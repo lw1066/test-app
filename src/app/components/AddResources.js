@@ -10,21 +10,20 @@ const AddResources = ({ book, handleUpdate }) => {
 
   const editorRef = useRef(null);
 
-  
   const initialFormData = book
   ? {
-    title: book.title,
-    description: book.description,
-    author: book.author,
-    bookDetails: book.bookDetails,
-    genres: book.genres,
+    title: book.title || 'title',
+    description: book.description || 'description',
+    author: book.author || 'author',
+    bookDetails: book.bookDetails || 'details',
+    genres: book.genres || '',
     imageFile: null,
-    imageUrl: book.imageUrl,
-    links: book.links,
+    imageUrl: book.imageUrl || '',
+    links: book.links ||'',
   }
   : {
     title: '',
-    description: '<p>Write the details here</p>',
+    description: '',
     author: '',
     bookDetails: '',
     genres: [],
@@ -35,13 +34,6 @@ const AddResources = ({ book, handleUpdate }) => {
   
   const [formData, setFormData] = React.useState(initialFormData);
   
-  useEffect(() => {
-    // Update editor content if book.description exists and the editor instance is available
-    if (editorRef.current && book && formData.description) {
-      editorRef.current.setContent(formData.description);
-    }
-  }, [formData]);
-
   const handleFileChange = (event) => {
     const file = event.target.files[0];
     setFormData({
@@ -177,8 +169,8 @@ const AddResources = ({ book, handleUpdate }) => {
                 <Editor
                   apiKey={process.env.NEXT_PUBLIC_TINYMCE_API_KEY}
                   textareaName='Body'
-                  initialValue='Write description here'
                   name='description'
+                  value={formData.description}
                   init={{
                       height: 500,
                       menubar: false,
@@ -194,9 +186,6 @@ const AddResources = ({ book, handleUpdate }) => {
                       content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
                     }}
                   onEditorChange={handleEditorChange}
-                  onInit={(evt, editor) => {
-                    editorRef.current=editor;
-                  }}
                 />
                
                <Form.Group controlId="image" className="mb-3">

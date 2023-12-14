@@ -1,0 +1,108 @@
+/* Library.module.css */
+
+/* Common styles */
+
+.bookgridcontainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  max-width: 75%;
+  gap: 20px;
+  justify-content: center;
+  margin: auto;
+}
+
+.bookcard {
+  width: 100%;
+  max-width: 200px;
+  height: auto;
+  background-size: cover;
+  transition: transform 0.6s ease-out;
+  overflow: hidden;
+}
+
+.genres {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1vw;
+}
+
+.genres p {
+  margin: 0;
+  padding: 1.5px 2.5px;
+  background-color: #f0f0f0;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+.btntext {
+  font-weight: 400;
+  font-size: 0.5rem;
+  padding: 0;
+  margin: 0;
+}
+
+.bookcard button {
+  border-width: 0.5px;
+  padding: 0.25px 5px;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* For larger screens */
+@media screen and (min-width: 768px) {
+  .bookgridcontainer {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+
+  .bookcard {
+    transition: transform 0.6s ease-out, z-index 0s 0.2s;
+    z-index: 1;
+  }
+
+  .bookcard:hover {
+    transform: scale(1.75);
+    z-index: 2;
+    transition-delay: 0s;
+  }
+}
+
+/* For medium-sized screens */
+@media screen and (max-width: 1024px) {
+  .bookgridcontainer {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    max-width: 75%;
+  }
+}
+
+/* For smaller screens */
+@media screen and (max-width: 768px) {
+  .bookgridcontainer {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    max-width: 75%;
+  }
+
+  .bookcard:hover {
+    transform: scale(1.3); /* Adjust the hover scale for smaller screens */
+    transition-delay: 0s;
+  }
+}
+
+/* For mobile screens */
+@media screen and (max-width: 480px) {
+  .bookgridcontainer {
+    grid-template-columns: 1fr;
+    max-width: 100%;
+  }
+
+  .bookcard {
+    width: 90%;
+    max-width: none;
+  }
+
+  .bookcard:hover {
+    transform: scale(1); /* Adjust the hover scale for mobile screens */
+    transition-delay: 0s;
+  }
+}

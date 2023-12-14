@@ -1,0 +1,21 @@
+
+.logo {
+    height: clamp(50px, 10vw, 150px);
+    width:  clamp(40px, 10vw, 120px);
+}
+
+.centeredText {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.zeroMarginPadding {
+    margin: 0;
+    padding: 0;
+}
+
+.title {
+    font-size: clamp(25px, 5vw, 200px);
+    
+}

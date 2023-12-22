@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { Card, Button, Modal } from 'react-bootstrap';
 import classes from './Library.module.css';
 import AddResources from '../components/AddResources';
@@ -6,8 +6,11 @@ import { getAndModifyDoc } from '../../firebase/firestore/getAndModifyDoc';
 import { useAuthContext } from "@/context/AuthContext";
 import { deleteData } from '../../firebase/firestore/deleteDoc';
 
+
 const BookCard = ({ book }) => {
-  const user = useAuthContext();
+  
+  const { user } = useAuthContext();
+  const isAdmin = user? user.isAdmin : false;
   const filteredLinks = book.links ? book.links.filter(link => link.type !== 'order') : [];
   const lockedLinks = filteredLinks.filter(link => link.locked);
   const unlockedLinks = filteredLinks.filter(link => !link.locked);
@@ -48,7 +51,6 @@ const BookCard = ({ book }) => {
 
   const handleUpdate = async (updatedFormData) => {
     
-    console.log(updatedFormData)
     try {
       const { result, error } = await getAndModifyDoc('books', book.id, updatedFormData);
       if (error) {
@@ -84,7 +86,7 @@ const BookCard = ({ book }) => {
       <Modal.Header closeButton>
         <div className="d-flex justify-content-between w-100 align-items-center">
           <div className="text-start">
-          {user.user !== null && (
+          {isAdmin && (
               <>
                 <Button variant="danger" size="sm" className="me-2 mb-2" onClick={handleDeleteClick}>
                   Delete
@@ -131,7 +133,7 @@ const BookCard = ({ book }) => {
               </div>
             )
           }
-          {user.user !== null && lockedLinks.length > 0 && (
+          {user && user.user !== null && lockedLinks.length > 0 && (
               <div className={classes.linksContainer}>
                 {lockedLinks.map((link, index) => (
                   <Button

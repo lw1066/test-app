@@ -1,0 +1,13 @@
+
+.light-mode {
+  
+    background-color: white;
+    color: #282727; 
+  }
+
+
+.dark-mode {
+    background-color: black;
+    color: white;
+}
+

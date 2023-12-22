@@ -1,3 +1,6 @@
+
+'use client'
+
 import React from 'react';
 import {
     onAuthStateChanged,
@@ -18,9 +21,18 @@ export const AuthContextProvider = ({
     const [loading, setLoading] = React.useState(true);
 
     React.useEffect(() => {
-        const unsubscribe = onAuthStateChanged(auth, (user) => {
+        const unsubscribe = onAuthStateChanged(auth, async (user) => {
             if (user) {
-                setUser(user);
+                const idTokenResult = await user.getIdTokenResult();
+
+                const isAdmin = !!idTokenResult.claims.admin;
+
+                const modUser = {
+                    ...user,
+                    isAdmin
+                };
+                
+                setUser(modUser);
             } else {
                 setUser(null);
             }

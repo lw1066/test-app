@@ -89,6 +89,11 @@
   }
 }
 
+.accordion {
+  width: 60%; 
+  margin: 3rem auto; 
+}
+
 /* For medium-sized screens */
 @media screen and (max-width: 1024px) {
   .bookgridcontainer {

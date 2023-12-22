@@ -24,7 +24,7 @@ function Page() {
     return (
         <div className="text-center">
             <div className="mt-4 col-md-3 mx-auto p-2"> 
-                <h1>Sign in</h1>
+                <h1 className="fs-5">If you are a teacher, please sign in to access teacher materials. If you don't have an account please contact us to register.</h1>
                 <form onSubmit={handleForm} className="form">
                         <div className="mb-3">
                             <label htmlFor="email" className="form-label">
@@ -36,10 +36,11 @@ function Page() {
                                 placeholder="example@mail.com"
                                 className="form-control"
                                 aria-describedby="emailHelp"
+                                autoComplete="off"
                                 />
                             </label>
                             <div id="emailHelp" className="form-text">
-                                We'll never share your email with anyone else.
+                                We'll <strong>never</strong> share your email with anyone.
                             </div>
                             <label className="mt-3" htmlFor="password">
                                 <p>Password</p>
@@ -50,11 +51,12 @@ function Page() {
                                 id="password" 
                                 placeholder="password"
                                 className="form-control"
+                                autoComplete="off"
                                 />
                             </label>
                         </div>
                        
-                    <button type="submit" className="btn btn-primary">
+                    <button type="submit" className="btn btn-outline-success">
                         Sign in
                     </button>
                 </form>

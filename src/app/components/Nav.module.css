@@ -19,3 +19,12 @@
     font-size: clamp(25px, 5vw, 200px);
     
 }
+
+[data-bs-theme='dark'] .navbar {
+    background-color: #333; /* Dark mode background color */
+  }
+  
+  /* Default (light mode) */
+  [data-bs-theme=''] .navbar {
+    background-color: #fff; /* Light mode background color */
+  }

@@ -5,7 +5,6 @@ import { uploadImageToFirebase } from '../../firebase/firestore/storage';
 import { Editor } from '@tinymce/tinymce-react';
 
 
-
 const AddResources = ({ book, handleUpdate }) => {
 
   const editorRef = useRef(null);
@@ -174,11 +173,11 @@ const AddResources = ({ book, handleUpdate }) => {
                   init={{
                       height: 500,
                       menubar: false,
-                      plugins: [
-                          'advlist autolink lists link image charmap print preview anchor',
-                          'searchreplace visualblocks code fullscreen',
-                          'insertdatetime media table paste code help wordcount'
-                      ],
+                      // plugins: [
+                      //     'advlist autolink lists link image charmap print preview',
+                      //     'searchreplace visualblocks code',
+                      //     'media table paste code help'
+                      // ],
                       toolbar: 'undo redo | fontfamily fontsizeinput | ' +
                       'lineheight bold italic underline | alignleft aligncenter ' +
                       'alignright alignjustify | bullist numlist outdent indent | ' +
@@ -243,16 +242,13 @@ const AddResources = ({ book, handleUpdate }) => {
                   </Button>
                 </Form.Group>
 
-
-               
                 <Button variant="primary" type="submit">
                   Save
                 </Button>
                 <Button variant="primary" onClick={handleInputUpdateChange}>
                   Update
                 </Button>
-              </Form>
-           
+              </Form>         
           
         </Container>
       </main>

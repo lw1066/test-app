@@ -1,15 +1,27 @@
+'use client'
 
+import { useEffect, useState, useContext } from 'react';
 import { signOutUser } from '../../firebase/auth/signout';
+import { DarkModeContext } from '@/context/DarkModeContext';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSun, faMoon } from '@fortawesome/free-solid-svg-icons';
 import Link from 'next/link';
 import { useAuthContext } from "@/context/AuthContext";
 import Button from 'react-bootstrap/Button';
 import classes from './Nav.module.css';
-
-
+import { auth } from '../../firebase/config';
 
 function Navigation() {
   const { user } = useAuthContext();
+  const isAdmin = user? user.isAdmin : false;
 
+  const { darkMode, toggleDarkMode } = useContext(DarkModeContext);
+
+  const handleToggleDarkMode = () => {
+    toggleDarkMode(); // Call the function to toggle dark mode in your context
+    console.log(darkMode)
+  };
+  
   const handleSignout = async () => {
     await signOutUser();
     redirectToSignIn(); // Redirect to '/signin' after signout
@@ -21,7 +33,8 @@ function Navigation() {
   
 
     return (
-      <nav className="navbar navbar-expand-lg bg-body-tertiary">
+      <div data-bs-theme={darkMode ? 'dark' :''}>
+      <nav className={`navbar navbar-expand-lg `} >
         <div className="container-fluid">
           <Link className="navbar-brand" href="/">
           <img
@@ -49,7 +62,12 @@ function Navigation() {
                   About
                 </Link>
               </li>
-              <li className="nav-item dropdown">
+              <li className="nav-item">
+                <Link className="nav-link active" aria-current="contact" href="Contact">
+                  Contact us
+                </Link>
+              </li>
+              {/* <li className="nav-item dropdown">
                 <a
                   className="nav-link dropdown-toggle"
                   href="#"
@@ -61,9 +79,9 @@ function Navigation() {
                 </a>
                 <ul className="dropdown-menu">
                   <li>
-                    <a className="dropdown-item" href="Contact">
+                    <Link className="dropdown-item" href="Contact">
                       Contact us
-                    </a>
+                    </Link>
                   </li>
                   <li>
                     <a className="dropdown-item" href="Sample">
@@ -79,22 +97,30 @@ function Navigation() {
                     <hr className="dropdown-divider" />
                   </li>
                   <li>
-                    <a className="dropdown-item" href="Admin">
+                    {isAdmin===true && <a className="dropdown-item" href="Admin">
                       Admin
-                    </a>
+                    </a>}
                   </li>
                 </ul>
-              </li>
+              </li> */}
              {!user && <li className="nav-item">
                 <Link className="nav-link" href="Signin">
                   Teacher Sign-in
                 </Link>
               </li>}
-              {user && <Button onClick={handleSignout}>Signout</Button>}
+              {user && <Button variant='outline-danger' onClick={handleSignout}>Signout</Button>}
+              <li className="nav-item">
+                {/* Dark mode toggle button */}
+                {console.log(user)}
+                <Button variant='light' className="rounded-circle ms-2" onClick={handleToggleDarkMode}>
+                  <FontAwesomeIcon icon= {darkMode ? faMoon : faSun} />
+                </Button>
+              </li>
             </ul>
           </div>
         </div>
       </nav>
+      </div>
     );
-  }
+    }
  export default Navigation;

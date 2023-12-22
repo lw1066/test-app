@@ -7,6 +7,7 @@ import BookCard from '../components/BookCard';
 import GenreSelector from '../components/GenreSelector';
 import LoadingSpinner from '../components/LoadingSpinner'; // Import your LoadingSpinner component
 
+
 const Library = () => {
     const [books, setBooks] = useState([]);
     const [error, setError] = useState(null);
@@ -49,8 +50,7 @@ const Library = () => {
     };
 
     return (
-        <>
-            <h1>Books</h1>
+        <>            
             <GenreSelector onSelectGenre={handleGenreChange} />
             {isLoading ? (
                 <div className="d-flex justify-content-center mt-5">

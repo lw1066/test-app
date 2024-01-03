@@ -4,6 +4,7 @@ import { Container, Row, Col, Button } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faInstagram, faFacebook } from '@fortawesome/free-brands-svg-icons';
 import { useDarkMode } from '@/context/DarkModeContext';
+import Image from 'next/image';
 import Link from 'next/link';
 
 const Footer = () => {
@@ -31,7 +32,7 @@ const Footer = () => {
             </a>
           </Col>
           <Col xs={6} md={3} className="text-right mb-3 mb-md-0">
-          <img src={ darkMode ? "/images/perceptia_logo_negative.jpg" : "/images/perceptia_logo.jpg"} alt="Perceptia Press" className="img-fluid" style={{height: '3rem' }} />
+          <imgage src={ darkMode ? "/images/perceptia_logo_negative.jpg" : "/images/perceptia_logo.jpg"} alt="Perceptia Press" className="img-fluid" style={{height: '3rem' }} />
             {/* Copyright */}
             <p className="mb-0">© {new Date().getFullYear()} Perceptia Press</p>
           </Col>

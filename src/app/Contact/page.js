@@ -89,7 +89,7 @@ const Contact = () => {
           </div>
                 
           
-          Want to ask a question or just say hello? Please fill in the form below, taking care to choose the reason you are contacting us. We'll get back to you as soon as possible...</h2>
+          Want to ask a question or just say hello? Please fill in the form below, taking care to choose the reason you are contacting us. We&apos;ll get back to you as soon as possible...</h2>
           <Form onSubmit={handleFormSubmit}>
             <Form.Group controlId="formName">
               <Form.Label>Name</Form.Label>
@@ -124,7 +124,7 @@ const Contact = () => {
 
             <Form.Group controlId="formCheckbox" className="mt-4">
               <fieldset required>
-                <p>Please choose your reasons for getting in contact (You can choose as many as you'd like)...</p>
+                <p>Please choose your reasons for getting in contact (You can choose as many as you&apos;d like)...</p>
                
                 <Form.Check
                   type="checkbox"

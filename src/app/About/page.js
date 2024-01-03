@@ -1,14 +1,12 @@
 'use client'
 
 import { useEffect, useRef  } from 'react';
-
 import { Player } from '@lordicon/react';
 
-const about
- = require('/public/images/about.json');
+const about = require('/public/images/about.json');
 
 
-const page = () => {
+const Page = () => {
 
   const playerRef = useRef(null);
   
@@ -40,4 +38,4 @@ const page = () => {
     )
 }
 
-export default page;
+export default Page;

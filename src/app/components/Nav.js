@@ -5,6 +5,7 @@ import { signOutUser } from '../../firebase/auth/signout';
 import { useDarkMode } from '@/context/DarkModeContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSun, faMoon } from '@fortawesome/free-solid-svg-icons';
+import Image from 'next/image';
 import Link from 'next/link';
 import { useAuthContext } from "@/context/AuthContext";
 import Button from 'react-bootstrap/Button';
@@ -44,7 +45,7 @@ function Navigation() {
       <nav className='navbar navbar-expand-lg' style={{ zIndex: 1000, backgroundColor: darkMode ? 'black' : 'white' }} >
         <div className="container-fluid">
           <Link className="navbar-brand" href="/">
-          <img
+          <imgage
                 src={ darkMode ? "/images/perceptia_logo_negative.jpg": "/images/perceptia_logo.jpg"}
                 alt='The doors of perception'
                 className={`d-inline-block align-top ${classes.logo}`}
@@ -65,12 +66,12 @@ function Navigation() {
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
               <li className="nav-item">
-                <Link className="nav-link" aria-current="page" href="About">
+                <Link className="nav-link" href="About">
                   About
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" aria-current="contact" href="Contact">
+                <Link className="nav-link" href="Contact">
                   Contact us
                 </Link>
               </li>

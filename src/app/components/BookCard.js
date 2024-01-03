@@ -1,4 +1,5 @@
-import { useState, useContext } from 'react';
+import { useState } from 'react';
+import { useDarkMode } from '@/context/DarkModeContext';
 import { Card, Button, Modal } from 'react-bootstrap';
 import classes from './Library.module.css';
 import AddResources from '../components/AddResources';
@@ -14,6 +15,7 @@ const BookCard = ({ book }) => {
   const filteredLinks = book.links ? book.links.filter(link => link.type !== 'order') : [];
   const lockedLinks = filteredLinks.filter(link => link.locked);
   const unlockedLinks = filteredLinks.filter(link => !link.locked);
+  const { darkMode } = useDarkMode()
 
   const [showModal, setShowModal] = useState(false);
   const [showUpdateModal, setShowUpdateModal] = useState(false);
@@ -98,7 +100,7 @@ const BookCard = ({ book }) => {
             )}
           <span className={classes.genres}>
             {book.genres ? (
-                book.genres.map(item => <p key={item}>{item}</p>)
+                book.genres.map(item => <p style={{border: darkMode ? '.75px solid white' : '.75px solid black'}} key={item}>{item}</p>)
               ) : (<p>No genres available</p>)
             }
           </span>

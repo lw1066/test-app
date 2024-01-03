@@ -4,9 +4,9 @@
 
 import { useState, useEffect, useRef  } from 'react';
 import { Form, Button, Container, Row, Col } from 'react-bootstrap';
+import { useDarkMode } from '@/context/DarkModeContext';
 import { Player } from '@lordicon/react';
 
-const smile = require('/public/images/smile.json');
 
 const Contact = () => {
   const [name, setName] = useState('');
@@ -15,6 +15,8 @@ const Contact = () => {
   const [bookSamples, setBookSamples] = useState(false);
   const [orderQuery, setOrderQuery] = useState(false);
   const [submission, setSubmission] = useState(false);
+  const { darkMode } = useDarkMode();
+  const smile = require(darkMode ? '/public/images/darkModeSmile.json' : '/public/images/smile.json');
   
   const resetForm = () => {
     setName('');

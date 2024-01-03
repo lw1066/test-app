@@ -1,13 +1,26 @@
-// DarkModeContext.js
-import { createContext, useContext, useState } from 'react';
+import { createContext, useContext, useState, useEffect } from 'react';
 
 export const DarkModeContext = createContext(null);
 
 export const DarkModeProvider = ({ children }) => {
-  const [darkMode, setDarkMode] = useState(false); // Assuming initial state is false
+  const [darkMode, setDarkMode] = useState(false);
+
+  useEffect(() => {
+    // Check if window and localStorage are available (browser environment)
+    if (typeof window !== 'undefined') {
+      const storedMode = localStorage.getItem('darkMode') === 'true';
+      setDarkMode(storedMode);
+    }
+  }, []);
 
   const toggleDarkMode = () => {
-    setDarkMode((prevMode) => !prevMode);
+    const updatedMode = !darkMode;
+    setDarkMode(updatedMode);
+
+    // Save to local storage (only in the browser)
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('darkMode', updatedMode.toString());
+    }
   };
 
   return (

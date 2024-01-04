@@ -70,7 +70,7 @@ const BookCard = ({ book }) => {
   return (
     <>
    
-            <Card className={`${classes.bookcard} bg-dark text-white `}>
+            <Card className={`${classes.bookcard} bg-dark text-white `} onClick={handleShowModal}>
             <Image
                 src={book.imageUrl}
                 alt={book.title}
@@ -78,82 +78,87 @@ const BookCard = ({ book }) => {
                 objectFit="cover"
                 className="img-fluid"
               />
-              <Card.ImgOverlay className="d-flex flex-column justify-content-end">
+              {/* <Card.ImgOverlay className="d-flex flex-column justify-content-end">
                 <Button variant="outline-light" size='sm' onClick={handleShowModal} className="align-self-center">
                   <span>More Info...</span>
                 </Button>
-              </Card.ImgOverlay>
+              </Card.ImgOverlay> */}
             </Card>
        
      
       <Modal show={showModal} onHide={handleCloseModal} size="lg">
-      <Modal.Header closeButton>
-        <div className="d-flex justify-content-between w-100 align-items-center">
-          <div className="text-start">
-          {isAdmin && (
-              <>
-                <Button variant="danger" size="sm" className="me-2 mb-2" onClick={handleDeleteClick}>
-                  Delete
-                </Button>
-                <Button variant="danger" size="sm" className="mb-2" onClick={handleUpdateClick}>
-                  Update
-                </Button>
-              </>
-            )}
-          <span className={classes.genres}>
-            {book.genres ? (
-                book.genres.map(item => <p style={{border: darkMode ? '.75px solid white' : '.75px solid black'}} key={item}>{item}</p>)
-              ) : (<p>No genres available</p>)
-            }
-          </span>
-            <Modal.Title style={{ flex: '1' }}>{book.title}</Modal.Title>
-            {book.author && <p className={classes.author}>{book.author}</p>}
-            {book.bookDetails && <p className={classes.details}>{book.bookDetails}</p>}
+        <Modal.Header closeButton>
+          <div className="d-flex justify-content-between w-100 align-items-center">
+            <div className="text-start">
+              {isAdmin && (
+                <>
+                  <Button variant="danger" size="sm" className="me-2 mb-2" onClick={handleDeleteClick}>
+                    Delete
+                  </Button>
+                  <Button variant="danger" size="sm" className="mb-2" onClick={handleUpdateClick}>
+                    Update
+                  </Button>
+                </>
+              )}
+              <span className={classes.genres}>
+                {book.genres ? (
+                    book.genres.map(item => <p style={{border: darkMode ? '.75px solid white' : '.75px solid black'}} key={item}>{item}</p>)
+                  ) : (<p>No genres</p>)
+                }
+              </span>
+              <Modal.Title style={{ fontSize:'2.25rem' }}>{book.title}</Modal.Title>
+              {book.author && <p className={classes.author}>{book.author}</p>}
+              {book.bookDetails && <p className={classes.details}>{book.bookDetails}</p>}
+            </div>
+            
           </div>
-          <div>
-          {hasOrderLink && (
-            <Button variant="outline-success" size='sm' onClick={() => window.open(buyLink, '_blank')}>
-              Buy
-            </Button>
-          )}
-          </div>
-        </div>
-          
         </Modal.Header>
         <Modal.Body>
-        <div className="d-flex justify-content-between w-100 align-items-center">
-          {unlockedLinks.length > 0 && (
-              <div className={classes.linksContainer}>
-                {unlockedLinks.map((link, index) => (
-                  <Button
+          <div>
+            {hasOrderLink && (
+              <Button variant="outline-success" size='sm' onClick={() => window.open(buyLink, '_blank')}>
+                Buy
+              </Button>
+            )}
+          </div>
+
+          <hr/>
+
+          <div className="d-flex justify-content-between w-100 align-items-center">
+            {unlockedLinks.length > 0 && (
+                <div className={classes.linksContainer}>
+                  {unlockedLinks.map((link, index) => (
+                    <Button
                     key={index}
                     variant="outline-primary"
                     className={classes.linkButton}
                     onClick={() => window.open(link.link, '_blank')}
-                  >
-                    {link.type}
-                  </Button>
-                ))}
-              </div>
-            )
-          }
-          {user && user.user !== null && lockedLinks.length > 0 && (
-              <div className={classes.linksContainer}>
-                {lockedLinks.map((link, index) => (
-                  <Button
-                    key={index}
-                    variant="outline-warning"
-                    className={classes.linkButton}
-                    onClick={() => window.open(link.link, '_blank')}
-                  >
-                    {link.type}
-                  </Button>
-                ))}
-              </div>
-            )
-          }
-        </div>
-       
+                    >
+                      {link.type}
+                    </Button>
+                  ))}
+                </div>
+              )
+            }
+            {user && user.user !== null && lockedLinks.length > 0 && (
+                <div className={classes.linksContainer}>
+                  {lockedLinks.map((link, index) => (
+                    <Button
+                      key={index}
+                      variant="outline-warning"
+                      className={classes.linkButton}
+                      onClick={() => window.open(link.link, '_blank')}
+                    >
+                      {link.type}
+                    </Button>
+                  ))}
+                </div>
+              )
+            }
+          </div>
+
+          <hr/>
+
           <div dangerouslySetInnerHTML={{ __html: book.description }} />
         </Modal.Body>
       </Modal>

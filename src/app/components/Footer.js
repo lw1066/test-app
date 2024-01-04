@@ -11,7 +11,7 @@ const Footer = () => {
   const { darkMode } = useDarkMode();
 
   return (
-    <footer className="text-center py-2 mt-auto" >
+    <footer className="text-center py-5 mt-auto " >
       <Container>
         <Row className="align-items-center justify-content-around">
           <Col xs={3} md={3} className="text-left mb-3 mb-md-0">

@@ -42,17 +42,33 @@ function Navigation() {
 
     return (
       <div className="sticky-top">
-      <nav className='navbar navbar-expand-md py-0' style={{ zIndex: 1000, backgroundColor: darkMode ? 'black' : 'white' }} >
+      <nav className='navbar navbar-expand flex-wrap py-0' style={{ zIndex: 1000, backgroundColor: darkMode ? 'black' : 'white' }} >
         <div className="container-fluid">
           <Link className="navbar-brand" href="/">
-          <Image
-                src={ darkMode ? "/images/perceptia_logo_negative.jpg": "/images/perceptia_logo.jpg"}
-                alt='The doors of perception'
-                className={`d-inline-block align-top img-fluid`}
-                width={70} 
-                height={100}
-            />{'      '}
-            <span className={classes.title}>Perceptia Press</span>
+            <div className="d-flex align-items-center justify-content-start">
+              <div className="ms-3" style={{ width: '30%', maxWidth: '70px', maxHeight: '100px' }}>
+                <Image
+                  src={darkMode ? "/images/perceptia_logo_negative.jpg" : "/images/perceptia_logo.jpg"}
+                  alt='The doors of perception'
+                  layout="responsive"
+                  width={70}
+                  height={100}
+                  className="img-fluid"
+                  style={{ maxWidth: '100%', height: 'auto' }}
+                />
+              </div>
+              <div className="ms-1" style={{ width: '70%', maxWidth: '400px', maxHeight: '100px' }}>
+                <Image
+                  src={darkMode ? "/images/pplogoneg.jpg" : "/images/pplogo.jpg"}
+                  alt='perceptia press'
+                  layout="responsive"
+                  width={400}
+                  height={100}
+                  className="img-fluid"
+                  style={{ maxWidth: '100%', height: 'auto' }}
+                />
+              </div>
+            </div>
           </Link>
           <button
             className="navbar-toggler ms-auto"
@@ -74,12 +90,12 @@ function Navigation() {
               </li>
               <li className="nav-item">
                 <Link className="nav-link" href="Contact">
-                  Contact us
+                  Contact
                 </Link>
               </li>
              {!user && <li className="nav-item">
                 <Link className="nav-link" href="Signin">
-                  Teacher Sign-in
+                  Sign-in
                 </Link>
               </li>}
               {user && <Button variant='outline-danger' onClick={handleSignout}>Signout</Button>}

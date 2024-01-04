@@ -15,9 +15,15 @@ export default function RootLayout({ children }) {
       <head />
       <body>
       <Providers >
+        <div className="app">
           <Navigation />
-          {children}
-          <Footer />
+          <div className="content">
+            {children}
+          </div>
+          <div className="footer">
+            <Footer />
+          </div>
+        </div>
           <BootstrapClient />
       </Providers>
       </body>

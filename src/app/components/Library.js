@@ -57,14 +57,16 @@ const Library = () => {
                     <LoadingSpinner />
                 </div>
             ) : (
-                <div className={classes.bookgrid}>
+                <div className={`container ${classes.bookgridcontainer}`}>
+                <div className="row g-4">
                     {error && <p>Error: {error.message}</p>}
-                    <div className={classes.bookgridcontainer}>
-                        {filteredBooks.map(book => (
-                            <BookCard key={book.id} book={book} />
-                        ))}
-                    </div>
+                    {filteredBooks.map(book => (
+                        <div key={book.id} className="col d-flex justify-content-center align-items-center">
+                            <BookCard book={book} />
+                        </div>
+                    ))}
                 </div>
+            </div>
             )}
         </>
     );

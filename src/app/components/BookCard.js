@@ -1,11 +1,12 @@
 import { useState } from 'react';
 import { useDarkMode } from '@/context/DarkModeContext';
-import { Card, Button, Modal } from 'react-bootstrap';
+import { Card, Button, Modal, Container, Row, Col  } from 'react-bootstrap';
 import classes from './Library.module.css';
 import AddResources from '../components/AddResources';
 import { getAndModifyDoc } from '../../firebase/firestore/getAndModifyDoc';
 import { useAuthContext } from "@/context/AuthContext";
 import { deleteData } from '../../firebase/firestore/deleteDoc';
+import Image from 'next/image';
 
 
 const BookCard = ({ book }) => {
@@ -66,24 +67,25 @@ const BookCard = ({ book }) => {
     }
   };
 
-  const cardStyle = {
-    backgroundImage: `url(${book.imageUrl})`,
-    backgroundSize: 'cover',
-    backgroundPosition: 'center',
-    height: '300px', // Set a suitable height for the card
-    position: 'relative',
-  };
-
   return (
     <>
-      <Card className={`${classes.bookcard} bg-dark text-white position-relative`} style={cardStyle}>
-          <Card.ImgOverlay className="d-flex flex-column justify-content-end">
-          <Button variant="outline-light" size='sm' onClick={handleShowModal} className="align-self-center">
-            <span>More Info...</span>
-          </Button>
-        </Card.ImgOverlay>
-      </Card>
-      
+   
+            <Card className={`${classes.bookcard} bg-dark text-white `}>
+            <Image
+                src={book.imageUrl}
+                alt={book.title}
+                layout="fill"
+                objectFit="cover"
+                className="img-fluid"
+              />
+              <Card.ImgOverlay className="d-flex flex-column justify-content-end">
+                <Button variant="outline-light" size='sm' onClick={handleShowModal} className="align-self-center">
+                  <span>More Info...</span>
+                </Button>
+              </Card.ImgOverlay>
+            </Card>
+       
+     
       <Modal show={showModal} onHide={handleCloseModal} size="lg">
       <Modal.Header closeButton>
         <div className="d-flex justify-content-between w-100 align-items-center">
@@ -173,6 +175,7 @@ const BookCard = ({ book }) => {
           
         </Modal.Footer>
     </Modal>
+    
     </>
   );
 };

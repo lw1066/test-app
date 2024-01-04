@@ -5,8 +5,7 @@
 import { useState, useEffect, useRef  } from 'react';
 import { Form, Button, Container, Row, Col } from 'react-bootstrap';
 import { useDarkMode } from '@/context/DarkModeContext';
-import { Player } from '@lordicon/react';
-
+import Image from 'next/image';
 
 const Contact = () => {
   const [name, setName] = useState('');
@@ -16,7 +15,7 @@ const Contact = () => {
   const [orderQuery, setOrderQuery] = useState(false);
   const [submission, setSubmission] = useState(false);
   const { darkMode } = useDarkMode();
-  const smile = require(darkMode ? '/public/images/darkModeSmile.json' : '/public/images/smile.json');
+  
   
   const resetForm = () => {
     setName('');
@@ -26,12 +25,6 @@ const Contact = () => {
     setOrderQuery(false);
     setSubmission(false);
   };
-
-  const playerRef = useRef(null);
-  
-  useEffect(() => {
-    playerRef.current?.playFromBeginning();
-  }, []);
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
@@ -67,29 +60,16 @@ const Contact = () => {
           
           <h2 className="mb-4 fs-5 mt-3">
           <div className="d-flex align-items-center justify-content-center mb-4">
-            <Player
-              ref={playerRef}
-              size={120}
-              icon={smile}
-              onComplete={() => {
-                setTimeout(() => {
-                  playerRef.current?.playFromBeginning();
-                }, 4000);
-              }}
-              styles={{
-                flex: 1,
-                gap: 20,
-                backgroundColor: '#fff',
-                alignItems: 'center',
-                justifyContent: 'center',
-                flexDirection: 'column',
-              }}
+            <Image src={darkMode ? '/images/darkSmile.webp' : '/images/thickSmile.webp'}
+              alt="Smile animation"
+              width={60} // Adjust the width as needed
+              height={60} // Adjust the height as needed
             />
-            <h2 className="mb-0 fs-5 mt-3">Hello!</h2>
+            <h2 className="mb-0 fs-5 mt-3 mb-3">Hello!</h2>
           </div>
                 
           
-          Want to ask a question or just say hello? Please fill in the form below, taking care to choose the reason you are contacting us. We&apos;ll get back to you as soon as possible...</h2>
+          Want to ask a question or just say hello? Please fill in the form below and we&apos;ll get back to you as soon as possible...</h2>
           <Form onSubmit={handleFormSubmit}>
             <Form.Group controlId="formName">
               <Form.Label>Name</Form.Label>

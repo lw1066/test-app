@@ -5,8 +5,8 @@ import { signOutUser } from '../../firebase/auth/signout';
 import { useDarkMode } from '@/context/DarkModeContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSun, faMoon } from '@fortawesome/free-solid-svg-icons';
-import Image from 'next/image';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useAuthContext } from "@/context/AuthContext";
 import Button from 'react-bootstrap/Button';
 import classes from './Nav.module.css';
@@ -42,18 +42,20 @@ function Navigation() {
 
     return (
       <div className="sticky-top">
-      <nav className='navbar navbar-expand-lg' style={{ zIndex: 1000, backgroundColor: darkMode ? 'black' : 'white' }} >
+      <nav className='navbar navbar-expand-md py-0' style={{ zIndex: 1000, backgroundColor: darkMode ? 'black' : 'white' }} >
         <div className="container-fluid">
           <Link className="navbar-brand" href="/">
-          <imgage
+          <Image
                 src={ darkMode ? "/images/perceptia_logo_negative.jpg": "/images/perceptia_logo.jpg"}
                 alt='The doors of perception'
-                className={`d-inline-block align-top ${classes.logo}`}
+                className={`d-inline-block align-top img-fluid`}
+                width={70} 
+                height={100}
             />{'      '}
             <span className={classes.title}>Perceptia Press</span>
           </Link>
           <button
-            className="navbar-toggler"
+            className="navbar-toggler ms-auto"
             type="button"
             data-bs-toggle="collapse"
             data-bs-target="#navbarSupportedContent"
@@ -64,7 +66,7 @@ function Navigation() {
             <span className="navbar-toggler-icon"></span>
           </button>
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
+            <ul className="navbar-nav ms-auto align-items-center">
               <li className="nav-item">
                 <Link className="nav-link" href="About">
                   About
@@ -83,7 +85,7 @@ function Navigation() {
               {user && <Button variant='outline-danger' onClick={handleSignout}>Signout</Button>}
               <li className="nav-item">
                 {/* Dark mode toggle button */}
-                <Button variant='light' className="rounded-circle ms-2" onClick={handleToggleDarkMode}>
+                <Button variant='light' className="rounded-circle ms-2 mb-2" onClick={handleToggleDarkMode}>
                   <FontAwesomeIcon icon= {darkMode ? faSun : faMoon} />
                 </Button>
               </li>

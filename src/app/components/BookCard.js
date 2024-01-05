@@ -13,11 +13,13 @@ const BookCard = ({ book }) => {
   
   const { user } = useAuthContext();
   const isAdmin = user? user.isAdmin : false;
-  const filteredLinks = book.links ? book.links.filter(link => link.type !== 'order') : [];
+  const filteredLinks = book.links ? book.links.filter(link => !['amazon', 'euro', 'asian', 'other'].includes(link.type)) : [];
+  const buyLinks = book.links ? book.links.filter(link => ['amazon', 'euro', 'asian', 'other'].includes(link.type)) : [];
   const lockedLinks = filteredLinks.filter(link => link.locked);
   const unlockedLinks = filteredLinks.filter(link => !link.locked);
   const { darkMode } = useDarkMode()
-
+  
+  console.log('hasAsianLink, buyLinks')
   const [showModal, setShowModal] = useState(false);
   const [showUpdateModal, setShowUpdateModal] = useState(false);
 
@@ -25,10 +27,11 @@ const BookCard = ({ book }) => {
   const handleShowModal = () => setShowModal(true);
   const handleCloseUpdate = () => setShowUpdateModal(false);
   
-  const hasOrderLink = book.links && book.links.some(link => link.type === 'order');
-  const buyLink = hasOrderLink ? book.links.find(link => link.type === 'order').link : '';
-
-  
+  const hasAmazonLink = buyLinks.some(link => link.type.includes('amazon'));
+  const hasAsianLink = buyLinks.some(link => link.type.includes('asian'));
+  const hasEuroLink = buyLinks.some(link => link.type.includes('euro'));
+  const hasOtherLink = buyLinks.some(link => link.type.includes('other'));
+  console.log(hasAsianLink, buyLinks)
   const handleUpdateClick = () => {
     setShowUpdateModal(true)
     console.log('update time')
@@ -67,6 +70,12 @@ const BookCard = ({ book }) => {
     }
   };
 
+  const handleLinkClick = (link) => {
+    window.open(link, '_blank'); // Function to open a link in a new tab
+    // You can also perform additional logic or tracking here
+  };
+
+  
   return (
     <>
    
@@ -87,7 +96,8 @@ const BookCard = ({ book }) => {
        
      
       <Modal show={showModal} onHide={handleCloseModal} size="lg">
-        <Modal.Header closeButton>
+        <Modal.Header closeButton >
+          
           <div className="d-flex justify-content-between w-100 align-items-center">
             <div className="text-start">
               {isAdmin && (
@@ -112,12 +122,29 @@ const BookCard = ({ book }) => {
             </div>
             
           </div>
+        
         </Modal.Header>
         <Modal.Body>
           <div>
-            {hasOrderLink && (
-              <Button variant="outline-success" size='sm' onClick={() => window.open(buyLink, '_blank')}>
-                Buy
+            {/* Conditional rendering of buttons based on link keywords */}
+            {hasAmazonLink && (
+              <Button variant="outline-success" className='mx-1' size="sm" onClick={() => handleLinkClick(buyLinks.find(link => link.type.includes('amazon')).link)}>
+                Buy on Amazon
+              </Button>
+            )}
+            {hasAsianLink && (
+              <Button variant="outline-success" className='mx-1' size="sm" onClick={() => handleLinkClick(buyLinks.find(link => link.type.includes('asian')).link)}>
+                Buy in Asia
+              </Button>
+            )}
+            {hasEuroLink && (
+              <Button variant="outline-success" className='mx-1' size="sm" onClick={() => handleLinkClick(buyLinks.find(link => link.type.includes('euro')).link)}>
+                Buy in Europe
+              </Button>
+            )}
+            {hasOtherLink && (
+              <Button variant="outline-success" className='mx-1' size="sm" onClick={() => handleLinkClick(buyLinks.find(link => link.type.includes('other')).link)}>
+                Distributer
               </Button>
             )}
           </div>

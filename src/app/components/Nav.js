@@ -50,22 +50,26 @@ function Navigation() {
                 <Image
                   src={darkMode ? "/images/perceptia_logo_negative.jpg" : "/images/perceptia_logo.jpg"}
                   alt='The doors of perception'
-                  layout="responsive"
+                  object-fit= "contain"
                   width={70}
                   height={100}
+                  maxWidth='40%'
                   className="img-fluid"
                   style={{ maxWidth: '100%', height: 'auto' }}
+                  priority
                 />
               </div>
               <div className="ms-1" style={{ width: '70%', maxWidth: '400px', maxHeight: '100px' }}>
                 <Image
                   src={darkMode ? "/images/pplogoneg.jpg" : "/images/pplogo.jpg"}
                   alt='perceptia press'
-                  layout="responsive"
+                  object-fit= "contain"
                   width={400}
                   height={100}
+                  maxWidth='40%'
                   className="img-fluid"
                   style={{ maxWidth: '100%', height: 'auto' }}
+                  priority
                 />
               </div>
             </div>
@@ -98,7 +102,15 @@ function Navigation() {
                   Sign-in
                 </Link>
               </li>}
-              {user && <Button variant='outline-danger' onClick={handleSignout}>Signout</Button>}
+              {/* {user && <Button variant='outline-danger' onClick={handleSignout}>Signout</Button>} */}
+              {user && (
+                <li className="nav-item">
+                
+                <Button variant='outline-danger' className="rounded-pill ms-2 mb-2 fs-0" onClick={handleSignout}>
+                  signout
+                </Button>
+              </li>
+              )}
               <li className="nav-item">
                 {/* Dark mode toggle button */}
                 <Button variant='light' className="rounded-circle ms-2 mb-2" onClick={handleToggleDarkMode}>

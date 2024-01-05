@@ -12,13 +12,14 @@
 }
 
 .bookcard {
-  height:15rem;
-  width:11rem;
+  height:15.75rem;
+  width:11.25rem;
   position: relative;
   justify-content: center;;
   transition: transform 0.6s ease-out;
   overflow: hidden;
   box-shadow: 4px 6px 8px rgba(0, 0, 0, 0.8);
+  border-radius: 0;
 }
 
 .bookcard img {

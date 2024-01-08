@@ -1,13 +1,16 @@
 import React, { useRef } from 'react';
 import { Container, Form, Button } from 'react-bootstrap';
-import { addData } from '../../firebase/firestore/addData';
+import { addData, manualRefresh } from '../../firebase/firestore/addData';
 import { Editor } from '@tinymce/tinymce-react';
+
 
 
 
 const AddNews = ({ news, handleUpdate }) => {
 
   const editorRef = useRef(null);
+
+  const isUpdate = news ? true : false;
 
   const initialNewsData = news
   ? {
@@ -51,6 +54,7 @@ const AddNews = ({ news, handleUpdate }) => {
         }} catch (error) {
             console.error('Error:', error);
         }
+        manualRefresh();
     };
 
   
@@ -70,33 +74,36 @@ const AddNews = ({ news, handleUpdate }) => {
                     </Form.Group>
 
                     <Editor
-                        apiKey={process.env.NEXT_PUBLIC_TINYMCE_API_KEY}
-                        textareaName='Body'
-                        name='description'
-                        value={newsData.description}
-                        init={{
-                            height: 500,
-                            menubar: false,
-                            plugins: [
-                                'advlist autolink lists link image charmap print preview anchor',
-                                'searchreplace visualblocks code fullscreen',
-                                'insertdatetime media table paste code help wordcount'
-                            ],
-                            toolbar: 'undo redo | fontfamily fontsizeinput | ' +
-                            'lineheight bold italic underline | alignleft aligncenter ' +
-                            'alignright alignjustify | bullist numlist outdent indent | ' +
-                            'removeformat | ',
-                            content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
-                            }}
-                        onEditorChange={handleEditorChange}
+                      apiKey={process.env.NEXT_PUBLIC_TINYMCE_API_KEY}
+                      textareaName='textarea'
+                      name='description'
+                      value={newsData.description}
+                      init={{
+                        height: 500,
+                        menubar: "insert | edit",
+                        plugins: [
+                          'link', 'paste', 'textcolor'
+                        ],
+                        toolbar: 'undo redo | fontfamily fontsizeinput forecolor backcolor | ' +
+                        'lineheight bold italic underline | alignleft aligncenter ' +
+                        'alignright alignjustify | bullist numlist outdent indent | ' +
+                        'removeformat | link | paste',
+                        content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }',
+                        default_link_target: "_blank"
+                      }}
+                      onEditorChange={handleEditorChange}
                     />
-                                        
-                    <Button variant="primary" type="submit">
-                    Save
-                    </Button>
-                    <Button variant="primary" onClick={handleInputUpdateChange}>
-                    Update
-                    </Button>
+
+                                       
+                    { !isUpdate && <Button variant="primary" type="submit" className="mt-3">
+                        Save
+                      </Button>
+                    }
+                    {isUpdate && <Button variant="primary" onClick={handleInputUpdateChange} className="mt-3"> 
+                        Update
+                      </Button>
+                    }
+                    
               </Form>       
             </Container>
       </main>

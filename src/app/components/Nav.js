@@ -9,7 +9,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useAuthContext } from "@/context/AuthContext";
 import Button from 'react-bootstrap/Button';
-import classes from './Nav.module.css';
+
 
 
 function Navigation() {
@@ -53,9 +53,9 @@ function Navigation() {
                   object-fit= "contain"
                   width={70}
                   height={100}
-                  maxWidth='40%'
+                  // maxWidth='40%'
                   className="img-fluid"
-                  style={{ maxWidth: '100%', height: 'auto' }}
+                  // style={{ maxWidth: '100%', height: 'auto' }}
                   priority
                 />
               </div>
@@ -97,6 +97,11 @@ function Navigation() {
                   Contact
                 </Link>
               </li>
+              {user && isAdmin && <li className="nav-item">
+                <Link className="nav-link" href="Admin">
+                  Admin
+                </Link>
+              </li>}
              {!user && <li className="nav-item">
                 <Link className="nav-link" href="Signin">
                   Sign-in

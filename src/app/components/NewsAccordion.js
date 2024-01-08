@@ -7,8 +7,10 @@ import Button from 'react-bootstrap/Button';
 import getAllDocs from '../../firebase/firestore/getAllDocs';
 import classes from './Library.module.css';
 import AddNews from './AddNews';
+import { deleteData } from '../../firebase/firestore/deleteDoc';
 import { useAuthContext } from "@/context/AuthContext";
 import { getAndModifyDoc } from '../../firebase/firestore/getAndModifyDoc';
+import { manualRefresh } from '../../firebase/firestore/addData';
 
 function NewsAccordion() {
   const { user } = useAuthContext();
@@ -64,19 +66,24 @@ function NewsAccordion() {
     }
   };
 
-  const manualRefresh = async () => {
+  const handleDelete = async (itemId) => {
     try {
-      const { results, error } = await getAllDocs('news');
-      if (!error) {
-        setNewsDataArray(results);
-        localStorage.setItem('newsDataArray', JSON.stringify(results));
+      const { success, error } = await deleteData('news', itemId);
+      if (error) {
+        console.error('Error deleting document:', error);
       } else {
-        console.error('Error fetching news data:', error);
+        console.log('Document deleted successfully', itemId);
+        manualRefresh();
+        
       }
     } catch (error) {
-      console.error('Error fetching news data:', error);
+      console.error('Error:', error);
     }
   };
+
+  const handleDeleteClick = (itemId) => {
+    handleDelete(itemId); // Pass book.id to handleDelete
+};
 
   return (
     <div className={classes.accordion}>
@@ -87,9 +94,14 @@ function NewsAccordion() {
             <Accordion.Body>
               <div dangerouslySetInnerHTML={{ __html: item.description }} />
               {isAdmin && (
-                <Button variant="primary" onClick={() => openModal(item)}>
+                <>
+                <Button variant="primary" onClick={() => openModal(item)} className="me-3">
                   Update
                 </Button>
+                <Button variant="danger" onClick={() => handleDeleteClick(item.id)}>
+                 Delete
+               </Button>
+               </>
               )}
             </Accordion.Body>
           </Accordion.Item>

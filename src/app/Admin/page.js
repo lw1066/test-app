@@ -21,11 +21,6 @@ function Page() {
             <Container className="d-flex justify-content-center border border-3 border-primary mb-4 p-4">
                 <h1>Welcome to the admin page</h1>
             </Container>
-            
-            <Container className="d-flex justify-content-center border border-3 border-primary mb-4 p-4">
-                <Signup />
-
-            </Container>
 
             <Container className="d-flex justify-content-center border border-3 border-primary mb-4 p-4">
                 <AddResources />
@@ -33,6 +28,10 @@ function Page() {
 
             <Container className="d-flex justify-content-center border border-3 border-primary mb-4 p-4">
                 <AddNews />
+            </Container>
+
+            <Container className="d-flex justify-content-center border border-3 border-primary mb-4 p-4">
+                <Signup />
             </Container>
 
             <Container className="d-flex justify-content-center border border-3 border-primary mb-4 p-4">

@@ -9,6 +9,8 @@ const AddResources = ({ book, handleUpdate }) => {
 
   const editorRef = useRef(null);
 
+  const isUpdate = book ? true : false;
+
   const initialFormData = book
   ? {
     title: book.title || 'title',
@@ -136,16 +138,16 @@ const AddResources = ({ book, handleUpdate }) => {
     <>
       <main>
         <Container>
-          <h1 className="edit-title">Add a picture, title, and description of the new item</h1>
+          <h1 className="edit-title">Enter new book</h1>
           
             
               <Form onSubmit={handleSubmit}>
                
-                <Form.Group controlId="title">
+                <Form.Group controlId="title"  className="mb-3">
                   <Form.Control type="text" name="title" placeholder="Title of item" value={formData.title} onChange={handleInputChange} required />
                 </Form.Group>
 
-                <Form.Group controlId="author">
+                <Form.Group controlId="author"  className="mb-3">
                   <Form.Control
                     type="text"
                     name="author"
@@ -155,7 +157,7 @@ const AddResources = ({ book, handleUpdate }) => {
                   />
                 </Form.Group>
 
-                <Form.Group controlId="bookDetails">
+                <Form.Group controlId="bookDetails"  className="mb-3">
                   <Form.Control
                     type='text'
                     name="bookDetails"
@@ -167,22 +169,21 @@ const AddResources = ({ book, handleUpdate }) => {
 
                 <Editor
                   apiKey={process.env.NEXT_PUBLIC_TINYMCE_API_KEY}
-                  textareaName='Body'
+                  textareaName='textarea'
                   name='description'
                   value={formData.description}
                   init={{
                       height: 500,
-                      menubar: false,
-                      // plugins: [
-                      //     'advlist autolink lists link image charmap print preview',
-                      //     'searchreplace visualblocks code',
-                      //     'media table paste code help'
-                      // ],
-                      toolbar: 'undo redo | fontfamily fontsizeinput | ' +
+                      menubar: "insert | edit",
+                      plugins: [
+                         'link', 'paste', 'textcolor'
+                      ],
+                      toolbar: 'undo redo | fontfamily fontsizeinput forecolor backcolor | ' +
                       'lineheight bold italic underline | alignleft aligncenter ' +
                       'alignright alignjustify | bullist numlist outdent indent | ' +
-                      'removeformat | ',
-                      content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
+                      'removeformat | link | paste',
+                      content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }',
+                      default_link_target: "_blank"
                     }}
                   onEditorChange={handleEditorChange}
                 />
@@ -194,7 +195,7 @@ const AddResources = ({ book, handleUpdate }) => {
 
 
 
-              <Form.Group controlId="genres">
+              <Form.Group controlId="genres"  className="mb-3">
                 <Form.Label>Choose the genres</Form.Label>
                 {['Reading', 'Listening', 'Speaking', 'Writing', 'Culture', 'Medical'].map((genre) => (
                   <Form.Check
@@ -208,7 +209,7 @@ const AddResources = ({ book, handleUpdate }) => {
                 ))}
                </Form.Group>
 
-                <Form.Group controlId="links">
+                <Form.Group controlId="links"  className="mb-3">
                   <Form.Label>Links</Form.Label>
                   {formData.links.map((link, index) => (
                     <div key={index}>
@@ -232,7 +233,7 @@ const AddResources = ({ book, handleUpdate }) => {
                         checked={link.locked}
                         onChange={() => handleLockedChange(index)}
                       />
-                      <Button variant="danger" onClick={() => handleRemoveLink(index)}>
+                      <Button variant="danger" onClick={() => handleRemoveLink(index)} className='mt-3 mb-3'>
                         Remove
                       </Button>
                     </div>
@@ -242,12 +243,14 @@ const AddResources = ({ book, handleUpdate }) => {
                   </Button>
                 </Form.Group>
 
-                <Button variant="primary" type="submit">
-                  Save
-                </Button>
-                <Button variant="primary" onClick={handleInputUpdateChange}>
-                  Update
-                </Button>
+                { !isUpdate && <Button variant="primary" type="submit"  className="me-3">
+                    Save
+                  </Button>
+                }
+                {isUpdate && <Button variant="primary" onClick={handleInputUpdateChange}>
+                    Update
+                  </Button>
+                }
               </Form>         
           
         </Container>

@@ -1,22 +1,23 @@
-import React, { useState } from 'react';
-import 'firebase/auth';
-import { firebaseApp, auth } from '../../firebase/config';
+import React, { useState } from "react";
+import "firebase/auth";
+import { firebaseApp, auth } from "../../firebase/config";
 
 const SetCustomClaimByEmail = () => {
-  const [email, setEmail] = useState('');
+  const [email, setEmail] = useState("");
   const [status, setStatus] = useState(null);
 
   const setCustomClaim = async () => {
     try {
       // Fetch the currently logged-in user
       const currentUser = auth.currentUser;
+      console.log(currentUser);
 
       if (!currentUser) {
-        setStatus('No user logged in');
+        setStatus("No user logged in");
         return;
       }
 
-      console.log(JSON.stringify({email}))
+      console.log(JSON.stringify({ email }));
       // Check if the user is an admin (optional)
       // const idTokenResult = await currentUser.getIdTokenResult();
       // if (!idTokenResult.claims.admin) {
@@ -25,28 +26,27 @@ const SetCustomClaimByEmail = () => {
       // }
 
       // Set custom claim by email
-      const response = await fetch('/api/SetCustomClaimByEmail', {
-        method: 'POST',
+      const response = await fetch("/api/SetCustomClaimByEmail", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({ email }),
       });
 
-      console.log('reeeeeeeeeeeeeeeeeeeeeeeeees',)
+      console.log("reeeeeeeeeeeeeeeeeeeeeeeeees");
 
       const data = await response.json();
-      
-      setStatus(data.success ? 'Custom claim set successfully' : 'Failed to set custom claim');
+
+      setStatus(
+        data.success
+          ? "Custom claim set successfully"
+          : "Failed to set custom claim"
+      );
     } catch (error) {
-      setStatus('Error occurred');
-      console.error('Error:', error);
+      setStatus("Error occurred");
+      console.error("Error:", error);
     }
-
-    
-
-
-
   };
 
   return (

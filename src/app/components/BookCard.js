@@ -128,7 +128,7 @@ const BookCard = ({ book }) => {
                       style={{
                         border: darkMode
                           ? ".75px solid white"
-                          : ".75px solid black",
+                          : "1.75px solid black",
                       }}
                       key={item}
                     >

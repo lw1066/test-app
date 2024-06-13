@@ -12,6 +12,7 @@ function Page() {
   const { user } = useAuthContext();
   const router = useRouter();
   const isAdmin = user ? user.isAdmin : false;
+  // const isAdmin = true;
 
   return (
     <div>

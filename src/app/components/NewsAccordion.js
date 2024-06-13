@@ -14,14 +14,16 @@ import { useAuthContext } from "@/context/AuthContext";
 import { getAndModifyDoc } from "../../firebase/firestore/getAndModifyDoc";
 import { manualRefresh } from "../../firebase/firestore/addData";
 import { useDarkMode } from "@/context/DarkModeContext";
+import { useModal } from "@/context/ModalContext";
 
 function NewsAccordion() {
   const { user } = useAuthContext();
   const isAdmin = user ? user.isAdmin : false;
   const [newsDataArray, setNewsDataArray] = useState([]);
-  const [showModal, setShowModal] = useState(false);
+  const [showUpdateModal, setShowUpdateModal] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null); // Store selected news item
 
+  const { showModal } = useModal();
   const { darkMode } = useDarkMode();
 
   useEffect(() => {
@@ -49,11 +51,11 @@ function NewsAccordion() {
 
   const openModal = (item) => {
     setSelectedItem(item);
-    setShowModal(true);
+    setShowUpdateModal(true);
   };
 
   const closeModal = () => {
-    setShowModal(false);
+    setShowUpdateModal(false);
   };
 
   const handleUpdate = async (updatedFormData) => {
@@ -63,15 +65,19 @@ function NewsAccordion() {
         selectedItem.id,
         updatedFormData
       );
+
       if (error) {
         console.error("Error updating document:", error);
-      } else {
-        console.log("Document updated successfully:", result);
-        closeModal();
-        manualRefresh(); // Trigger a manual refresh after updating data
+        showModal(`So sorry - there's an error!`, `${error}`);
+        return;
       }
+
+      showModal(`News updated!`, `All done`);
+      closeModal();
+      manualRefresh();
     } catch (error) {
-      console.error("Error:", error);
+      console.error("Unexpected error:", error);
+      showModal(`So sorry - there's an error!`, `${error}`);
     }
   };
 
@@ -80,8 +86,10 @@ function NewsAccordion() {
       const { success, error } = await deleteData("news", itemId);
       if (error) {
         console.error("Error deleting document:", error);
+        showModal(`So sorry - there's an error!`, `${error}`);
       } else {
         console.log("Document deleted successfully", itemId);
+        showModal(`News item deleted!`, `All done`);
         manualRefresh();
       }
     } catch (error) {
@@ -90,16 +98,22 @@ function NewsAccordion() {
   };
 
   const handleDeleteClick = (itemId) => {
-    handleDelete(itemId); // Pass book.id to handleDelete
+    handleDelete(itemId);
   };
 
-  console.log(darkMode);
   return (
     <>
+      <h1 style={{ fontSize: 36, textAlign: "center", marginTop: 20 }}>
+        Welcome to Perceptia Press!
+      </h1>
+      <p style={{ textAlign: "center" }}>
+        Browse the catalogue to explore our titles or go to FAQs to learn more
+        about us.
+      </p>
       <div className={classes.accordion}>
         <Carousel data-bs-theme="dark" controls={false} interval={5000}>
           {newsDataArray.map((item, index) => (
-            <Carousel.Item key={index} eventKey={String(index)}>
+            <Carousel.Item key={index}>
               <div
                 className="d-block w-100"
                 style={{
@@ -158,7 +172,7 @@ function NewsAccordion() {
       </div>
 
       {/* Modal for editing news */}
-      <Modal show={showModal} onHide={closeModal}>
+      <Modal show={showUpdateModal} onHide={closeModal}>
         <Modal.Header closeButton>
           <Modal.Title>Edit News</Modal.Title>
         </Modal.Header>

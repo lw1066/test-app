@@ -2,7 +2,7 @@
 
 import { useDarkMode } from "@/context/DarkModeContext";
 import { Container, Row, Col } from "react-bootstrap";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import FAQAccordion from "../components/FAQAccordion";
 
 const Page = () => {

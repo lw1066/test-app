@@ -1,21 +1,14 @@
-/* Library.module.css */
-
-/* Common styles */
-
-
 .bookgridcontainer {
   display: grid;
-  /* grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); */
   gap: 10px;
   justify-content: center;
-  /* max-width: 100%; */
 }
 
 .bookcard {
-  height:15.75rem;
-  width:11.25rem;
+  height: 15.75rem;
+  width: 11.25rem;
   position: relative;
-  justify-content: center;;
+  justify-content: center;
   transition: transform 0.6s ease-out;
   overflow: hidden;
   box-shadow: 4px 6px 8px rgba(0, 0, 0, 0.8);
@@ -37,20 +30,20 @@
 .genres p {
   margin: 0;
   padding: 1.5px 2.5px;
-  
+
   border-radius: 5px;
-  font-size: .5rem;
+  font-size: 0.5rem;
 }
 
 .author {
-  font-size: .75rem;
-  padding:0;
-  margin:0 0 .75rem 0;
+  font-size: 0.75rem;
+  padding: 0;
+  margin: 0 0 0.75rem 0;
 }
 
 .details {
-  font-size:.75rem;
-  margin:0;
+  font-size: 0.75rem;
+  margin: 0;
 }
 
 .btntext {
@@ -70,23 +63,20 @@
 }
 
 .linkButton {
-  font-size: .75rem;
-  margin: .25rem;
+  font-size: 0.75rem;
+  margin: 0.25rem;
 }
 
-
-
 .accordion {
-  width: 60%; 
-  margin: 3rem auto; 
+  width: 60%;
+  margin: 3rem auto;
 }
 
 .bookcard:hover {
   transform: scale(1.5);
   transition-delay: 0s;
-  z-index: 1
+  z-index: 1;
 }
-
 
 @media screen and (max-width: 567px) {
   .bookgridcontainer {
@@ -97,4 +87,4 @@
     transform: scale(1);
     transition-delay: 0s;
   }
-} 
+}

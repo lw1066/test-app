@@ -52,9 +52,9 @@ const Library = () => {
 
   return (
     <>
-      <h2 style={{ textAlign: "center", fontSize: 32 }}>Our Library</h2>
+      <h2 style={{ textAlign: "center", fontSize: 32 }}>Our Catalogue</h2>
       <h3 style={{ textAlign: "center", fontSize: 24 }}>
-        Choose a category to see our current titles
+        Choose a category to explore our current titles
       </h3>
       <GenreSelector onSelectGenre={handleGenreChange} />
       {isLoading ? (

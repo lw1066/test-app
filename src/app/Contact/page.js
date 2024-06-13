@@ -5,7 +5,7 @@
 import { useState, useEffect, useRef } from "react";
 import { Form, Button, Container, Row, Col } from "react-bootstrap";
 import { useDarkMode } from "@/context/DarkModeContext";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import Success from "../components/Success";
 import { useModal } from "@/context/ModalContext";
 
@@ -27,7 +27,6 @@ const Contact = () => {
     setOrderQuery(false);
     setSubmission(false);
   };
-
   const handleFormSubmit = async (e) => {
     e.preventDefault();
 
@@ -42,19 +41,34 @@ const Contact = () => {
 
     console.log(formData);
 
-    const response = await fetch("/api/emailer", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(formData),
-    });
+    try {
+      const response = await fetch("/api/emailer", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
 
-    if (response.ok) {
-      resetForm();
+      if (response.ok) {
+        resetForm();
+        showModal(
+          `Hi ${name}`,
+          `Thanks for your email, we'll reply to ${email} as soon as possible.`
+        );
+      } else {
+        const errorData = await response.json();
+        showModal(
+          "Sorry - something went wrong",
+          `There was a problem with your submission: ${
+            errorData.message || response.statusText
+          }`
+        );
+      }
+    } catch (error) {
       showModal(
-        `Hi ${name}, thanks for your message!`,
-        `We'll be in touch soon. We'll reply to ${email} as soon as possible.`
+        "Sorry - something went wong",
+        `An unexpected error occurred: ${error.message}`
       );
     }
   };

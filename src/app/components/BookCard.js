@@ -1,15 +1,17 @@
 import { useState } from "react";
 import { useDarkMode } from "@/context/DarkModeContext";
-import { Card, Button, Modal, Container, Row, Col } from "react-bootstrap";
+import { Card, Button, Modal } from "react-bootstrap";
 import classes from "./Library.module.css";
 import AddResources from "../components/AddResources";
 import { getAndModifyDoc } from "../../firebase/firestore/getAndModifyDoc";
 import { useAuthContext } from "@/context/AuthContext";
 import { deleteData } from "../../firebase/firestore/deleteDoc";
-import Image from "next/image";
+import Image from "next/legacy/image";
+import { useModal } from "@/context/ModalContext";
 
 const BookCard = ({ book }) => {
   const { user } = useAuthContext();
+  const { showModal } = useModal();
   const isAdmin = user ? user.isAdmin : false;
   const filteredLinks = book.links
     ? book.links.filter(
@@ -25,11 +27,11 @@ const BookCard = ({ book }) => {
   const unlockedLinks = filteredLinks.filter((link) => !link.locked);
   const { darkMode } = useDarkMode();
 
-  const [showModal, setShowModal] = useState(false);
+  const [showBookModal, setShowBookModal] = useState(false);
   const [showUpdateModal, setShowUpdateModal] = useState(false);
 
-  const handleCloseModal = () => setShowModal(false);
-  const handleShowModal = () => setShowModal(true);
+  const handleCloseModal = () => setShowBookModal(false);
+  const handleShowModal = () => setShowBookModal(true);
   const handleCloseUpdate = () => setShowUpdateModal(false);
 
   const hasAmazonLink = buyLinks.some((link) => link.type.includes("amazon"));
@@ -47,8 +49,9 @@ const BookCard = ({ book }) => {
       const { success, error } = await deleteData("books", bookId);
       if (error) {
         console.error("Error deleting document:", error);
+        showModal("Sorry it's gone wrong", `this happened: ${error}`);
       } else {
-        console.log("Document deleted successfully");
+        showModal("Book deleted", "All done");
         handleCloseModal(); // Handle any necessary UI updates after deletion
       }
     } catch (error) {
@@ -69,8 +72,9 @@ const BookCard = ({ book }) => {
       );
       if (error) {
         console.error("Error updating document:", error);
+        showModal("Sorry it's gone wrong", `this happened: ${error}`);
       } else {
-        console.log("Document updated successfully:", result);
+        showModal("Book updated", "All done");
         handleCloseUpdate();
       }
     } catch (error) {
@@ -97,7 +101,7 @@ const BookCard = ({ book }) => {
         />
       </Card>
 
-      <Modal show={showModal} onHide={handleCloseModal} size="lg">
+      <Modal show={showBookModal} onHide={handleCloseModal} size="lg">
         <Modal.Header closeButton>
           <div className="d-flex justify-content-between w-100 align-items-center">
             <div className="text-start">

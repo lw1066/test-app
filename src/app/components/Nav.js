@@ -6,7 +6,7 @@ import { useDarkMode } from "@/context/DarkModeContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSun, faMoon } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import { useAuthContext } from "@/context/AuthContext";
 import Button from "react-bootstrap/Button";
 
@@ -48,7 +48,7 @@ function Navigation() {
             <div className="d-flex align-items-center justify-content-start">
               <div
                 className="ms-3"
-                style={{ width: "30%", maxWidth: "70px", maxHeight: "100px" }}
+                style={{ width: "20%", maxHeight: "100px" }}
               >
                 <Image
                   src={
@@ -60,15 +60,13 @@ function Navigation() {
                   object-fit="contain"
                   width={70}
                   height={100}
-                  // maxWidth='40%'
                   className="img-fluid"
-                  // style={{ maxWidth: '100%', height: 'auto' }}
                   priority
                 />
               </div>
               <div
                 className="ms-1"
-                style={{ width: "70%", maxWidth: "400px", maxHeight: "100px" }}
+                style={{ width: "70%", maxHeight: "100px" }}
               >
                 <Image
                   src={
@@ -78,9 +76,7 @@ function Navigation() {
                   object-fit="contain"
                   width={400}
                   height={100}
-                  maxWidth="40%"
                   className="img-fluid"
-                  style={{ maxWidth: "100%", height: "auto" }}
                   priority
                 />
               </div>

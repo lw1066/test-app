@@ -2,11 +2,13 @@
 import React from "react";
 import signIn from "@/firebase/auth/signin";
 import { useRouter } from "next/navigation";
+import { useModal } from "@/context/ModalContext";
 
 function Page() {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const router = useRouter();
+  const { showModal } = useModal();
 
   const handleForm = async (event) => {
     event.preventDefault();
@@ -14,11 +16,13 @@ function Page() {
     const { result, error } = await signIn(email, password);
 
     if (error) {
+      showModal(
+        "Sorry something isn't right",
+        "Please check your details and try again."
+      );
       return console.log(error);
     }
 
-    // else successful
-    console.log(result);
     return router.push("/");
   };
   return (

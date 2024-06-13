@@ -1,10 +1,12 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { Container, Form, Button } from "react-bootstrap";
 import { addData, manualRefresh } from "../../firebase/firestore/addData";
 import { Editor } from "@tinymce/tinymce-react";
+import { useModal } from "@/context/ModalContext";
 
 const AddNews = ({ news, handleUpdate }) => {
   const editorRef = useRef(null);
+  const { showModal } = useModal();
 
   const isUpdate = news ? true : false;
 
@@ -18,7 +20,7 @@ const AddNews = ({ news, handleUpdate }) => {
         description: "",
       };
 
-  const [newsData, setNewsData] = React.useState(initialNewsData);
+  const [newsData, setNewsData] = useState(initialNewsData);
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -39,9 +41,10 @@ const AddNews = ({ news, handleUpdate }) => {
 
       if (error) {
         console.error("Error adding document:", error);
+        showModal(`So sorry - there's an error!`, `${error}`);
       } else {
         console.log("Document added with ID:", result);
-        // window.location.reload();
+        showModal(`News item added!`, `All done`);
         setNewsData({
           title: "",
           description: "Add description here",
@@ -49,11 +52,13 @@ const AddNews = ({ news, handleUpdate }) => {
       }
     } catch (error) {
       console.error("Error:", error);
+      showModal(`So sorry - there's an error!`, `${error}`);
     }
     manualRefresh();
   };
 
   const handleInputUpdateChange = () => {
+    console.log("here we are handling stuff");
     handleUpdate(newsData);
   };
 
@@ -82,7 +87,7 @@ const AddNews = ({ news, handleUpdate }) => {
               init={{
                 height: 500,
                 menubar: "insert | edit",
-                plugins: ["link", "paste"],
+                plugins: ["link"],
                 toolbar:
                   "undo redo | fontfamily fontsizeinput forecolor backcolor | " +
                   "lineheight bold italic underline | alignleft aligncenter " +

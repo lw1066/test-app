@@ -4,7 +4,7 @@ import { Container, Row, Col, Button } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faInstagram, faFacebook } from "@fortawesome/free-brands-svg-icons";
 import { useDarkMode } from "@/context/DarkModeContext";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import Link from "next/link";
 
 const Footer = () => {

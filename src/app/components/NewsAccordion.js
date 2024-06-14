@@ -15,8 +15,9 @@ import { getAndModifyDoc } from "../../firebase/firestore/getAndModifyDoc";
 import { manualRefresh } from "../../firebase/firestore/addData";
 import { useDarkMode } from "@/context/DarkModeContext";
 import { useModal } from "@/context/ModalContext";
+import Link from "next/link";
 
-function NewsAccordion() {
+function NewsAccordion({ onClick }) {
   const { user } = useAuthContext();
   const isAdmin = user ? user.isAdmin : false;
   const [newsDataArray, setNewsDataArray] = useState([]);
@@ -106,9 +107,16 @@ function NewsAccordion() {
       <h1 style={{ fontSize: 36, textAlign: "center", marginTop: 20 }}>
         Welcome to Perceptia Press!
       </h1>
-      <p style={{ textAlign: "center" }}>
-        Browse the catalogue to explore our titles or go to FAQs to learn more
-        about us.
+      <p style={{ textAlign: "center", paddingInline: 10 }}>
+        Browse the{" "}
+        <a href="#!" onClick={onClick} style={{ textDecoration: "none" }}>
+          catalogue
+        </a>{" "}
+        to explore our titles or go to{" "}
+        <Link href="/About" style={{ textDecoration: "none" }}>
+          FAQs
+        </Link>{" "}
+        to learn more about us.
       </p>
       <div className={classes.accordion}>
         <Carousel data-bs-theme="dark" controls={false} interval={5000}>
@@ -117,7 +125,7 @@ function NewsAccordion() {
               <div
                 className="d-block w-100"
                 style={{
-                  height: "400px",
+                  height: "450px",
                   backgroundColor: darkMode ? "#212529" : "white",
                   borderRadius: 12,
                   display: "grid",
@@ -136,8 +144,9 @@ function NewsAccordion() {
                       color: darkMode ? "white" : "black",
                     }}
                   >
-                    <h3>{item.title}</h3>
+                    <h3 className={classes.captionTitle}>{item.title}</h3>
                     <div
+                      className={classes.captionDescription}
                       dangerouslySetInnerHTML={{ __html: item.description }}
                     />
                     {isAdmin && (

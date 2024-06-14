@@ -28,21 +28,21 @@ const Footer = () => {
           </Col>
           <Col xs={3} md={6} className="text-center mb-3 mb-md-0">
             {/* Instagram */}
-            <a
+            {/* <a
               href="https://www.instagram.com/your_instagram"
               target="_blank"
               rel="noopener noreferrer"
               className="text-decoration-none"
-            >
-              <FontAwesomeIcon
+            > */}
+            {/* <FontAwesomeIcon
                 icon={faInstagram}
                 size="lg"
                 color={darkMode ? "white" : "black"}
               />
-            </a>
+            </a> */}
             {/* Facebook */}
             <a
-              href="https://www.facebook.com/your_facebook"
+              href="https://www.facebook.com/perceptiapress/"
               target="_blank"
               rel="noopener noreferrer"
               className="text-decoration-none ms-3"

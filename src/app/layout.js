@@ -6,14 +6,10 @@ import "./globals.css";
 import Providers from "./providers";
 import Footer from "./components/Footer";
 import Success from "./components/Success";
-import Head from "next/head";
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <Head>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
       <body>
         <Providers>
           <div className="app">

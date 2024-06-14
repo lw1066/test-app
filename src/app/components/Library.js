@@ -1,13 +1,13 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, forwardRef } from "react";
 import getAllDocs from "../../firebase/firestore/getAllDocs";
 import classes from "./Library.module.css";
 import BookCard from "../components/BookCard";
 import GenreSelector from "../components/GenreSelector";
 import LoadingSpinner from "../components/LoadingSpinner"; // Import your LoadingSpinner component
 
-const Library = () => {
+const Library = forwardRef((props, ref) => {
   const [books, setBooks] = useState([]);
   const [error, setError] = useState(null);
   const [selectedGenre, setSelectedGenre] = useState("");
@@ -51,11 +51,13 @@ const Library = () => {
   };
 
   return (
-    <>
-      <h2 style={{ textAlign: "center", fontSize: 32 }}>Our Catalogue</h2>
-      <h3 style={{ textAlign: "center", fontSize: 24 }}>
+    <div>
+      <h2 style={{ textAlign: "center", fontSize: 32 }} ref={ref}>
+        Our Catalogue
+      </h2>
+      <p style={{ textAlign: "center", paddingInline: 10 }}>
         Choose a category to explore our current titles
-      </h3>
+      </p>
       <GenreSelector onSelectGenre={handleGenreChange} />
       {isLoading ? (
         <div className="d-flex justify-content-center mt-5">
@@ -76,8 +78,8 @@ const Library = () => {
           </div>
         </div>
       )}
-    </>
+    </div>
   );
-};
+});
 
 export default Library;

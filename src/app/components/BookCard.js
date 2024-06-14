@@ -92,11 +92,10 @@ const BookCard = ({ book }) => {
         className={`${classes.bookcard} bg-dark text-white `}
         onClick={handleShowModal}
       >
-        <Image
+        <img
           src={book.imageUrl}
           alt={book.title}
-          layout="fill"
-          objectFit="cover"
+          style={{ width: "100%", height: "100%", objectFit: "cover" }}
           className="img-fluid"
         />
       </Card>

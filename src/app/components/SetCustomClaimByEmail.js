@@ -1,31 +1,19 @@
 import React, { useState } from "react";
-import "firebase/auth";
-import { firebaseApp, auth } from "../../firebase/config";
+import { auth } from "../../firebase/config";
 
 const SetCustomClaimByEmail = () => {
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState(null);
 
-  const setCustomClaim = async () => {
+  const setCustomClaim = async (email) => {
     try {
-      // Fetch the currently logged-in user
       const currentUser = auth.currentUser;
-      console.log(currentUser);
 
       if (!currentUser) {
         setStatus("No user logged in");
         return;
       }
 
-      console.log(JSON.stringify({ email }));
-      // Check if the user is an admin (optional)
-      // const idTokenResult = await currentUser.getIdTokenResult();
-      // if (!idTokenResult.claims.admin) {
-      //   setStatus('You must be an admin to perform this action');
-      //   return;
-      // }
-
-      // Set custom claim by email
       const response = await fetch("/api/SetCustomClaimByEmail", {
         method: "POST",
         headers: {
@@ -34,17 +22,15 @@ const SetCustomClaimByEmail = () => {
         body: JSON.stringify({ email }),
       });
 
-      console.log("reeeeeeeeeeeeeeeeeeeeeeeeees");
-
       const data = await response.json();
 
       setStatus(
         data.success
           ? "Custom claim set successfully"
-          : "Failed to set custom claim"
+          : `Failed to set custom claim: ${data.message || "Unknown error"}`
       );
     } catch (error) {
-      setStatus("Error occurred");
+      setStatus("Error occurred while setting custom claim");
       console.error("Error:", error);
     }
   };
@@ -58,7 +44,13 @@ const SetCustomClaimByEmail = () => {
         value={email}
         onChange={(e) => setEmail(e.target.value)}
       />
-      <button onClick={setCustomClaim}>Set Custom Claim</button>
+      <button
+        onClick={() => {
+          setCustomClaim(email);
+        }}
+      >
+        Set Custom Claim
+      </button>
       {status && <p>{status}</p>}
     </div>
   );

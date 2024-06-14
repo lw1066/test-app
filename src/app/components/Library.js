@@ -44,6 +44,7 @@ const Library = forwardRef((props, ref) => {
       setFilteredBooks(filtered);
     } else {
       setFilteredBooks(books);
+      console.log(filteredBooks);
     }
   }, [selectedGenre, books]);
 

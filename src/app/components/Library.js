@@ -6,6 +6,7 @@ import classes from "./Library.module.css";
 import BookCard from "../components/BookCard";
 import GenreSelector from "../components/GenreSelector";
 import LoadingSpinner from "../components/LoadingSpinner"; // Import your LoadingSpinner component
+import { library } from "@fortawesome/fontawesome-svg-core";
 
 const Library = forwardRef((props, ref) => {
   const [books, setBooks] = useState([]);
@@ -81,5 +82,7 @@ const Library = forwardRef((props, ref) => {
     </div>
   );
 });
+
+library.displayName = "Library";
 
 export default Library;

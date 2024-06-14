@@ -46,7 +46,7 @@ function FAQAccordion() {
           </Accordion.Item>
           <Accordion.Item eventKey="3">
             <Accordion.Header>
-              I'm a teacher can I access teacher materials?
+              I am a teacher can I access teacher materials?
             </Accordion.Header>
             <Accordion.Body>
               <p>Information on signing up to get teacher access?</p>

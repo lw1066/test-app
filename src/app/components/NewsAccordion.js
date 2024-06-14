@@ -1,9 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-
 import Carousel from "react-bootstrap/Carousel";
-
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import getAllDocs from "../../firebase/firestore/getAllDocs";
@@ -29,12 +27,23 @@ function NewsAccordion({ onClick }) {
 
   useEffect(() => {
     const storedNewsData = localStorage.getItem("newsDataArray");
-    if (storedNewsData) {
+    const storedTimestamp = localStorage.getItem("newsDataTimestamp");
+    const isDataStale = checkIfDataIsStale(storedTimestamp);
+
+    if (storedNewsData && !isDataStale) {
       setNewsDataArray(JSON.parse(storedNewsData));
     } else {
       fetchNewsData();
     }
   }, []);
+
+  const checkIfDataIsStale = (timestamp) => {
+    if (!timestamp) return true;
+    const savedTime = new Date(timestamp);
+    const currentTime = new Date();
+    const differenceInDays = (currentTime - savedTime) / (1000 * 60 * 60 * 24);
+    return differenceInDays > 3;
+  };
 
   const fetchNewsData = async () => {
     try {
@@ -42,6 +51,7 @@ function NewsAccordion({ onClick }) {
       if (!error) {
         setNewsDataArray(results);
         localStorage.setItem("newsDataArray", JSON.stringify(results));
+        localStorage.setItem("newsDataTimestamp", new Date().toISOString());
       } else {
         console.error("Error fetching news data:", error);
       }

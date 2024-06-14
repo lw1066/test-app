@@ -83,6 +83,6 @@ const Library = forwardRef((props, ref) => {
   );
 });
 
-library.displayName = "Library";
+Library.displayName = "Library";
 
 export default Library;

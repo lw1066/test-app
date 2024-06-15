@@ -1,15 +1,16 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { Container, Form, Button } from "react-bootstrap";
 import { addData } from "../../firebase/firestore/addData";
-import { uploadImageToFirebase } from "../../firebase/firestore/storage";
+import { uploadImageToFirebase } from "../../firebase/firestore/uploadImageToFirebase";
 import { Editor } from "@tinymce/tinymce-react";
 import { useModal } from "@/context/ModalContext";
+import { deleteImageFromFirebase } from "@/firebase/firestore/deleteImageFromFirebase";
 
 const AddResources = ({ book, handleUpdate }) => {
   const editorRef = useRef(null);
   const { showModal } = useModal();
 
-  const isUpdate = book ? true : false;
+  const isUpdate = !!book;
 
   const initialFormData = book
     ? {
@@ -33,7 +34,7 @@ const AddResources = ({ book, handleUpdate }) => {
         links: [{ type: "", link: "", locked: false }],
       };
 
-  const [formData, setFormData] = React.useState(initialFormData);
+  const [formData, setFormData] = useState(initialFormData);
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
@@ -82,12 +83,11 @@ const AddResources = ({ book, handleUpdate }) => {
     event.preventDefault();
 
     try {
-      // Upload the image to Firebase Storage
       if (formData.imageFile) {
-        const imageUrl = await uploadImageToFirebase(formData.imageFile); // Function to upload image
+        const imageUrl = await uploadImageToFirebase(formData.imageFile);
 
         const formDataWithoutImageFile = { ...formData, imageUrl };
-        delete formDataWithoutImageFile.imageFile; // Remove the imageFile property
+        delete formDataWithoutImageFile.imageFile;
 
         const { result, error } = await addData(
           "books",
@@ -133,8 +133,33 @@ const AddResources = ({ book, handleUpdate }) => {
     setFormData({ ...formData, genres: selectedGenres });
   };
 
-  const handleInputUpdateChange = () => {
-    handleUpdate(formData);
+  const handleInputUpdateChange = async () => {
+    try {
+      console.log("Updating book with data:", formData);
+
+      let imageUrl = formData.imageUrl;
+
+      if (formData.imageFile) {
+        if (book.imageUrl) {
+          await deleteImageFromFirebase(book.imageUrl);
+        }
+        imageUrl = await uploadImageToFirebase(formData.imageFile);
+      }
+
+      const updatedData = {
+        ...formData,
+        imageUrl,
+      };
+      delete updatedData.imageFile;
+
+      console.log("Updated data:", updatedData);
+
+      await handleUpdate(updatedData);
+      showModal("Book updated!", "All done");
+    } catch (error) {
+      console.error("Error updating document:", error);
+      showModal("So sorry - there's an error!", `${error}`);
+    }
   };
 
   return (
@@ -144,11 +169,11 @@ const AddResources = ({ book, handleUpdate }) => {
           <h1 className="edit-title">Enter new book</h1>
 
           <Form onSubmit={handleSubmit}>
-            <Form.Group controlId="title" className="mb-3">
+            <Form.Group controlId="book title" className="mb-3">
               <Form.Control
                 type="text"
                 name="title"
-                placeholder="Title of item"
+                placeholder="Title of book"
                 value={formData.title}
                 onChange={handleInputChange}
                 required
@@ -217,6 +242,7 @@ const AddResources = ({ book, handleUpdate }) => {
               ].map((genre) => (
                 <Form.Check
                   key={genre}
+                  id={`genre-${genre}`}
                   type="checkbox"
                   label={genre}
                   value={genre}
@@ -226,7 +252,7 @@ const AddResources = ({ book, handleUpdate }) => {
               ))}
             </Form.Group>
 
-            <Form.Group controlId="links" className="mb-3">
+            <Form.Group className="mb-3">
               <Form.Label>Links</Form.Label>
               {formData.links.map((link, index) => (
                 <div key={index}>
@@ -236,6 +262,7 @@ const AddResources = ({ book, handleUpdate }) => {
                     name="type"
                     value={link.type}
                     onChange={(e) => handleLinkChange(index, e)}
+                    id={`type-${index}`}
                   />
                   <Form.Control
                     type="text"
@@ -243,6 +270,7 @@ const AddResources = ({ book, handleUpdate }) => {
                     name="link"
                     value={link.link}
                     onChange={(e) => handleLinkChange(index, e)}
+                    id={`link-${index}`}
                   />
                   <Form.Check
                     type="checkbox"

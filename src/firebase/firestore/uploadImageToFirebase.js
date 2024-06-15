@@ -1,5 +1,10 @@
-import { getStorage, ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
-import { v4 } from 'uuid';
+import {
+  getStorage,
+  ref,
+  uploadBytesResumable,
+  getDownloadURL,
+} from "firebase/storage";
+import { v4 } from "uuid";
 
 // Initialize Firebase storage
 const storage = getStorage();
@@ -8,16 +13,22 @@ const storage = getStorage();
 export const uploadImageToFirebase = async (imageFile) => {
   const storageRef = ref(storage, `images/${imageFile.name + v4()}`);
 
+  // Define metadata with Cache-Control header
+  const metadata = {
+    contentType: imageFile.type,
+    cacheControl: "public, max-age=86400", // Cache for 1 day
+  };
+
   try {
-    // Upload the image file
-    const uploadTask = uploadBytesResumable(storageRef, imageFile);
+    // Upload the image file with metadata
+    const uploadTask = uploadBytesResumable(storageRef, imageFile, metadata);
 
     // Get the download URL after successful upload
     const snapshot = await uploadTask;
     const downloadURL = await getDownloadURL(snapshot.ref);
     return downloadURL;
   } catch (error) {
-    console.error('Error uploading image:', error);
+    console.error("Error uploading image:", error);
     throw error; // Propagate the error if needed
   }
 };

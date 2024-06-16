@@ -1,12 +1,9 @@
-// ContactForm.js
-
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState } from "react";
 import { Form, Button, Container, Row, Col } from "react-bootstrap";
 import { useDarkMode } from "@/context/DarkModeContext";
 import Image from "next/legacy/image";
-import Success from "../components/Success";
 import { useModal } from "@/context/ModalContext";
 
 const Contact = () => {
@@ -27,6 +24,7 @@ const Contact = () => {
     setOrderQuery(false);
     setSubmission(false);
   };
+
   const handleFormSubmit = async (e) => {
     e.preventDefault();
 
@@ -58,14 +56,18 @@ const Contact = () => {
         );
       } else {
         const errorData = await response.json();
+        console.error("Error response:", errorData);
         showModal(
           "Sorry - something went wrong",
-          `There was a problem with your submission: ${errorData}`
+          `There was a problem with your submission. Status: ${
+            response.status
+          }. Error: ${JSON.stringify(errorData)}`
         );
       }
     } catch (error) {
+      console.error("Fetch error:", error);
       showModal(
-        "Sorry - something went wong",
+        "Sorry - something went wrong",
         `An unexpected error occurred: ${error.message}`
       );
     }

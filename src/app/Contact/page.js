@@ -60,7 +60,7 @@ const Contact = () => {
         const errorData = await response.json();
         showModal(
           "Sorry - something went wrong",
-          `There was a problem with your submission: ${errorData.error}`
+          `There was a problem with your submission: ${errorData}`
         );
       }
     } catch (error) {

@@ -58,7 +58,6 @@ const AddNews = ({ news, handleUpdate }) => {
   };
 
   const handleInputUpdateChange = () => {
-    console.log("here we are handling stuff");
     handleUpdate(newsData);
   };
 

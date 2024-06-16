@@ -29,6 +29,7 @@ const BookCard = ({ book }) => {
 
   const [showBookModal, setShowBookModal] = useState(false);
   const [showUpdateModal, setShowUpdateModal] = useState(false);
+  const [imageLoading, setImageLoading] = useState(true);
 
   const handleCloseModal = () => setShowBookModal(false);
   const handleShowModal = () => setShowBookModal(true);
@@ -38,6 +39,14 @@ const BookCard = ({ book }) => {
   const hasAsianLink = buyLinks.some((link) => link.type.includes("asian"));
   const hasEuroLink = buyLinks.some((link) => link.type.includes("euro"));
   const hasOtherLink = buyLinks.some((link) => link.type.includes("other"));
+
+  const loadingImage = darkMode
+    ? "/images/perceptia_logo_negative.jpg"
+    : "/images/perceptia_logo.jpg";
+
+  const handleImageLoad = () => {
+    setImageLoading(false);
+  };
 
   const handleUpdateClick = () => {
     setShowUpdateModal(true);
@@ -92,11 +101,25 @@ const BookCard = ({ book }) => {
         className={`${classes.bookcard} bg-dark text-white `}
         onClick={handleShowModal}
       >
+        {imageLoading && (
+          <img
+            src={loadingImage}
+            alt="Loading..."
+            style={{ width: "100%", height: "100%", objectFit: "cover" }}
+            className="img-fluid"
+          />
+        )}
         <img
           src={book.imageUrl}
           alt={book.title}
-          style={{ width: "100%", height: "100%", objectFit: "cover" }}
+          style={{
+            width: "100%",
+            height: "100%",
+            objectFit: "cover",
+            display: imageLoading ? "none" : "block",
+          }}
           className="img-fluid"
+          onLoad={handleImageLoad}
         />
       </Card>
 

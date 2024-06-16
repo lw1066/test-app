@@ -31,6 +31,7 @@ function NewsAccordion({ onClick }) {
     const isDataStale = checkIfDataIsStale(storedTimestamp);
 
     if (storedNewsData && !isDataStale) {
+      console.log("Using cached news data");
       setNewsDataArray(JSON.parse(storedNewsData));
     } else {
       fetchNewsData();
@@ -42,11 +43,12 @@ function NewsAccordion({ onClick }) {
     const savedTime = new Date(timestamp);
     const currentTime = new Date();
     const differenceInDays = (currentTime - savedTime) / (1000 * 60 * 60 * 24);
-    return differenceInDays > 3;
+    return differenceInDays > 1;
   };
 
   const fetchNewsData = async () => {
     try {
+      console.log("Fetching news data...");
       const { results, error } = await getAllDocs("news");
       if (!error) {
         setNewsDataArray(results);

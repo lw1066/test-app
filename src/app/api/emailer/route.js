@@ -10,7 +10,7 @@ export async function POST(req) {
 
   // Create a transporter
   const transporter = nodemailer.createTransport({
-    host: "smtp.gmail.com",
+    host: "smtp.zoho.eu",
     port: 465,
     secure: true,
     auth: {
@@ -21,7 +21,7 @@ export async function POST(req) {
 
   // Compose email
   const mailOptions = {
-    from: "testy1066@gmail.com",
+    from: process.env.NODEMAILER_EMAIL,
     to: "lewis_webster@hotmail.com", // Change this to the recipient's email
     subject: `Contact: ${name},  ${bookSamples ? "SAMPLES" : ""} ${
       orderQuery ? "ORDER" : ""

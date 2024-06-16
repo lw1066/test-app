@@ -5,7 +5,7 @@ import { NextResponse } from "next/server";
 
 export async function POST(req) {
   const body = await req.json();
-
+  console.log("body-------------------", body);
   const { name, email, message, bookSamples, orderQuery, submission } = body;
 
   // Create a transporter
@@ -36,7 +36,7 @@ export async function POST(req) {
     `,
   };
 
-  console.log(mailOptions);
+  console.log("mailoptions---------------------", mailOptions);
 
   // Send email
   try {
@@ -48,6 +48,7 @@ export async function POST(req) {
       message: "Email sent successfully!",
     });
   } catch (error) {
+    console.log("error----", error);
     console.error("Error sending email:", error);
     return NextResponse.json({ success: false, error }, { status: 500 });
   }

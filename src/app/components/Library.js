@@ -1,12 +1,12 @@
 "use client";
 
 import React, { useEffect, useState, forwardRef } from "react";
-import getAllDocs from "../../firebase/firestore/getAllDocs";
 import classes from "./Library.module.css";
 import BookCard from "../components/BookCard";
 import GenreSelector from "../components/GenreSelector";
-import LoadingSpinner from "../components/LoadingSpinner"; // Import your LoadingSpinner component
-import { library } from "@fortawesome/fontawesome-svg-core";
+import LoadingSpinner from "../components/LoadingSpinner";
+import fetchBooks from "../../firebase/firestore/fetchBooks";
+import { checkIfDataIsStale } from "../../firebase/firestore/checkIfDataIsStale";
 
 const Library = forwardRef((props, ref) => {
   const [books, setBooks] = useState([]);
@@ -16,24 +16,29 @@ const Library = forwardRef((props, ref) => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    async function fetchBooks() {
-      try {
-        const { results, error } = await getAllDocs("books");
+    async function loadBooks() {
+      const storedBookData = localStorage.getItem("bookArray");
+      const storedTimestamp = localStorage.getItem("bookTimestamp");
+      const isDataStale = checkIfDataIsStale(storedTimestamp);
+
+      if (storedBookData && !isDataStale) {
+        console.log("Using cached book data");
+        setBooks(JSON.parse(storedBookData));
+        setFilteredBooks(JSON.parse(storedBookData));
+      } else {
+        console.log("Fetching book data...");
+        const { results, error } = await fetchBooks();
         if (error) {
           setError(error);
         } else {
           setBooks(results);
           setFilteredBooks(results);
         }
-      } catch (error) {
-        console.error("Error fetching books:", error);
-        setError(error);
-      } finally {
-        setIsLoading(false);
       }
+      setIsLoading(false);
     }
 
-    fetchBooks();
+    loadBooks();
   }, []);
 
   useEffect(() => {

@@ -14,13 +14,15 @@ import { manualRefresh } from "../../firebase/firestore/addData";
 import { useDarkMode } from "@/context/DarkModeContext";
 import { useModal } from "@/context/ModalContext";
 import Link from "next/link";
+import { checkIfDataIsStale } from "@/firebase/firestore/checkIfDataIsStale";
+import fetchNewsData from "@/firebase/firestore/fetchNewsData";
 
 function NewsAccordion({ onClick }) {
   const { user } = useAuthContext();
   const isAdmin = user ? user.isAdmin : false;
   const [newsDataArray, setNewsDataArray] = useState([]);
   const [showUpdateModal, setShowUpdateModal] = useState(false);
-  const [selectedItem, setSelectedItem] = useState(null); // Store selected news item
+  const [selectedItem, setSelectedItem] = useState(null);
 
   const { showModal } = useModal();
   const { darkMode } = useDarkMode();
@@ -34,30 +36,15 @@ function NewsAccordion({ onClick }) {
       console.log("Using cached news data");
       setNewsDataArray(JSON.parse(storedNewsData));
     } else {
-      fetchNewsData();
+      loadNewsData();
     }
   }, []);
 
-  const checkIfDataIsStale = (timestamp) => {
-    if (!timestamp) return true;
-    const savedTime = new Date(timestamp);
-    const currentTime = new Date();
-    const differenceInDays = (currentTime - savedTime) / (1000 * 60 * 60 * 24);
-    return differenceInDays > 1;
-  };
-
-  const fetchNewsData = async () => {
-    try {
-      console.log("Fetching news data...");
-      const { results, error } = await getAllDocs("news");
-      if (!error) {
-        setNewsDataArray(results);
-        localStorage.setItem("newsDataArray", JSON.stringify(results));
-        localStorage.setItem("newsDataTimestamp", new Date().toISOString());
-      } else {
-        console.error("Error fetching news data:", error);
-      }
-    } catch (error) {
+  const loadNewsData = async () => {
+    const { results, error } = await fetchNewsData();
+    if (!error) {
+      setNewsDataArray(results);
+    } else {
       console.error("Error fetching news data:", error);
     }
   };
@@ -101,7 +88,6 @@ function NewsAccordion({ onClick }) {
         console.error("Error deleting document:", error);
         showModal(`So sorry - there's an error!`, `${error}`);
       } else {
-        console.log("Document deleted successfully", itemId);
         showModal(`News item deleted!`, `All done`);
         manualRefresh();
       }

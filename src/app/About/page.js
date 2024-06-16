@@ -10,13 +10,15 @@ const Page = () => {
 
   return (
     <>
-      <div className="d-flex align-items-center justify-content-center mt-5">
+      <div className="d-flex flex-column  align-items-center justify-content-center mt-5">
         <Image
           src={darkMode ? "/images/darkAbout.webp" : "/images/lightAbout.webp"}
           alt="people talking animation"
-          width={60} // Adjust the width as needed
-          height={60} // Adjust the height as needed
+          width={45} // Adjust the width as needed
+          height={45} // Adjust the height as needed
+          unoptimized
         />
+        <h1 style={{ fontSize: "24px" }}>FAQs</h1>
       </div>
       <FAQAccordion />
     </>

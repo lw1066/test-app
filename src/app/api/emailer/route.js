@@ -4,6 +4,7 @@ import nodemailer from "nodemailer";
 import { NextResponse } from "next/server";
 
 export async function POST(req) {
+  console.log("hi from the route");
   const body = await req.json();
   console.log("body-------------------", body);
   const { name, email, message, bookSamples, orderQuery, submission } = body;

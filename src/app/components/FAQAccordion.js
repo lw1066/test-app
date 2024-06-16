@@ -9,9 +9,6 @@ function FAQAccordion() {
 
   return (
     <>
-      <h2 style={{ textAlign: "center", fontSize: 24, marginTop: 10 }}>
-        Take a look at the FAQs to get to know us better
-      </h2>
       <div className={classes.accordion}>
         <Accordion activeKey={activeKey} onSelect={(k) => setActiveKey(k)}>
           <Accordion.Item eventKey="0">

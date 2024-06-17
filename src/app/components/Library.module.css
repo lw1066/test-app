@@ -87,6 +87,15 @@
   width: 90px;
 }
 
+.newsAccordionLinks {
+  text-decoration: none;
+  color: gray;
+}
+
+.newsAccordionLinks:hover {
+  text-decoration: underline;
+}
+
 @media screen and (max-width: 609px) {
   .bookgridcontainer {
     grid-template-columns: repeat(1, 1fr);

@@ -107,11 +107,11 @@ function NewsAccordion({ onClick }) {
       </h1>
       <p style={{ textAlign: "center", paddingInline: 10 }}>
         Browse the{" "}
-        <a href="#!" onClick={onClick} style={{ textDecoration: "none" }}>
+        <a href="#!" onClick={onClick} className={classes.newsAccordionLinks}>
           catalogue
         </a>{" "}
         to explore our titles or go to{" "}
-        <Link href="/About" style={{ textDecoration: "none" }}>
+        <Link href="/About" className={classes.newsAccordionLinks}>
           FAQs
         </Link>{" "}
         to learn more about us.

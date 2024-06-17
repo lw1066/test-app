@@ -64,7 +64,7 @@
 
 .accordion {
   width: 60%;
-  margin: 3rem auto;
+  margin: 0.5rem auto;
 }
 
 .bookcard:hover {
@@ -114,7 +114,7 @@
     font-size: 20px;
   }
 
-  .captionDescription {
+  /* .captionDescription {
     font-size: 14px;
-  }
+  } */
 }

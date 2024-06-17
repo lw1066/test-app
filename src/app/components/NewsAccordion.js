@@ -123,14 +123,14 @@ function NewsAccordion({ onClick }) {
               <div
                 className="d-block w-100"
                 style={{
-                  height: "450px",
+                  height: "400px",
                   backgroundColor: darkMode ? "#212529" : "white",
                   borderRadius: 12,
                   display: "grid",
                   placeItems: "center",
                 }}
               >
-                <div className="text-center">
+                <div>
                   <Carousel.Caption
                     style={{
                       height: "100%",
@@ -140,6 +140,7 @@ function NewsAccordion({ onClick }) {
                       alignItems: "center",
                       textAlign: "center",
                       color: darkMode ? "white" : "black",
+                      fontSize: "clamp(.75rem, 2vw, 1rem)",
                     }}
                   >
                     <h3 className={classes.captionTitle}>{item.title}</h3>

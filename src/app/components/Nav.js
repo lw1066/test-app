@@ -119,12 +119,12 @@ function Navigation() {
                   </Link>
                 </li>
               )}
-              {/* {user && <Button variant='outline-danger' onClick={handleSignout}>Signout</Button>} */}
+
               {user && (
                 <li className="nav-item">
                   <Button
                     variant="outline-danger"
-                    className="rounded-pill ms-2 mb-2 fs-0"
+                    className=" ms-2 mb-2 fs-0"
                     onClick={handleSignout}
                   >
                     signout

@@ -79,7 +79,20 @@
   cursor: pointer;
 }
 
-@media screen and (max-width: 600px) {
+.buttonGroupContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  margin: 30px 50px 70px 50px;
+}
+
+.button {
+  margin: 0.3rem;
+  width: 90px;
+}
+
+@media screen and (max-width: 609px) {
   .bookgridcontainer {
     grid-template-columns: repeat(1, 1fr);
   }

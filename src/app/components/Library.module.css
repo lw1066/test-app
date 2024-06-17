@@ -35,15 +35,10 @@
   font-size: 0.5rem;
 }
 
-.author {
-  font-size: 0.75rem;
-  padding: 0;
-  margin: 0 0 0.75rem 0;
-}
-
-.details {
-  font-size: 0.75rem;
+.bookDetails {
+  font-size: 1rem;
   margin: 0;
+  padding: 0;
 }
 
 .btntext {

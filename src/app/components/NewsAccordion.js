@@ -117,7 +117,7 @@ function NewsAccordion({ onClick }) {
         to learn more about us.
       </p>
       <div className={classes.accordion}>
-        <Carousel data-bs-theme="dark" controls={false} interval={5000}>
+        <Carousel data-bs-theme="dark" controls={false} interval={3000}>
           {newsDataArray.map((item, index) => (
             <Carousel.Item key={index}>
               <div

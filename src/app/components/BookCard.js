@@ -147,30 +147,13 @@ const BookCard = ({ book }) => {
                   </Button>
                 </>
               )}
-              <span className={classes.genres}>
-                {book.genres ? (
-                  book.genres.map((item) => (
-                    <p
-                      style={{
-                        border: darkMode
-                          ? ".75px solid white"
-                          : "1.75px solid black",
-                      }}
-                      key={item}
-                    >
-                      {item}
-                    </p>
-                  ))
-                ) : (
-                  <p>No genres</p>
-                )}
-              </span>
-              <Modal.Title style={{ fontSize: "2.25rem" }}>
-                {book.title}
-              </Modal.Title>
-              {book.author && <p className={classes.author}>{book.author}</p>}
+
+              <Modal.Title>{book.title}</Modal.Title>
+              {book.author && (
+                <p className={classes.bookDetails}>{book.author}</p>
+              )}
               {book.bookDetails && (
-                <p className={classes.details}>{book.bookDetails}</p>
+                <p className={classes.bookDetails}>{book.bookDetails}</p>
               )}
             </div>
           </div>
@@ -181,8 +164,7 @@ const BookCard = ({ book }) => {
             {hasAmazonLink && (
               <Button
                 variant="outline-success"
-                className="mx-1"
-                size="sm"
+                className={classes.linkButton}
                 onClick={() =>
                   handleLinkClick(
                     buyLinks.find((link) => link.type.includes("amazon")).link
@@ -195,8 +177,7 @@ const BookCard = ({ book }) => {
             {hasAsianLink && (
               <Button
                 variant="outline-success"
-                className="mx-1"
-                size="sm"
+                className={classes.linkButton}
                 onClick={() =>
                   handleLinkClick(
                     buyLinks.find((link) => link.type.includes("asian")).link
@@ -209,8 +190,7 @@ const BookCard = ({ book }) => {
             {hasEuroLink && (
               <Button
                 variant="outline-success"
-                className="mx-1"
-                size="sm"
+                className={classes.linkButton}
                 onClick={() =>
                   handleLinkClick(
                     buyLinks.find((link) => link.type.includes("euro")).link
@@ -223,8 +203,7 @@ const BookCard = ({ book }) => {
             {hasOtherLink && (
               <Button
                 variant="outline-success"
-                className="mx-1"
-                size="sm"
+                className={classes.linkButton}
                 onClick={() =>
                   handleLinkClick(
                     buyLinks.find((link) => link.type.includes("other")).link
@@ -269,7 +248,7 @@ const BookCard = ({ book }) => {
             )}
           </div>
 
-          <hr />
+          {(unlockedLinks.length > 0 || lockedLinks.length > 0) && <hr />}
 
           <div dangerouslySetInnerHTML={{ __html: book.description }} />
         </Modal.Body>

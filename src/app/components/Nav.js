@@ -9,11 +9,15 @@ import Link from "next/link";
 import Image from "next/legacy/image";
 import { useAuthContext } from "@/context/AuthContext";
 import Button from "react-bootstrap/Button";
+import fetchBooks from "../../firebase/firestore/fetchBooks";
+import fetchNewsData from "@/firebase/firestore/fetchNewsData";
+import { useModal } from "@/context/ModalContext";
 
 function Navigation() {
   const { user } = useAuthContext();
   const isAdmin = user ? user.isAdmin : false;
   const { darkMode, toggleDarkMode } = useDarkMode();
+  const { showModal } = useModal();
 
   const handleToggleDarkMode = () => {
     const updatedMode = !darkMode;
@@ -31,6 +35,12 @@ function Navigation() {
   const handleSignout = async () => {
     redirectToHome();
     signOutUser();
+  };
+
+  const handleRefresh = () => {
+    fetchBooks();
+    fetchNewsData();
+    showModal("News and books refreshed", "go have a look");
   };
 
   const redirectToHome = () => {
@@ -106,11 +116,20 @@ function Navigation() {
                 </Link>
               </li>
               {user && isAdmin && (
-                <li className="nav-item">
-                  <Link className="nav-link" href="Admin">
-                    Admin
-                  </Link>
-                </li>
+                <>
+                  <li className="nav-item">
+                    <Link className="nav-link" href="Admin">
+                      Admin
+                    </Link>
+                  </li>
+                  <Button
+                    variant="outline-danger"
+                    className=" ms-2 mb-2 fs-0"
+                    onClick={handleRefresh}
+                  >
+                    Refresh
+                  </Button>
+                </>
               )}
               {!user && (
                 <li className="nav-item">

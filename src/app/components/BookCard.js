@@ -1,5 +1,4 @@
 import { useState } from "react";
-import Link from "next/link"; // Import Link from next/link
 import { useDarkMode } from "@/context/DarkModeContext";
 import { Card, Button, Modal, ListGroup, ListGroupItem } from "react-bootstrap";
 import classes from "./Library.module.css";
@@ -7,7 +6,6 @@ import AddResources from "../components/AddResources";
 import { getAndModifyDoc } from "../../firebase/firestore/getAndModifyDoc";
 import { useAuthContext } from "@/context/AuthContext";
 import { deleteData } from "../../firebase/firestore/deleteDoc";
-import Image from "next/legacy/image";
 import { useModal } from "@/context/ModalContext";
 import AudioModal from "./AudioModal";
 
@@ -46,6 +44,9 @@ const BookCard = ({ book }) => {
   const hasOtherLink = buyLinks.some((link) => link.type.includes("other"));
 
   const audioFileUrls = book.audioFileUrls || [];
+  const sortedAudioFileUrls = audioFileUrls.sort((a, b) =>
+    a.downloadURL.localeCompare(b.downloadURL)
+  );
 
   const loadingImage = darkMode
     ? "/images/perceptia_logo_negative.jpg"
@@ -68,7 +69,7 @@ const BookCard = ({ book }) => {
         showModal("Sorry it's gone wrong", `this happened: ${error}`);
       } else {
         showModal("Book deleted", "All done");
-        handleCloseModal(); // Handle any necessary UI updates after deletion
+        handleCloseModal();
       }
     } catch (error) {
       console.error("Error:", error);
@@ -76,7 +77,7 @@ const BookCard = ({ book }) => {
   };
 
   const handleDeleteClick = () => {
-    handleDelete(book.id); // Pass book.id to handleDelete
+    handleDelete(book.id);
   };
 
   const handleUpdate = async (updatedFormData) => {
@@ -302,11 +303,9 @@ const BookCard = ({ book }) => {
           <Modal.Title>{book.title} Audio</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <p style={{ textAlign: "center", margin: "1rem" }}>
-            Click title to play
-          </p>
+          <p style={{ textAlign: "center", margin: "1rem" }}>Click to play</p>
           <ListGroup>
-            {audioFileUrls.map((audio, index) => (
+            {sortedAudioFileUrls.map((audio, index) => (
               <ListGroupItem
                 key={index}
                 action
@@ -325,6 +324,7 @@ const BookCard = ({ book }) => {
           setShowAudioModal(false);
         }}
         audio={currentAudioUrl}
+        bookTitle={book.title}
       />
     </>
   );

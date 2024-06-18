@@ -1,6 +1,7 @@
 import { useState } from "react";
+import Link from "next/link"; // Import Link from next/link
 import { useDarkMode } from "@/context/DarkModeContext";
-import { Card, Button, Modal } from "react-bootstrap";
+import { Card, Button, Modal, ListGroup, ListGroupItem } from "react-bootstrap";
 import classes from "./Library.module.css";
 import AddResources from "../components/AddResources";
 import { getAndModifyDoc } from "../../firebase/firestore/getAndModifyDoc";
@@ -8,6 +9,7 @@ import { useAuthContext } from "@/context/AuthContext";
 import { deleteData } from "../../firebase/firestore/deleteDoc";
 import Image from "next/legacy/image";
 import { useModal } from "@/context/ModalContext";
+import AudioModal from "./AudioModal";
 
 const BookCard = ({ book }) => {
   const { user } = useAuthContext();
@@ -29,7 +31,10 @@ const BookCard = ({ book }) => {
 
   const [showBookModal, setShowBookModal] = useState(false);
   const [showUpdateModal, setShowUpdateModal] = useState(false);
+  const [showAudioListModal, setShowAudioListModal] = useState(false);
   const [imageLoading, setImageLoading] = useState(true);
+  const [showAudioModal, setShowAudioModal] = useState(false);
+  const [currentAudioUrl, setCurrentAudioUrl] = useState("");
 
   const handleCloseModal = () => setShowBookModal(false);
   const handleShowModal = () => setShowBookModal(true);
@@ -39,6 +44,8 @@ const BookCard = ({ book }) => {
   const hasAsianLink = buyLinks.some((link) => link.type.includes("asian"));
   const hasEuroLink = buyLinks.some((link) => link.type.includes("euro"));
   const hasOtherLink = buyLinks.some((link) => link.type.includes("other"));
+
+  const audioFileUrls = book.audioFileUrls || [];
 
   const loadingImage = darkMode
     ? "/images/perceptia_logo_negative.jpg"
@@ -93,6 +100,15 @@ const BookCard = ({ book }) => {
 
   const handleLinkClick = (link) => {
     window.open(link, "_blank");
+  };
+
+  const handleAudioClick = () => {
+    setShowAudioListModal(true);
+  };
+
+  const handleShowAudioModal = (audio) => {
+    setShowAudioModal(true);
+    setCurrentAudioUrl(audio);
   };
 
   return (
@@ -218,6 +234,13 @@ const BookCard = ({ book }) => {
           <hr />
 
           <div className="d-flex justify-content-between w-100 align-items-center">
+            <Button
+              variant="outline-primary"
+              className={classes.linkButton}
+              onClick={handleAudioClick}
+            >
+              Audio
+            </Button>
             {unlockedLinks.length > 0 && (
               <div className={classes.linksContainer}>
                 {unlockedLinks.map((link, index) => (
@@ -270,6 +293,39 @@ const BookCard = ({ book }) => {
           </Button>
         </Modal.Footer>
       </Modal>
+
+      <Modal
+        show={showAudioListModal}
+        onHide={() => setShowAudioListModal(false)}
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>{book.title} Audio</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <p style={{ textAlign: "center", margin: "1rem" }}>
+            Click title to play
+          </p>
+          <ListGroup>
+            {audioFileUrls.map((audio, index) => (
+              <ListGroupItem
+                key={index}
+                action
+                onClick={() => handleShowAudioModal(audio)}
+              >
+                {audio.name}
+              </ListGroupItem>
+            ))}
+          </ListGroup>
+        </Modal.Body>
+      </Modal>
+
+      <AudioModal
+        show={showAudioModal}
+        handleClose={() => {
+          setShowAudioModal(false);
+        }}
+        audio={currentAudioUrl}
+      />
     </>
   );
 };

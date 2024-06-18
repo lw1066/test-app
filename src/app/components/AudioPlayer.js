@@ -14,8 +14,8 @@ const AudioPlayer = ({ url }) => {
         url={url}
         playing={false}
         controls={true}
-        width="50%"
-        height="150px"
+        width="100%"
+        height="80px"
       />
     </div>
   );

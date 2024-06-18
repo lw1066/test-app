@@ -7,7 +7,6 @@ import AudioModal from "../components/AudioModal";
 const Home = (audioFileUrls) => {
   const [showModal, setShowModal] = useState(false);
   const [currentAudioUrl, setCurrentAudioUrl] = useState("");
-  const [audioFileUrls, setAudioFileUrls] = useState([]);
 
   const handleShowModal = (url) => {
     setCurrentAudioUrl(url);

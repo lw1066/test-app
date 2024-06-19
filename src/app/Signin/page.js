@@ -32,10 +32,7 @@ function Page() {
           If you are a teacher, please sign in to access teacher materials. If
           you don&apos;t have an account please contact us to register.
         </h1>
-        <p>
-          *** to test teacher sign-in use email: teacherTest@test.com pw:
-          teachertest
-        </p>
+
         <form onSubmit={handleForm} className="form">
           <div className="mb-3">
             <label htmlFor="email" className="form-label">

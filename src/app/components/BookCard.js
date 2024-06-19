@@ -8,6 +8,7 @@ import { useAuthContext } from "@/context/AuthContext";
 import { deleteData } from "../../firebase/firestore/deleteDoc";
 import { useModal } from "@/context/ModalContext";
 import AudioModal from "./AudioModal";
+import Image from "next/legacy/image";
 
 const BookCard = ({ book }) => {
   const { user } = useAuthContext();
@@ -119,22 +120,19 @@ const BookCard = ({ book }) => {
         onClick={handleShowModal}
       >
         {imageLoading && (
-          <img
+          <Image
             src={loadingImage}
             alt="Loading..."
-            style={{ width: "100%", height: "100%", objectFit: "cover" }}
+            layout="fill"
+            objectFit="contain"
             className="img-fluid"
           />
         )}
-        <img
+        <Image
           src={book.imageUrl}
           alt={book.title}
-          style={{
-            width: "100%",
-            height: "100%",
-            objectFit: "cover",
-            display: imageLoading ? "none" : "block",
-          }}
+          layout="fill"
+          objectFit="contain"
           className="img-fluid"
           onLoad={handleImageLoad}
         />
@@ -165,15 +163,12 @@ const BookCard = ({ book }) => {
                 </>
               )}
               <div style={{ display: "flex", flexDirection: "row" }}>
-                <img
+                <Image
                   src={book.imageUrl}
                   alt={book.title}
-                  style={{
-                    width: 75,
-                    height: "auto",
-                    objectFit: "contain",
-                    display: imageLoading ? "none" : "block",
-                  }}
+                  width={75}
+                  height={95}
+                  objectFit="contain"
                   className="img-fluid"
                   onLoad={handleImageLoad}
                 />
@@ -192,7 +187,6 @@ const BookCard = ({ book }) => {
         </Modal.Header>
         <Modal.Body>
           <div>
-            {/* Conditional rendering of buttons based on link keywords */}
             {hasAmazonLink && (
               <Button
                 variant="outline-success"
@@ -300,10 +294,7 @@ const BookCard = ({ book }) => {
           <Modal.Title>Update Book</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <AddResources
-            book={book} // Pass the book data to AddResources
-            handleUpdate={handleUpdate}
-          />
+          <AddResources book={book} handleUpdate={handleUpdate} />
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleCloseUpdate}>
@@ -320,16 +311,15 @@ const BookCard = ({ book }) => {
           <Modal.Title>{book.title} Audio</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <div style={{ display: "flex", justifyContent: "center" }}>
-            <img
+          <div style={{ textAlign: "center", marginBottom: "1rem" }}>
+            <Image
               src={book.imageUrl}
               alt={book.title}
-              style={{
-                width: 100,
-                height: "auto",
-                objectFit: "cover",
-                display: imageLoading ? "none" : "block",
-              }}
+              width={100}
+              height={125}
+              objectFit="contain"
+              className="img-fluid"
+              style={{ display: imageLoading ? "none" : "block" }}
             />
           </div>
           <p style={{ textAlign: "center", margin: "1rem" }}>Click to play</p>

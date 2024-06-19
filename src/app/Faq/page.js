@@ -21,7 +21,7 @@ const Page = () => {
         />
 
         <h1 style={{ fontSize: "18px", display: "flex", flexDirection: "row" }}>
-          Questions? If it's not answered below please&nbsp;
+          Questions? If it is not answered below please&nbsp;
           <Link className={classes.newsAccordionLinks} href="Contact">
             Contact
           </Link>

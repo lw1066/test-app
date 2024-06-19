@@ -8,7 +8,7 @@ import { useAuthContext } from "@/context/AuthContext";
 import { deleteData } from "../../firebase/firestore/deleteDoc";
 import { useModal } from "@/context/ModalContext";
 import AudioModal from "./AudioModal";
-import Image from "next/legacy/image";
+import Image from "next/image";
 
 const BookCard = ({ book }) => {
   const { user } = useAuthContext();
@@ -48,8 +48,6 @@ const BookCard = ({ book }) => {
   const sortedAudioFileUrls = audioFileUrls.sort((a, b) =>
     a.downloadURL.localeCompare(b.downloadURL)
   );
-
-  console.log("imageURL in bookcard----", book.imageUrl);
 
   const loadingImage = darkMode
     ? "/images/perceptia_logo_negative.jpg"
@@ -125,8 +123,8 @@ const BookCard = ({ book }) => {
           <Image
             src={loadingImage}
             alt="Loading..."
-            layout="fill"
-            objectFit="contain"
+            fill={true}
+            object-fit="cover"
             className="img-fluid"
             unoptimized
           />
@@ -134,8 +132,8 @@ const BookCard = ({ book }) => {
         <Image
           src={book.imageUrl}
           alt={book.title}
-          layout="fill"
-          objectFit="contain"
+          fill={true}
+          object-fit="contain"
           className="img-fluid"
           onLoad={handleImageLoad}
           unoptimized
@@ -172,7 +170,7 @@ const BookCard = ({ book }) => {
                   alt={book.title}
                   width={75}
                   height={95}
-                  objectFit="contain"
+                  object-fit="contain"
                   className="img-fluid"
                   unoptimized
                 />

@@ -111,7 +111,7 @@ function NewsAccordion({ onClick }) {
           catalogue
         </a>{" "}
         to explore our titles or go to{" "}
-        <Link href="/About" className={classes.newsAccordionLinks}>
+        <Link href="/Faq" className={classes.newsAccordionLinks}>
           FAQs
         </Link>{" "}
         to learn more about us.
@@ -128,6 +128,7 @@ function NewsAccordion({ onClick }) {
                   borderRadius: 12,
                   display: "grid",
                   placeItems: "center",
+                  border: darkMode ? "1px solid white" : "1px solid black",
                 }}
               >
                 <div>

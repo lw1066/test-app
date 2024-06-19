@@ -58,7 +58,10 @@ const Library = forwardRef((props, ref) => {
 
   return (
     <div>
-      <h2 style={{ textAlign: "center", fontSize: 32 }} ref={ref}>
+      <h2
+        style={{ textAlign: "center", fontSize: 32, marginTop: 50 }}
+        ref={ref}
+      >
         Our Catalogue
       </h2>
       <p style={{ textAlign: "center", paddingInline: 10 }}>

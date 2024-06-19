@@ -78,21 +78,21 @@ const Contact = () => {
       <Container>
         <Row>
           <Col md={{ span: 6, offset: 3 }}>
-            <div className="d-flex align-items-center justify-content-center mb-4 mt-5">
-              <h2 className="mb-0 fs-5 mt-3 mb-3">
-                Ask a question or just say hello
-              </h2>
+            <div className="d-flex flex-column align-items-center justify-content-center mb-2 mt-5">
               <Image
                 src={
                   darkMode
-                    ? "/images/darkSmile.webp"
-                    : "/images/thickSmile.webp"
+                    ? "/images/contactWhite.png"
+                    : "/images/contactBlack.png"
                 }
                 alt="Smile animation"
-                width={40} // Adjust the width as needed
-                height={40} // Adjust the height as needed
+                width={60} // Adjust the width as needed
+                height={60} // Adjust the height as needed
                 unoptimized
               />
+              <h2 className="mb-0 fs-5 mt-3 mb-3">
+                Ask a question or just say hello
+              </h2>
             </div>
 
             <Form onSubmit={handleFormSubmit}>

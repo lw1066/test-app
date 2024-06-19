@@ -164,14 +164,29 @@ const BookCard = ({ book }) => {
                   </Button>
                 </>
               )}
-
-              <Modal.Title>{book.title}</Modal.Title>
-              {book.author && (
-                <p className={classes.bookDetails}>{book.author}</p>
-              )}
-              {book.bookDetails && (
-                <p className={classes.bookDetails}>{book.bookDetails}</p>
-              )}
+              <div style={{ display: "flex", flexDirection: "row" }}>
+                <img
+                  src={book.imageUrl}
+                  alt={book.title}
+                  style={{
+                    width: 75,
+                    height: "auto",
+                    objectFit: "contain",
+                    display: imageLoading ? "none" : "block",
+                  }}
+                  className="img-fluid"
+                  onLoad={handleImageLoad}
+                />
+                <div style={{ marginLeft: 20 }}>
+                  <Modal.Title>{book.title}</Modal.Title>
+                  {book.author && (
+                    <p className={classes.bookDetails}>{book.author}</p>
+                  )}
+                  {book.bookDetails && (
+                    <p className={classes.bookDetails}>{book.bookDetails}</p>
+                  )}
+                </div>
+              </div>
             </div>
           </div>
         </Modal.Header>
@@ -235,15 +250,15 @@ const BookCard = ({ book }) => {
           <hr />
 
           <div className="d-flex justify-content-between w-100 align-items-center">
-            <Button
-              variant="outline-primary"
-              className={classes.linkButton}
-              onClick={handleAudioClick}
-            >
-              Audio
-            </Button>
-            {unlockedLinks.length > 0 && (
+            {(unlockedLinks.length > 0 || audioFileUrls.length > 0) && (
               <div className={classes.linksContainer}>
+                <Button
+                  variant="outline-primary"
+                  className={classes.linkButton}
+                  onClick={handleAudioClick}
+                >
+                  Audio
+                </Button>
                 {unlockedLinks.map((link, index) => (
                   <Button
                     key={index}
@@ -272,7 +287,9 @@ const BookCard = ({ book }) => {
             )}
           </div>
 
-          {(unlockedLinks.length > 0 || lockedLinks.length > 0) && <hr />}
+          {(unlockedLinks.length > 0 ||
+            lockedLinks.length > 0 ||
+            audioFileUrls.length > 0) && <hr />}
 
           <div dangerouslySetInnerHTML={{ __html: book.description }} />
         </Modal.Body>
@@ -303,6 +320,18 @@ const BookCard = ({ book }) => {
           <Modal.Title>{book.title} Audio</Modal.Title>
         </Modal.Header>
         <Modal.Body>
+          <div style={{ display: "flex", justifyContent: "center" }}>
+            <img
+              src={book.imageUrl}
+              alt={book.title}
+              style={{
+                width: 100,
+                height: "auto",
+                objectFit: "cover",
+                display: imageLoading ? "none" : "block",
+              }}
+            />
+          </div>
           <p style={{ textAlign: "center", margin: "1rem" }}>Click to play</p>
           <ListGroup>
             {sortedAudioFileUrls.map((audio, index) => (
@@ -325,6 +354,7 @@ const BookCard = ({ book }) => {
         }}
         audio={currentAudioUrl}
         bookTitle={book.title}
+        bookImage={book.imageUrl}
       />
     </>
   );

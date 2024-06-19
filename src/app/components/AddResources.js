@@ -181,7 +181,9 @@ const AddResources = ({ book, handleUpdate }) => {
         }
         const uploadPromises = formData.audioFiles.map(async (file) => {
           const downloadURL = await uploadAudioToFirebase(file);
-          return { name: file.name, downloadURL };
+          let name = file.name.substring(0, file.name.lastIndexOf("."));
+          name = name.replace(/_/g, " ");
+          return { name, downloadURL };
         });
 
         audioFileUrls = await Promise.all(uploadPromises);

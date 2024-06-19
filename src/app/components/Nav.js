@@ -106,7 +106,7 @@ function Navigation() {
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav ms-auto align-items-center">
               <li className="nav-item">
-                <Link className="nav-link" href="About">
+                <Link className="nav-link" href="Faq">
                   FAQs
                 </Link>
               </li>

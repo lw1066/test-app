@@ -137,6 +137,7 @@ const BookCard = ({ book }) => {
           objectFit="contain"
           className="img-fluid"
           onLoad={handleImageLoad}
+          unoptimized
         />
       </Card>
 

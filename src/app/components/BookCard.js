@@ -128,6 +128,7 @@ const BookCard = ({ book }) => {
             layout="fill"
             objectFit="contain"
             className="img-fluid"
+            unoptimized
           />
         )}
         <Image
@@ -173,7 +174,7 @@ const BookCard = ({ book }) => {
                   height={95}
                   objectFit="contain"
                   className="img-fluid"
-                  onLoad={handleImageLoad}
+                  unoptimized
                 />
                 <div style={{ marginLeft: 20 }}>
                   <Modal.Title>{book.title}</Modal.Title>
@@ -322,7 +323,7 @@ const BookCard = ({ book }) => {
               height={125}
               objectFit="contain"
               className="img-fluid"
-              style={{ display: imageLoading ? "none" : "block" }}
+              unoptimized
             />
           </div>
           <p style={{ textAlign: "center", margin: "1rem" }}>Click to play</p>

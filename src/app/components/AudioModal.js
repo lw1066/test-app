@@ -26,6 +26,7 @@ const AudioModal = ({ show, handleClose, audio, bookTitle, bookImage }) => {
             height={125}
             objectFit="contain"
             className="img-fluid"
+            unoptimized
           />
           <p style={{ textAlign: "center", marginTop: 40 }}>
             Now playing {audio.name}

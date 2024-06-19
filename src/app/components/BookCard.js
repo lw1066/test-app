@@ -49,6 +49,8 @@ const BookCard = ({ book }) => {
     a.downloadURL.localeCompare(b.downloadURL)
   );
 
+  console.log("imageURL in bookcard----", book.imageUrl);
+
   const loadingImage = darkMode
     ? "/images/perceptia_logo_negative.jpg"
     : "/images/perceptia_logo.jpg";

@@ -65,6 +65,8 @@
 .accordion {
   width: 60%;
   margin: 0.5rem auto;
+  border-radius: 12px;
+  overflow: hidden;
 }
 
 .bookcard:hover {

@@ -29,7 +29,7 @@ const AudioModal = ({ show, handleClose, audio, bookTitle, bookImage }) => {
             unoptimized
           />
           <p style={{ textAlign: "center", marginTop: 40 }}>
-            Now playing {audio.name}
+            Now playing <b>{audio.name}</b>
           </p>
         </div>
         <AudioPlayer url={audio.downloadURL} />

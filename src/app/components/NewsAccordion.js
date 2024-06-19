@@ -116,7 +116,10 @@ function NewsAccordion({ onClick }) {
         </Link>{" "}
         to learn more about us.
       </p>
-      <div className={classes.accordion}>
+      <div
+        className={classes.accordion}
+        style={{ border: darkMode ? "1px solid white" : "1px solid black" }}
+      >
         <Carousel data-bs-theme="dark" controls={false} interval={3000}>
           {newsDataArray.map((item, index) => (
             <Carousel.Item key={index}>
@@ -128,7 +131,6 @@ function NewsAccordion({ onClick }) {
                   borderRadius: 12,
                   display: "grid",
                   placeItems: "center",
-                  border: darkMode ? "1px solid white" : "1px solid black",
                 }}
               >
                 <div>

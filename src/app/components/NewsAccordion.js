@@ -1,23 +1,19 @@
-"use client";
-
 import React, { useState, useEffect } from "react";
 import Carousel from "react-bootstrap/Carousel";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
-import getAllDocs from "../../firebase/firestore/getAllDocs";
-import classes from "./Library.module.css";
+import classes from "./Library.module.css"; // Adjust path as per your project structure
 import AddNews from "./AddNews";
 import { deleteData } from "../../firebase/firestore/deleteDoc";
-import { useAuthContext } from "@/context/AuthContext";
+import { useAuthContext } from "@/context/AuthContext"; // Adjust path as per your project structure
 import { getAndModifyDoc } from "../../firebase/firestore/getAndModifyDoc";
 import { manualRefresh } from "../../firebase/firestore/addData";
-import { useDarkMode } from "@/context/DarkModeContext";
-import { useModal } from "@/context/ModalContext";
-import Link from "next/link";
-import { checkIfDataIsStale } from "@/firebase/firestore/checkIfDataIsStale";
-import fetchNewsData from "@/firebase/firestore/fetchNewsData";
+import { useDarkMode } from "@/context/DarkModeContext"; // Adjust path as per your project structure
+import { useModal } from "@/context/ModalContext"; // Adjust path as per your project structure
+import { checkIfDataIsStale } from "@/firebase/firestore/checkIfDataIsStale"; // Adjust path as per your project structure
+import fetchNewsData from "@/firebase/firestore/fetchNewsData"; // Adjust path as per your project structure
 
-function NewsAccordion({ onClick }) {
+function NewsAccordion() {
   const { user } = useAuthContext();
   const isAdmin = user ? user.isAdmin : false;
   const [newsDataArray, setNewsDataArray] = useState([]);
@@ -28,6 +24,19 @@ function NewsAccordion({ onClick }) {
   const { darkMode } = useDarkMode();
 
   useEffect(() => {
+    const loadNewsData = async () => {
+      try {
+        const { results, error } = await fetchNewsData();
+        if (!error) {
+          setNewsDataArray(results);
+        } else {
+          console.error("Error fetching news data:", error);
+        }
+      } catch (error) {
+        console.error("Error fetching news data:", error);
+      }
+    };
+
     const storedNewsData = localStorage.getItem("newsDataArray");
     const storedTimestamp = localStorage.getItem("newsDataTimestamp");
     const isDataStale = checkIfDataIsStale(storedTimestamp);
@@ -39,15 +48,6 @@ function NewsAccordion({ onClick }) {
       loadNewsData();
     }
   }, []);
-
-  const loadNewsData = async () => {
-    const { results, error } = await fetchNewsData();
-    if (!error) {
-      setNewsDataArray(results);
-    } else {
-      console.error("Error fetching news data:", error);
-    }
-  };
 
   const openModal = (item) => {
     setSelectedItem(item);
@@ -102,80 +102,61 @@ function NewsAccordion({ onClick }) {
 
   return (
     <>
-      <h1 style={{ fontSize: 36, textAlign: "center", marginTop: 20 }}>
-        Welcome to Perceptia Press!
-      </h1>
-      <p style={{ textAlign: "center", paddingInline: 10 }}>
-        Browse the{" "}
-        <a href="#!" onClick={onClick} className={classes.newsAccordionLinks}>
-          catalogue
-        </a>{" "}
-        to explore our titles or go to{" "}
-        <Link href="/Faq" className={classes.newsAccordionLinks}>
-          FAQs
-        </Link>{" "}
-        to learn more about us.
-      </p>
-      <div
-        className={classes.accordion}
-        style={{ border: darkMode ? "1px solid white" : "1px solid black" }}
-      >
-        <Carousel data-bs-theme="dark" controls={false} interval={3000}>
+      <div className={classes.newsCarousel}>
+        <Carousel
+          data-bs-theme="dark"
+          controls={false}
+          interval={5000}
+          style={{
+            border: darkMode ? "1px solid white" : "1px solid black",
+            borderRadius: "12px",
+            overflow: "hidden",
+          }}
+        >
           {newsDataArray.map((item, index) => (
-            <Carousel.Item key={index}>
-              <div
-                className="d-block w-100"
-                style={{
-                  height: "400px",
-                  backgroundColor: darkMode ? "#212529" : "white",
-                  borderRadius: 12,
-                  display: "grid",
-                  placeItems: "center",
-                }}
-              >
-                <div>
-                  <Carousel.Caption
-                    style={{
-                      height: "100%",
-                      display: "flex",
-                      flexDirection: "column",
-                      justifyContent: "center",
-                      alignItems: "center",
-                      textAlign: "center",
-                      color: darkMode ? "white" : "black",
-                      fontSize: "clamp(.75rem, 2vw, 1rem)",
-                    }}
-                  >
-                    <h3 className={classes.captionTitle}>{item.title}</h3>
+            <Carousel.Item key={index} style={{ minHeight: "400px" }}>
+              <div>
+                <Carousel.Caption
+                  style={{
+                    height: "100%",
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    textAlign: "center",
+                    color: darkMode ? "white" : "black",
+                    fontSize: "clamp(.75rem, 1.25vw, .9rem)",
+                  }}
+                >
+                  <h3 className={classes.captionTitle}>{item.title}</h3>
+                  <div
+                    className={classes.captionDescription}
+                    dangerouslySetInnerHTML={{ __html: item.description }}
+                  />
+                  {isAdmin && (
                     <div
-                      className={classes.captionDescription}
-                      dangerouslySetInnerHTML={{ __html: item.description }}
-                    />
-                    {isAdmin && (
-                      <div
-                        style={{
-                          display: "flex",
-                          flexDirection: "row",
-                          justifyContent: "center",
-                        }}
+                      style={{
+                        display: "flex",
+                        flexDirection: "row",
+                        justifyContent: "center",
+                      }}
+                    >
+                      <Button
+                        variant="primary"
+                        onClick={() => openModal(item)}
+                        className="me-3"
                       >
-                        <Button
-                          variant="primary"
-                          onClick={() => openModal(item)}
-                          className="me-3"
-                        >
-                          Update
-                        </Button>
-                        <Button
-                          variant="danger"
-                          onClick={() => handleDeleteClick(item.id)}
-                        >
-                          Delete
-                        </Button>
-                      </div>
-                    )}
-                  </Carousel.Caption>
-                </div>
+                        Update
+                      </Button>
+                      <Button
+                        variant="danger"
+                        onClick={() => handleDeleteClick(item.id)}
+                      >
+                        Delete
+                      </Button>
+                    </div>
+                  )}
+                </Carousel.Caption>
               </div>
             </Carousel.Item>
           ))}

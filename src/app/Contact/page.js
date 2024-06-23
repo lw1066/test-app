@@ -95,7 +95,15 @@ const Contact = () => {
               </h2>
             </div>
 
-            <Form onSubmit={handleFormSubmit}>
+            <Form
+              onSubmit={handleFormSubmit}
+              style={{
+                backgroundColor: darkMode ? "black" : "white",
+                padding: "20px",
+                borderRadius: "12px",
+                marginBottom: "50px",
+              }}
+            >
               <Form.Group controlId="formName">
                 <Form.Label>Name</Form.Label>
                 <Form.Control
@@ -104,6 +112,7 @@ const Contact = () => {
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   required
+                  style={{ backgroundColor: darkMode ? "black" : "white" }}
                 />
               </Form.Group>
 
@@ -115,6 +124,7 @@ const Contact = () => {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
+                  style={{ backgroundColor: darkMode ? "black" : "white" }}
                 />
               </Form.Group>
 
@@ -127,6 +137,7 @@ const Contact = () => {
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
                   required
+                  style={{ backgroundColor: darkMode ? "black" : "white" }}
                 />
               </Form.Group>
 

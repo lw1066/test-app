@@ -7,6 +7,7 @@ import GenreSelector from "../components/GenreSelector";
 import LoadingSpinner from "../components/LoadingSpinner";
 import fetchBooks from "../../firebase/firestore/fetchBooks";
 import { checkIfDataIsStale } from "../../firebase/firestore/checkIfDataIsStale";
+import { useDarkMode } from "@/context/DarkModeContext";
 
 const Library = forwardRef((props, ref) => {
   const [books, setBooks] = useState([]);
@@ -14,6 +15,7 @@ const Library = forwardRef((props, ref) => {
   const [selectedGenre, setSelectedGenre] = useState("");
   const [filteredBooks, setFilteredBooks] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const { darkMode } = useDarkMode();
 
   useEffect(() => {
     async function loadBooks() {
@@ -57,37 +59,34 @@ const Library = forwardRef((props, ref) => {
   };
 
   return (
-    <div>
-      <h2
-        style={{ textAlign: "center", fontSize: 32, marginTop: 50 }}
-        ref={ref}
-      >
-        Our Catalogue
-      </h2>
-      <p style={{ textAlign: "center", paddingInline: 10 }}>
-        Choose a category to explore our current titles
-      </p>
-      <GenreSelector onSelectGenre={handleGenreChange} />
-      {isLoading ? (
-        <div className="d-flex justify-content-center mt-5">
-          <LoadingSpinner />
-        </div>
-      ) : (
-        <div className={`container ${classes.bookgridcontainer}`}>
-          <div className="row g-4">
-            {error && <p>Error: {error.message}</p>}
-            {filteredBooks.map((book) => (
-              <div
-                key={book.id}
-                className="col d-flex justify-content-center align-items-center"
-              >
-                <BookCard book={book} />
-              </div>
-            ))}
+    <>
+      <div className={classes.genreContainer}>
+        <GenreSelector onSelectGenre={handleGenreChange} />
+        <p style={{ fontSize: ".75rem", textAlign: "center" }}>
+          Choose a category, click on a cover for details
+        </p>
+
+        {isLoading ? (
+          <div className="d-flex justify-content-center mt-5">
+            <LoadingSpinner />
           </div>
-        </div>
-      )}
-    </div>
+        ) : (
+          <div className={`container ${classes.bookgridcontainer}`}>
+            <div className="row g-4">
+              {error && <p>Error: {error.message}</p>}
+              {filteredBooks.map((book) => (
+                <div
+                  key={book.id}
+                  className="col d-flex justify-content-center align-items-center"
+                >
+                  <BookCard book={book} />
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
+    </>
   );
 });
 

@@ -1,0 +1,9 @@
+// Import Bootstrap functions and variables
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+
+// Override Bootstrap variables
+$body-bg-dark: #151515;
+$body-bg: rgb(255, 255, 255);
+
+@import "~bootstrap/scss/bootstrap";

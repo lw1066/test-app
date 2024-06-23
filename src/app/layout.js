@@ -1,5 +1,5 @@
 import Navigation from "./components/Nav";
-import "bootstrap/dist/css/bootstrap.min.css";
+import "./styles/custom-bootstrap.scss";
 import BootstrapClient from "./components/BootstrapClient";
 import "./globals.css";
 
@@ -17,9 +17,7 @@ export default function RootLayout({ children }) {
             <div className="content">
               {children} <Success />
             </div>
-            <div className="footer">
-              <Footer />
-            </div>
+            <Footer />
           </div>
           <BootstrapClient />
         </Providers>

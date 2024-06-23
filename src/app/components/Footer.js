@@ -2,7 +2,7 @@
 
 import { Container, Row, Col, Button } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faInstagram, faFacebook } from "@fortawesome/free-brands-svg-icons";
+import { faFacebook } from "@fortawesome/free-brands-svg-icons";
 import { useDarkMode } from "@/context/DarkModeContext";
 import Image from "next/legacy/image";
 import Link from "next/link";
@@ -11,11 +11,16 @@ const Footer = () => {
   const { darkMode } = useDarkMode();
 
   return (
-    <footer className="text-center py-5 mt-auto ">
+    <footer
+      className="text-center py-3"
+      style={{
+        backgroundColor: darkMode ? "black" : "white",
+        width: "100%",
+      }}
+    >
       <Container>
         <Row className="align-items-center justify-content-around">
-          <Col xs={3} md={3} className="text-left mb-3 mb-md-0">
-            {/* Privacy and Data Policies Button */}
+          <Col xs={3} md={3} className="text-left">
             <Link href="Privacy">
               <Button
                 variant={darkMode ? "outline-light" : "outline-dark"}
@@ -27,20 +32,6 @@ const Footer = () => {
             </Link>
           </Col>
           <Col xs={3} md={6} className="text-center mb-3 mb-md-0">
-            {/* Instagram */}
-            {/* <a
-              href="https://www.instagram.com/your_instagram"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-decoration-none"
-            > */}
-            {/* <FontAwesomeIcon
-                icon={faInstagram}
-                size="lg"
-                color={darkMode ? "white" : "black"}
-              />
-            </a> */}
-            {/* Facebook */}
             <a
               href="https://www.facebook.com/perceptiapress/"
               target="_blank"
@@ -66,7 +57,6 @@ const Footer = () => {
               width={30}
               height={40}
             />
-            {/* Copyright */}
             <p className="mb-0" style={{ fontSize: "0.5rem" }}>
               © {new Date().getFullYear()} Perceptia Press
             </p>

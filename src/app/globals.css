@@ -1,12 +1,26 @@
-.body, html {
+.body,
+html {
   height: 100%;
   margin: 0;
+  padding: 0;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+#__next {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
 }
 
 .app {
   display: flex;
   flex-direction: column;
-  min-height: 100vh; /* Set a minimum height to take up the full viewport height */
+  flex: 1;
 }
 
 .content {
@@ -14,5 +28,10 @@
 }
 
 .footer {
-  flex-shrink: 0; /* Prevent footer from shrinking */
+  flex-shrink: 0;
+  width: 100%;
+}
+
+.modal {
+  background-color: rgba(0, 0, 0, 0.8);
 }

@@ -9,6 +9,7 @@ import { deleteData } from "../../firebase/firestore/deleteDoc";
 import { useModal } from "@/context/ModalContext";
 import AudioModal from "./AudioModal";
 import Image from "next/image";
+import "../../app/globals.css";
 
 const BookCard = ({ book }) => {
   const { user } = useAuthContext();
@@ -187,7 +188,12 @@ const BookCard = ({ book }) => {
             </div>
           </div>
         </Modal.Header>
-        <Modal.Body>
+        <Modal.Body
+          style={{
+            backgroundColor: darkMode ? "black" : "white",
+            borderRadius: "12px",
+          }}
+        >
           <div>
             {hasAmazonLink && (
               <Button
@@ -312,14 +318,19 @@ const BookCard = ({ book }) => {
         <Modal.Header closeButton>
           <Modal.Title>{book.title} Audio</Modal.Title>
         </Modal.Header>
-        <Modal.Body>
+        <Modal.Body
+          style={{
+            backgroundColor: darkMode ? "black" : "white",
+            borderRadius: "12px",
+          }}
+        >
           <div style={{ textAlign: "center", marginBottom: "1rem" }}>
             <Image
               src={book.imageUrl}
               alt={book.title}
               width={100}
               height={125}
-              objectFit="contain"
+              object-fit="contain"
               className="img-fluid"
               unoptimized
             />

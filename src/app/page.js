@@ -1,22 +1,24 @@
 "use client";
 
-import { useRef } from "react";
+// import { useRef } from "react";
 import Library from "./components/Library";
 import NewsAccordion from "./components/NewsAccordion";
-import { BLOCKED_PAGES } from "next/dist/shared/lib/constants";
+import classes from "./components/Library.module.css";
+import WelcomeMessage from "./components/WelcomeMessage";
 
 const Home = () => {
-  const catalogueRef = useRef(null);
+  // const catalogueRef = useRef(null);
 
-  const handleScrollToCatalogue = () => {
-    catalogueRef.current.scrollIntoView({ behavior: "smooth" });
-  };
+  // const handleScrollToCatalogue = () => {
+  //   catalogueRef.current.scrollIntoView({ behavior: "smooth" });
+  // };
 
   return (
-    <>
-      <NewsAccordion onClick={handleScrollToCatalogue} />
-      <Library ref={catalogueRef} />
-    </>
+    <div className={classes.frontPage}>
+      <WelcomeMessage />
+      <NewsAccordion />
+      <Library />
+    </div>
   );
 };
 

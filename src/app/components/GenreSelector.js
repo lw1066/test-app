@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Button } from "react-bootstrap";
 import classes from "./Library.module.css";
+import { useDarkMode } from "@/context/DarkModeContext";
 
 const GenreSelector = ({ onSelectGenre }) => {
   const genres = [
@@ -13,6 +14,7 @@ const GenreSelector = ({ onSelectGenre }) => {
     "All",
   ];
   const [selectedGenre, setSelectedGenre] = useState("");
+  const { darkMode } = useDarkMode();
 
   const handleGenreClick = (genre) => {
     setSelectedGenre(genre);
@@ -24,7 +26,7 @@ const GenreSelector = ({ onSelectGenre }) => {
       {genres.map((genre) => (
         <Button
           key={genre}
-          variant="outline-secondary"
+          variant={darkMode ? "outline-light" : "outline-secondary"}
           onClick={() => handleGenreClick(genre)}
           active={selectedGenre === genre}
           className={classes.button}

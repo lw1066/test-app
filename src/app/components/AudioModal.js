@@ -15,7 +15,8 @@ const AudioModal = ({ show, handleClose, audio, bookTitle, bookImage }) => {
       <Modal.Body
         style={{
           backgroundColor: darkMode ? "black" : "white",
-          borderRadius: "12px",
+          borderBottomLeftRadius: "12px",
+          borderBottomRightRadius: "12px",
         }}
       >
         <div

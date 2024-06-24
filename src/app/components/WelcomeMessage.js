@@ -20,10 +20,10 @@ const WelcomeMessage = () => {
       </h1>
       <p style={{ textAlign: "center", paddingInline: 10, fontSize: ".75rem" }}>
         Browse our catalogue, catch up on the latest below or go to{" "}
-        <Link href="/Faq" className={classes.newsAccordionLinks}>
+        <Link href="/Faq" className={classes.linkstyle}>
           FAQs
         </Link>{" "}
-        to learn more about us.
+        to learn more about us
       </p>
     </div>
   );

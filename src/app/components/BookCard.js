@@ -166,15 +166,16 @@ const BookCard = ({ book }) => {
                 </>
               )}
               <div style={{ display: "flex", flexDirection: "row" }}>
-                <Image
-                  src={book.imageUrl}
-                  alt={book.title}
-                  width={75}
-                  height={95}
-                  object-fit="contain"
-                  className="img-fluid"
-                  unoptimized
-                />
+                <div style={{ minWidth: 70, height: 95, position: "relative" }}>
+                  <Image
+                    src={book.imageUrl}
+                    alt={book.title}
+                    fill={true}
+                    object-fit="contain"
+                    className="img-fluid"
+                    unoptimized
+                  />
+                </div>
                 <div style={{ marginLeft: 20 }}>
                   <Modal.Title>{book.title}</Modal.Title>
                   {book.author && (
@@ -191,7 +192,8 @@ const BookCard = ({ book }) => {
         <Modal.Body
           style={{
             backgroundColor: darkMode ? "black" : "white",
-            borderRadius: "12px",
+            borderBottomLeftRadius: "12px",
+            borderBottomRightRadius: "12px",
           }}
         >
           <div>
@@ -321,7 +323,8 @@ const BookCard = ({ book }) => {
         <Modal.Body
           style={{
             backgroundColor: darkMode ? "black" : "white",
-            borderRadius: "12px",
+            borderBottomLeftRadius: "12px",
+            borderBottomRightRadius: "12px",
           }}
         >
           <div style={{ textAlign: "center", marginBottom: "1rem" }}>

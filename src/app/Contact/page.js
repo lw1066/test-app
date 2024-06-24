@@ -90,17 +90,17 @@ const Contact = () => {
                 height={60} // Adjust the height as needed
                 unoptimized
               />
-              <h2 className="mb-0 fs-5 mt-3 mb-3">
+              <p className="mb-0 fs-5 mt-3 mb-3">
                 Ask a question or just say hello
-              </h2>
+              </p>
             </div>
 
             <Form
               onSubmit={handleFormSubmit}
               style={{
-                backgroundColor: darkMode ? "black" : "white",
-                padding: "20px",
-                borderRadius: "12px",
+                // backgroundColor: darkMode ? "black" : "white",
+                // padding: "20px",
+                // borderRadius: "12px",
                 marginBottom: "50px",
               }}
             >
@@ -112,7 +112,6 @@ const Contact = () => {
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   required
-                  style={{ backgroundColor: darkMode ? "black" : "white" }}
                 />
               </Form.Group>
 
@@ -124,7 +123,7 @@ const Contact = () => {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
-                  style={{ backgroundColor: darkMode ? "black" : "white" }}
+                  // style={{ backgroundColor: darkMode ? "black" : "white" }}
                 />
               </Form.Group>
 
@@ -137,7 +136,7 @@ const Contact = () => {
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
                   required
-                  style={{ backgroundColor: darkMode ? "black" : "white" }}
+                  // style={{ backgroundColor: darkMode ? "black" : "white" }}
                 />
               </Form.Group>
 

@@ -27,7 +27,7 @@ const Footer = () => {
                 className="me-3"
                 style={{ fontSize: ".5rem" }}
               >
-                Privacy and Data Policies
+                Privacy & Data Policies
               </Button>
             </Link>
           </Col>

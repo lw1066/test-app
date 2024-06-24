@@ -22,7 +22,7 @@ const Page = () => {
 
         <h1 style={{ fontSize: "18px", display: "flex", flexDirection: "row" }}>
           Still got questions -&nbsp;
-          <Link className={classes.newsAccordionLinks} href="Contact">
+          <Link className={classes.linkstyle} href="Contact">
             Contact us!
           </Link>
         </h1>

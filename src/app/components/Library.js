@@ -132,7 +132,7 @@ const Library = () => {
             </p>
           )
         ) : (
-          <div className={`container ${classes.bookgridcontainer}`}>
+          <div className={classes.bookgridcontainer}>
             <div className="row g-2">
               {error && <p>Error: {error.message}</p>}
               {filteredBooks.map((book) => (

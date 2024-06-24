@@ -38,7 +38,6 @@
 
 .bookgridcontainer {
   display: grid;
-
   justify-content: center;
   grid-template-columns: repeat(auto-fit, minmax(125px, 1fr));
   margin: 20px 0 80px 0;

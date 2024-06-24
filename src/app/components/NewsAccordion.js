@@ -2,16 +2,16 @@ import React, { useState, useEffect } from "react";
 import Carousel from "react-bootstrap/Carousel";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
-import classes from "./Library.module.css"; // Adjust path as per your project structure
+import classes from "./Library.module.css";
 import AddNews from "./AddNews";
 import { deleteData } from "../../firebase/firestore/deleteDoc";
-import { useAuthContext } from "@/context/AuthContext"; // Adjust path as per your project structure
+import { useAuthContext } from "@/context/AuthContext";
 import { getAndModifyDoc } from "../../firebase/firestore/getAndModifyDoc";
-import { manualRefresh } from "../../firebase/firestore/addData";
-import { useDarkMode } from "@/context/DarkModeContext"; // Adjust path as per your project structure
-import { useModal } from "@/context/ModalContext"; // Adjust path as per your project structure
-import { checkIfDataIsStale } from "@/firebase/firestore/checkIfDataIsStale"; // Adjust path as per your project structure
-import fetchNewsData from "@/firebase/firestore/fetchNewsData"; // Adjust path as per your project structure
+import { manualRefresh } from "@/firebase/firestore/addData";
+import { useDarkMode } from "@/context/DarkModeContext";
+import { useModal } from "@/context/ModalContext";
+import { checkIfDataIsStale } from "@/firebase/firestore/checkIfDataIsStale";
+import fetchNewsData from "@/firebase/firestore/fetchNewsData";
 
 function NewsAccordion() {
   const { user } = useAuthContext();

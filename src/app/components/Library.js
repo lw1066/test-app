@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState, forwardRef } from "react";
+import React, { useEffect, useState } from "react";
 import classes from "./Library.module.css";
 import BookCard from "../components/BookCard";
 import GenreSelector from "../components/GenreSelector";
@@ -9,7 +9,7 @@ import fetchBooks from "../../firebase/firestore/fetchBooks";
 import { checkIfDataIsStale } from "../../firebase/firestore/checkIfDataIsStale";
 import { useDarkMode } from "@/context/DarkModeContext";
 
-const Library = forwardRef((props, ref) => {
+const Library = () => {
   const [books, setBooks] = useState([]);
   const [error, setError] = useState(null);
   const [selectedGenre, setSelectedGenre] = useState("");
@@ -26,8 +26,7 @@ const Library = forwardRef((props, ref) => {
 
       if (storedBookData && !isDataStale) {
         console.log("Using cached book data");
-        const bookData = JSON.parse(storedBookData);
-        setBooks(bookData);
+        setBooks(JSON.parse(storedBookData));
       } else {
         console.log("Fetching book data...");
         const { results, error } = await fetchBooks();
@@ -150,8 +149,8 @@ const Library = forwardRef((props, ref) => {
       </div>
     </>
   );
-});
+};
 
-Library.displayName = "Library";
+// Library.displayName = "Library";
 
 export default Library;

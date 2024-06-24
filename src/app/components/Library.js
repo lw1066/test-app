@@ -43,37 +43,36 @@ const Library = forwardRef((props, ref) => {
     loadBooks();
   }, []);
 
-  const applyFilters = () => {
-    let filtered = [...books];
+  useEffect(() => {
+    const applyFilters = () => {
+      let filtered = [...books];
 
-    if (selectedGenre !== "All") {
-      filtered = filtered.filter(
-        (book) => book.genres && book.genres.includes(selectedGenre)
-      );
-    }
-
-    if (searchQuery !== "") {
-      if (selectedGenre === "") {
-        filtered = books.filter(
-          (book) =>
-            book.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-            book.author.toLowerCase().includes(searchQuery.toLowerCase())
-        );
-      } else {
+      if (selectedGenre !== "All") {
         filtered = filtered.filter(
-          (book) =>
-            book.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-            book.author.toLowerCase().includes(searchQuery.toLowerCase())
+          (book) => book.genres && book.genres.includes(selectedGenre)
         );
       }
-    }
 
-    setFilteredBooks(filtered);
-  };
+      if (searchQuery !== "") {
+        if (selectedGenre === "") {
+          filtered = books.filter(
+            (book) =>
+              book.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+              book.author.toLowerCase().includes(searchQuery.toLowerCase())
+          );
+        } else {
+          filtered = filtered.filter(
+            (book) =>
+              book.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+              book.author.toLowerCase().includes(searchQuery.toLowerCase())
+          );
+        }
+      }
 
-  useEffect(() => {
+      setFilteredBooks(filtered);
+    };
     applyFilters();
-  }, [selectedGenre, searchQuery, books, applyFilters]);
+  }, [selectedGenre, searchQuery, books]);
 
   const handleGenreChange = (genre) => {
     setSelectedGenre(genre);

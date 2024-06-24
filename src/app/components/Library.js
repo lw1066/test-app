@@ -43,10 +43,6 @@ const Library = forwardRef((props, ref) => {
     loadBooks();
   }, []);
 
-  useEffect(() => {
-    applyFilters();
-  }, [selectedGenre, searchQuery, books]);
-
   const applyFilters = () => {
     let filtered = [...books];
 
@@ -74,6 +70,10 @@ const Library = forwardRef((props, ref) => {
 
     setFilteredBooks(filtered);
   };
+
+  useEffect(() => {
+    applyFilters();
+  }, [selectedGenre, searchQuery, books, applyFilters]);
 
   const handleGenreChange = (genre) => {
     setSelectedGenre(genre);

@@ -130,6 +130,7 @@ function Navigation() {
                     variant="outline-danger"
                     className=" ms-2 mb-2 fs-0"
                     onClick={handleRefresh}
+                    style={{ fontSize: "10px", padding: "5px 10px" }}
                   >
                     Refresh
                   </Button>
@@ -149,6 +150,7 @@ function Navigation() {
                     variant="outline-danger"
                     className=" ms-2 mb-2 fs-0"
                     onClick={handleSignout}
+                    style={{ fontSize: "10px", padding: "5px 10px" }}
                   >
                     signout
                   </Button>
@@ -160,6 +162,13 @@ function Navigation() {
                   variant="light"
                   className="rounded-circle ms-2 mb-2"
                   onClick={handleToggleDarkMode}
+                  style={{
+                    width: "30px",
+                    height: "30px",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
                 >
                   <FontAwesomeIcon icon={darkMode ? faSun : faMoon} />
                 </Button>

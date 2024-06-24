@@ -30,6 +30,12 @@ const GenreSelector = ({ onSelectGenre }) => {
           onClick={() => handleGenreClick(genre)}
           active={selectedGenre === genre}
           className={classes.button}
+          style={{
+            fontSize: "10px",
+            padding: "5px 10px",
+            margin: "3px",
+            borderRadius: "4px",
+          }}
         >
           {genre}
         </Button>

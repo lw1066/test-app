@@ -35,7 +35,7 @@
 }
 
 .bookDetails {
-  font-size: 1rem;
+  font-size: 0.75rem;
   margin: 0;
   padding: 0;
 }
@@ -57,10 +57,10 @@
   margin: 0;
 }
 
-.button {
+/* .button {
   margin: 0.15rem;
   font-size: clamp(0.45rem, 1vw, 0.65rem);
-}
+} */
 
 .buttonGroupContainer {
   display: flex;
@@ -139,8 +139,14 @@
 }
 
 .linkButton {
-  font-size: 0.75rem;
+  font-size: 0.5rem;
   margin: 0.25rem;
+  padding: 3px 5px;
+  border-radius: 4px;
+}
+
+.modalTitle {
+  font-size: 1.25rem;
 }
 
 .navText {
@@ -194,6 +200,10 @@
     transition-delay: 0s;
   }
 
+  .bookDetails {
+    font-size: 0.5rem;
+  }
+
   /* .button {
     margin: 0.2rem;
     font-size: 0.45rem;
@@ -232,6 +242,10 @@
   .instructionText {
     font-size: 0.65rem;
     width: 75%;
+  }
+
+  .modalTitle {
+    font-size: 1rem;
   }
 
   .newsCarousel {

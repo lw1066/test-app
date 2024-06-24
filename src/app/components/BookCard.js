@@ -152,6 +152,7 @@ const BookCard = ({ book }) => {
                     size="sm"
                     className="me-2 mb-2"
                     onClick={handleDeleteClick}
+                    style={{ fontSize: "10px", padding: "5px 10px" }}
                   >
                     Delete
                   </Button>
@@ -160,6 +161,7 @@ const BookCard = ({ book }) => {
                     size="sm"
                     className="mb-2"
                     onClick={handleUpdateClick}
+                    style={{ fontSize: "10px", padding: "5px 10px" }}
                   >
                     Update
                   </Button>
@@ -177,7 +179,9 @@ const BookCard = ({ book }) => {
                   />
                 </div>
                 <div style={{ marginLeft: 20 }}>
-                  <Modal.Title>{book.title}</Modal.Title>
+                  <Modal.Title className={classes.modalTitle}>
+                    {book.title}
+                  </Modal.Title>
                   {book.author && (
                     <p className={classes.bookDetails}>{book.author}</p>
                   )}

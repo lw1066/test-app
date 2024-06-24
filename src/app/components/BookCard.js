@@ -116,10 +116,7 @@ const BookCard = ({ book }) => {
 
   return (
     <>
-      <Card
-        className={`${classes.bookcard} bg-dark text-white `}
-        onClick={handleShowModal}
-      >
+      <Card className={classes.bookcard} onClick={handleShowModal}>
         {imageLoading && (
           <Image
             src={loadingImage}

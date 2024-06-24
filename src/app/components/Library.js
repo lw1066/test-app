@@ -1,12 +1,10 @@
-"use client";
-
 import React, { useEffect, useState } from "react";
-import classes from "./Library.module.css";
-import BookCard from "../components/BookCard";
-import GenreSelector from "../components/GenreSelector";
-import LoadingSpinner from "../components/LoadingSpinner";
-import fetchBooks from "../../firebase/firestore/fetchBooks";
-import { checkIfDataIsStale } from "../../firebase/firestore/checkIfDataIsStale";
+import classes from "@/app/components/Library.module.css";
+import BookCard from "@/app/components/BookCard";
+import GenreSelector from "@/app/components/GenreSelector";
+import LoadingSpinner from "@/app/components/LoadingSpinner";
+import fetchBooks from "@/firebase/firestore/fetchBooks";
+import { checkIfDataIsStale } from "@/firebase/firestore/checkIfDataIsStale";
 import { useDarkMode } from "@/context/DarkModeContext";
 
 const Library = () => {

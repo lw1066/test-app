@@ -1,7 +1,7 @@
 // components/AudioModal.js
 import React from "react";
 import { Modal, Button } from "react-bootstrap";
-import AudioPlayer from "./AudioPlayer";
+import AudioPlayer from "@/app/components/AudioPlayer";
 import Image from "next/image";
 import { useDarkMode } from "@/context/DarkModeContext";
 

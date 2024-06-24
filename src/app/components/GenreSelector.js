@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Button } from "react-bootstrap";
-import classes from "./Library.module.css";
+import classes from "@/app/components/Library.module.css";
 import { useDarkMode } from "@/context/DarkModeContext";
 
 const GenreSelector = ({ onSelectGenre }) => {

@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import { Container, Form, Button } from "react-bootstrap";
-import { addData } from "../../firebase/firestore/addData";
-import { uploadImageToFirebase } from "../../firebase/firestore/uploadImageToFirebase";
+import { addData } from "@/firebase/firestore/addData";
+import { uploadImageToFirebase } from "@/firebase/firestore/uploadImageToFirebase";
 import { Editor } from "@tinymce/tinymce-react";
 import { useModal } from "@/context/ModalContext";
 import { deleteImageFromFirebase } from "@/firebase/firestore/deleteImageFromFirebase";

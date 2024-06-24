@@ -95,10 +95,8 @@
 
 .genreContainer {
   width: 100%;
-  /* margin: 0 auto; */
   display: flex;
   flex-direction: column;
-  /* justify-content: flex-start; */
   align-items: center;
 }
 .genres p {
@@ -110,7 +108,6 @@
 
 .headerContainer {
   width: 70%;
-  /* text-align: left; */
   border-radius: 4px;
   padding-inline: 20px;
   padding-top: 5px;
@@ -238,8 +235,6 @@
 
   .newsCarousel {
     width: 100%;
-    /* margin: 0 auto; */
-    /* border-radius: 12px; */
 
     margin-bottom: 50px;
   }

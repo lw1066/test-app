@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import Accordion from "react-bootstrap/Accordion";
-import classes from "./Library.module.css";
+import classes from "@/app/component/Library.module.css";
 import { useDarkMode } from "@/context/DarkModeContext";
 
 function FAQAccordion() {

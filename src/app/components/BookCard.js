@@ -1,15 +1,15 @@
 import { useState } from "react";
 import { useDarkMode } from "@/context/DarkModeContext";
 import { Card, Button, Modal, ListGroup, ListGroupItem } from "react-bootstrap";
-import classes from "./Library.module.css";
-import AddResources from "../components/AddResources";
-import { getAndModifyDoc } from "../../firebase/firestore/getAndModifyDoc";
+import classes from "@/app/components/Library.module.css";
+import AddResources from "@/app/components/AddResources";
+import { getAndModifyDoc } from "@/firebase/firestore/getAndModifyDoc";
 import { useAuthContext } from "@/context/AuthContext";
-import { deleteData } from "../../firebase/firestore/deleteDoc";
+import { deleteData } from "@/firebase/firestore/deleteDoc";
 import { useModal } from "@/context/ModalContext";
-import AudioModal from "./AudioModal";
+import AudioModal from "@/app/components/AudioModal";
 import Image from "next/image";
-import "../../app/globals.css";
+import "@/app/globals.css";
 
 const BookCard = ({ book }) => {
   const { user } = useAuthContext();

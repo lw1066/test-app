@@ -25,6 +25,7 @@ const Library = () => {
       if (storedBookData && !isDataStale) {
         console.log("Using cached book data");
         setBooks(JSON.parse(storedBookData));
+        setFilteredBooks(JSON.parse(storedBookData));
       } else {
         console.log("Fetching book data...");
         const { results, error } = await fetchBooks();
@@ -32,6 +33,7 @@ const Library = () => {
           setError(error);
         } else {
           setBooks(results);
+          setFilteredBooks(results);
         }
       }
       setIsLoading(false);

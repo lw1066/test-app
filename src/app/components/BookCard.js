@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDarkMode } from "@/context/DarkModeContext";
-import { Card, Button, Modal, ListGroup, ListGroupItem } from "react-bootstrap";
+import { Button, Modal, ListGroup, ListGroupItem } from "react-bootstrap";
 import classes from "@/app/components/Library.module.css";
 import AddResources from "@/app/components/AddResources";
 import { getAndModifyDoc } from "@/firebase/firestore/getAndModifyDoc";
@@ -116,27 +116,30 @@ const BookCard = ({ book }) => {
 
   return (
     <>
-      <Card className={classes.bookcard} onClick={handleShowModal}>
+      <div className={classes.bookcard} onClick={handleShowModal}>
         {imageLoading && (
           <Image
             src={loadingImage}
             alt="Loading..."
-            fill={true}
+            width={100}
+            height={125}
             object-fit="cover"
-            className="img-fluid"
+            // className="img-fluid"
             unoptimized
           />
         )}
         <Image
           src={book.imageUrl}
           alt={book.title}
-          fill={true}
+          // fill={true}
+          width={100}
+          height={125}
           object-fit="contain"
-          className="img-fluid"
+          // className="img-fluid"
           onLoad={handleImageLoad}
           unoptimized
         />
-      </Card>
+      </div>
 
       <Modal show={showBookModal} onHide={handleCloseModal} size="lg">
         <Modal.Header closeButton>

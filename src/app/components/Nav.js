@@ -12,6 +12,7 @@ import Button from "react-bootstrap/Button";
 import fetchBooks from "../../firebase/firestore/fetchBooks";
 import fetchNewsData from "@/firebase/firestore/fetchNewsData";
 import { useModal } from "@/context/ModalContext";
+import classes from "./Library.module.css";
 
 function Navigation() {
   const { user } = useAuthContext();
@@ -106,19 +107,22 @@ function Navigation() {
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav ms-auto align-items-center">
               <li className="nav-item">
-                <Link className="nav-link" href="Faq">
+                <Link className={`nav-link ${classes.navText}`} href="Faq">
                   FAQs
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" href="Contact">
+                <Link className={`nav-link ${classes.navText}`} href="Contact">
                   Contact
                 </Link>
               </li>
               {user && isAdmin && (
                 <>
                   <li className="nav-item">
-                    <Link className="nav-link" href="Admin">
+                    <Link
+                      className={`nav-link ${classes.navText}`}
+                      href="Admin"
+                    >
                       Admin
                     </Link>
                   </li>
@@ -133,7 +137,7 @@ function Navigation() {
               )}
               {!user && (
                 <li className="nav-item">
-                  <Link className="nav-link" href="Signin">
+                  <Link className={`nav-link ${classes.navText}`} href="Signin">
                     Sign-in
                   </Link>
                 </li>

@@ -9,8 +9,8 @@ const Home = () => {
   return (
     <div className={classes.frontPage}>
       <WelcomeMessage />
-      <NewsAccordion />
       <Library />
+      <NewsAccordion />
     </div>
   );
 };

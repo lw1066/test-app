@@ -102,21 +102,21 @@ function NewsAccordion() {
 
   return (
     <>
+      <div
+        className={classes.headerContainer}
+        style={{
+          backgroundColor: darkMode ? "black" : "gray",
+          margin: "0 auto",
+        }}
+      >
+        <h2 className={classes.headerText}>The Latest News</h2>
+      </div>
       <div className={classes.newsCarousel}>
-        <Carousel
-          data-bs-theme="dark"
-          controls={false}
-          interval={5000}
-          style={{
-            border: darkMode ? "1px solid white" : "1px solid black",
-            borderRadius: "12px",
-            overflow: "hidden",
-          }}
-        >
+        <Carousel data-bs-theme="dark" controls={false} interval={8000}>
           {newsDataArray.map((item, index) => (
             <Carousel.Item
               key={index}
-              style={{ minHeight: "400px", minWidth: "200px" }}
+              style={{ minHeight: "400px", minWidth: "250px" }}
             >
               <div>
                 <Carousel.Caption
@@ -128,7 +128,8 @@ function NewsAccordion() {
                     alignItems: "center",
                     textAlign: "center",
                     color: darkMode ? "white" : "black",
-                    fontSize: "clamp(.5rem, 1vw, .75rem)",
+                    fontSize: ".75rem",
+                    fontSize: "clamp(.6rem, 1.1vw, 1rem)",
                   }}
                 >
                   <h3 className={classes.captionTitle}>{item.title}</h3>

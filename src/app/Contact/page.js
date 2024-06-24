@@ -90,7 +90,7 @@ const Contact = () => {
                 height={60} // Adjust the height as needed
                 unoptimized
               />
-              <p className="mb-0 fs-5 mt-3 mb-3">
+              <p className="mb-0 fs-6 mt-3 mb-3">
                 Ask a question or just say hello
               </p>
             </div>

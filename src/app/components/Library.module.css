@@ -131,6 +131,7 @@
   min-width: 200px;
   border-radius: 12px;
   grid-column: 1;
+  min-width: 200px;
   order: 3;
 }
 

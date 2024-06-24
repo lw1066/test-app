@@ -114,7 +114,10 @@ function NewsAccordion() {
           }}
         >
           {newsDataArray.map((item, index) => (
-            <Carousel.Item key={index} style={{ minHeight: "400px" }}>
+            <Carousel.Item
+              key={index}
+              style={{ minHeight: "400px", minWidth: "200px" }}
+            >
               <div>
                 <Carousel.Caption
                   style={{
@@ -125,7 +128,7 @@ function NewsAccordion() {
                     alignItems: "center",
                     textAlign: "center",
                     color: darkMode ? "white" : "black",
-                    fontSize: "clamp(.75rem, 1.25vw, .9rem)",
+                    fontSize: "clamp(.5rem, 1vw, .75rem)",
                   }}
                 >
                   <h3 className={classes.captionTitle}>{item.title}</h3>

@@ -21,17 +21,37 @@ const Footer = () => {
       <Container>
         <Row className="align-items-center justify-content-around">
           <Col xs={3} md={3} className="text-left">
-            <Link href="Privacy">
-              <Button
-                variant={darkMode ? "outline-light" : "outline-dark"}
-                className="me-3"
-                style={{ fontSize: ".5rem" }}
-              >
-                Privacy & Data Policies
-              </Button>
-            </Link>
+            <div className="d-flex flex-column">
+              <Link href="Submissions">
+                <Button
+                  variant={darkMode ? "outline-light" : "outline-dark"}
+                  className="mb-1"
+                  style={{
+                    fontSize: ".5rem",
+                    padding: "2px 3px",
+                    borderRadius: "4px",
+                  }}
+                >
+                  Submissions
+                </Button>
+              </Link>
+              <Link href="Privacy">
+                <Button
+                  variant={darkMode ? "outline-light" : "outline-dark"}
+                  style={{
+                    fontSize: ".45rem",
+                    padding: "2px 3px",
+                    borderRadius: "4px",
+                    minWidth: "65px",
+                  }}
+                >
+                  Privacy & Data Policies
+                </Button>
+              </Link>
+            </div>
           </Col>
-          <Col xs={3} md={6} className="text-center mb-3 mb-md-0">
+
+          <Col xs={3} md={6} className="text-center mb-3">
             <a
               href="https://www.facebook.com/perceptiapress/"
               target="_blank"
@@ -45,7 +65,7 @@ const Footer = () => {
               />
             </a>
           </Col>
-          <Col xs={3} md={3} className="text-right mb-3 mb-md-0">
+          <Col xs={3} md={3} className="text-center mb-0">
             <Image
               src={
                 darkMode
@@ -57,7 +77,10 @@ const Footer = () => {
               width={30}
               height={40}
             />
-            <p className="mb-0" style={{ fontSize: "0.5rem" }}>
+            <p
+              className="mb-0 text-center"
+              style={{ fontSize: "0.5rem", minWidth: "50px" }}
+            >
               © {new Date().getFullYear()} Perceptia Press
             </p>
           </Col>

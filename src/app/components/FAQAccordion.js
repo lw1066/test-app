@@ -17,7 +17,10 @@ function FAQAccordion() {
               Do you accept submissions or book ideas?
             </Accordion.Header>
             <Accordion.Body
-              style={{ backgroundColor: darkMode ? "black" : "white" }}
+              style={{
+                backgroundColor: darkMode ? "black" : "white",
+                fontSize: "12px",
+              }}
             >
               <p>
                 Thank you for your interest in submitting to Perceptia Press. We
@@ -31,7 +34,10 @@ function FAQAccordion() {
           <Accordion.Item eventKey="1">
             <Accordion.Header>How do I browse titles?</Accordion.Header>
             <Accordion.Body
-              style={{ backgroundColor: darkMode ? "black" : "white" }}
+              style={{
+                backgroundColor: darkMode ? "black" : "white",
+                fontSize: "12px",
+              }}
             >
               <p>
                 The library is organized into categories. Click on a category to
@@ -43,7 +49,10 @@ function FAQAccordion() {
           <Accordion.Item eventKey="2">
             <Accordion.Header>Where can I buy your books?</Accordion.Header>
             <Accordion.Body
-              style={{ backgroundColor: darkMode ? "black" : "white" }}
+              style={{
+                backgroundColor: darkMode ? "black" : "white",
+                fontSize: "12px",
+              }}
             >
               <p>Information on buying books online etc...</p>
             </Accordion.Body>
@@ -53,7 +62,10 @@ function FAQAccordion() {
               I am a teacher can I access teacher materials?
             </Accordion.Header>
             <Accordion.Body
-              style={{ backgroundColor: darkMode ? "black" : "white" }}
+              style={{
+                backgroundColor: darkMode ? "black" : "white",
+                fontSize: "12px",
+              }}
             >
               <p>Information on signing up to get teacher access?</p>
             </Accordion.Body>

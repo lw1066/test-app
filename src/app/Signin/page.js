@@ -34,7 +34,7 @@ function Page() {
     <Container>
       <Row>
         <Col md={{ span: 6, offset: 3 }}>
-          <div className="d-flex flex-column align-items-center justify-content-center mb-2 mt-5">
+          <div className="d-flex flex-column align-items-center justify-content-center mb-2 mt-5 fs-6">
             <h1 className="fs-5">Teacher sign-in</h1>
             <p>Please sign in to access teaching materials</p>
             <p>
@@ -70,7 +70,7 @@ function Page() {
               />
             </Form.Group>
 
-            <div className="mt-3">
+            <div className="my-4">
               <Button variant="outline-success" type="submit">
                 Sign in
               </Button>

@@ -124,18 +124,15 @@ const BookCard = ({ book }) => {
             width={100}
             height={125}
             object-fit="cover"
-            // className="img-fluid"
             unoptimized
           />
         )}
         <Image
           src={book.imageUrl}
           alt={book.title}
-          // fill={true}
           width={100}
           height={125}
           object-fit="contain"
-          // className="img-fluid"
           onLoad={handleImageLoad}
           unoptimized
         />
@@ -178,7 +175,12 @@ const BookCard = ({ book }) => {
                     unoptimized
                   />
                 </div>
-                <div style={{ marginLeft: 20 }}>
+                <div
+                  style={{
+                    marginLeft: 20,
+                    marginTop: 0,
+                  }}
+                >
                   <Modal.Title>
                     <p className={classes.modalTitle}>{book.title}</p>
                   </Modal.Title>
@@ -195,6 +197,7 @@ const BookCard = ({ book }) => {
         </Modal.Header>
         <Modal.Body
           style={{
+            padding: ".5rem",
             backgroundColor: darkMode ? "black" : "white",
             borderBottomLeftRadius: "12px",
             borderBottomRightRadius: "12px",
@@ -205,7 +208,11 @@ const BookCard = ({ book }) => {
               <Button
                 variant="outline-success"
                 className={classes.linkButton}
-                style={{ fontSize: "10px", padding: "3px 5px" }}
+                style={{
+                  fontSize: "10px",
+                  padding: "3px 5px",
+                  borderRadius: "4px",
+                }}
                 onClick={() =>
                   handleLinkClick(
                     buyLinks.find((link) => link.type.includes("amazon")).link
@@ -219,7 +226,11 @@ const BookCard = ({ book }) => {
               <Button
                 variant="outline-success"
                 className={classes.linkButton}
-                style={{ fontSize: "10px", padding: "3px 5px" }}
+                style={{
+                  fontSize: "10px",
+                  padding: "3px 5px",
+                  borderRadius: "4px",
+                }}
                 onClick={() =>
                   handleLinkClick(
                     buyLinks.find((link) => link.type.includes("asian")).link
@@ -233,7 +244,11 @@ const BookCard = ({ book }) => {
               <Button
                 variant="outline-success"
                 className={classes.linkButton}
-                style={{ fontSize: "10px", padding: "3px 5px" }}
+                style={{
+                  fontSize: "10px",
+                  padding: "3px 5px",
+                  borderRadius: "4px",
+                }}
                 onClick={() =>
                   handleLinkClick(
                     buyLinks.find((link) => link.type.includes("euro")).link
@@ -247,7 +262,11 @@ const BookCard = ({ book }) => {
               <Button
                 variant="outline-success"
                 className={classes.linkButton}
-                style={{ fontSize: "10px", padding: "3px 5px" }}
+                style={{
+                  fontSize: "10px",
+                  padding: "3px 5px",
+                  borderRadius: "4px",
+                }}
                 onClick={() =>
                   handleLinkClick(
                     buyLinks.find((link) => link.type.includes("other")).link
@@ -259,7 +278,7 @@ const BookCard = ({ book }) => {
             )}
           </div>
 
-          <hr />
+          <hr style={{ margin: "0.5rem" }} />
 
           <div className="d-flex justify-content-between w-100 align-items-center">
             {(unlockedLinks.length > 0 || audioFileUrls.length > 0) && (
@@ -267,7 +286,11 @@ const BookCard = ({ book }) => {
                 <Button
                   variant="outline-primary"
                   className={classes.linkButton}
-                  style={{ fontSize: "10px", padding: "3px 5px" }}
+                  style={{
+                    fontSize: "10px",
+                    padding: "3px 5px",
+                    borderRadius: "4px",
+                  }}
                   onClick={handleAudioClick}
                 >
                   Audio
@@ -277,6 +300,11 @@ const BookCard = ({ book }) => {
                     key={index}
                     variant="outline-primary"
                     className={classes.linkButton}
+                    style={{
+                      fontSize: "10px",
+                      padding: "3px 5px",
+                      borderRadius: "4px",
+                    }}
                     onClick={() => window.open(link.link, "_blank")}
                   >
                     {link.type}
@@ -291,7 +319,11 @@ const BookCard = ({ book }) => {
                     key={index}
                     variant="outline-warning"
                     className={classes.linkButton}
-                    style={{ fontSize: "10px", padding: "3px 5px" }}
+                    style={{
+                      fontSize: "10px",
+                      padding: "3px 5px",
+                      borderRadius: "4px",
+                    }}
                     onClick={() => window.open(link.link, "_blank")}
                   >
                     {link.type}
@@ -303,9 +335,12 @@ const BookCard = ({ book }) => {
 
           {(unlockedLinks.length > 0 ||
             lockedLinks.length > 0 ||
-            audioFileUrls.length > 0) && <hr />}
+            audioFileUrls.length > 0) && <hr style={{ margin: "0.5rem" }} />}
 
-          <div dangerouslySetInnerHTML={{ __html: book.description }} />
+          <div
+            className={classes.bookContent}
+            dangerouslySetInnerHTML={{ __html: book.description }}
+          />
         </Modal.Body>
       </Modal>
 

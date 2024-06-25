@@ -34,6 +34,10 @@
   cursor: pointer;
 }
 
+.bookContent {
+  line-height: 1;
+}
+
 .bookDetails {
   font-size: 0.75rem;
   margin: 0;
@@ -80,10 +84,8 @@
 
 .frontPage {
   display: grid;
-
   gap: 5px;
   margin: 5px auto;
-
   flex: 1;
   width: 90%;
 }
@@ -146,6 +148,8 @@
 
 .modalTitle {
   font-size: 1.25rem;
+  padding: 0;
+  margin: 0;
 }
 
 .navText {
@@ -198,6 +202,9 @@
     transform: scale(1);
     transition-delay: 0s;
   }
+  .bookContent {
+    line-height: 0.75;
+  }
 
   .bookDetails {
     font-size: 0.5rem;
@@ -244,7 +251,7 @@
   }
 
   .modalTitle {
-    font-size: 1rem;
+    font-size: 0.8rem;
   }
 
   .newsCarousel {

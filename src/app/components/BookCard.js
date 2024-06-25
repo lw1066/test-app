@@ -179,8 +179,8 @@ const BookCard = ({ book }) => {
                   />
                 </div>
                 <div style={{ marginLeft: 20 }}>
-                  <Modal.Title className={classes.modalTitle}>
-                    {book.title}
+                  <Modal.Title>
+                    <p className={classes.modalTitle}>{book.title}</p>
                   </Modal.Title>
                   {book.author && (
                     <p className={classes.bookDetails}>{book.author}</p>
@@ -205,6 +205,7 @@ const BookCard = ({ book }) => {
               <Button
                 variant="outline-success"
                 className={classes.linkButton}
+                style={{ fontSize: "10px", padding: "3px 5px" }}
                 onClick={() =>
                   handleLinkClick(
                     buyLinks.find((link) => link.type.includes("amazon")).link
@@ -218,6 +219,7 @@ const BookCard = ({ book }) => {
               <Button
                 variant="outline-success"
                 className={classes.linkButton}
+                style={{ fontSize: "10px", padding: "3px 5px" }}
                 onClick={() =>
                   handleLinkClick(
                     buyLinks.find((link) => link.type.includes("asian")).link
@@ -231,6 +233,7 @@ const BookCard = ({ book }) => {
               <Button
                 variant="outline-success"
                 className={classes.linkButton}
+                style={{ fontSize: "10px", padding: "3px 5px" }}
                 onClick={() =>
                   handleLinkClick(
                     buyLinks.find((link) => link.type.includes("euro")).link
@@ -244,6 +247,7 @@ const BookCard = ({ book }) => {
               <Button
                 variant="outline-success"
                 className={classes.linkButton}
+                style={{ fontSize: "10px", padding: "3px 5px" }}
                 onClick={() =>
                   handleLinkClick(
                     buyLinks.find((link) => link.type.includes("other")).link
@@ -263,6 +267,7 @@ const BookCard = ({ book }) => {
                 <Button
                   variant="outline-primary"
                   className={classes.linkButton}
+                  style={{ fontSize: "10px", padding: "3px 5px" }}
                   onClick={handleAudioClick}
                 >
                   Audio
@@ -286,6 +291,7 @@ const BookCard = ({ book }) => {
                     key={index}
                     variant="outline-warning"
                     className={classes.linkButton}
+                    style={{ fontSize: "10px", padding: "3px 5px" }}
                     onClick={() => window.open(link.link, "_blank")}
                   >
                     {link.type}

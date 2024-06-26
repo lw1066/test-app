@@ -105,11 +105,11 @@ function NewsAccordion() {
       <div
         className={classes.headerContainer}
         style={{
-          backgroundColor: darkMode ? "black" : "gray",
+          backgroundColor: darkMode ? "black" : "#ededed",
           margin: "0 auto",
         }}
       >
-        <h2 className={classes.headerText}>The Latest News</h2>
+        <h2 className={classes.headerText}>News updates</h2>
       </div>
       <div className={classes.newsCarousel}>
         <Carousel data-bs-theme="dark" controls={false} interval={8000}>

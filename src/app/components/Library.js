@@ -86,14 +86,15 @@ const Library = () => {
       <div className={classes.genreContainer}>
         <div
           className={classes.headerContainer}
-          style={{ backgroundColor: darkMode ? "black" : "gray" }}
+          style={{ backgroundColor: darkMode ? "black" : "#ededed" }}
         >
-          <h2 className={classes.headerText}>The Catalogue</h2>
+          <h2 className={classes.headerText}>Catalogue</h2>
         </div>
         <GenreSelector onSelectGenre={handleGenreChange} />
 
         <input
           type="text"
+          id="search"
           placeholder="Search by title or author"
           value={searchQuery}
           onChange={handleSearchChange}

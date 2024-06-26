@@ -121,8 +121,8 @@ const BookCard = ({ book }) => {
           <Image
             src={loadingImage}
             alt="Loading..."
-            width={100}
-            height={125}
+            width={98}
+            height={126}
             object-fit="cover"
             unoptimized
           />
@@ -130,8 +130,8 @@ const BookCard = ({ book }) => {
         <Image
           src={book.imageUrl}
           alt={book.title}
-          width={100}
-          height={125}
+          width={98}
+          height={126}
           object-fit="contain"
           onLoad={handleImageLoad}
           unoptimized

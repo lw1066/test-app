@@ -9,13 +9,17 @@
 } */
 
 .bookcard {
-  height: 126px;
-  width: 98px;
+  height: auto;
+  width: auto;
   transition: transform 0.6s ease-out;
-  overflow: hidden;
+  /* overflow: hidden; */
   box-shadow: 4px 6px 8px rgba(0, 0, 0, 0.8);
   border-radius: 0;
   padding: 0;
+  background-color: #ededed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .bookcard button {
@@ -132,12 +136,7 @@
 }
 
 .linkstyle {
-  color: gray;
   text-decoration: none;
-}
-
-.linkstyle:hover {
-  text-decoration: underline;
 }
 
 .linkButton {

@@ -4,15 +4,10 @@ import { useRef } from "react";
 
 import classes from "./Library.module.css";
 import Link from "next/link";
-import NewsAccordion from "./NewsAccordion";
+import { useDarkMode } from "@/context/DarkModeContext";
 
 const WelcomeMessage = () => {
-  const catalogueRef = useRef(null);
-
-  // const handleScrollToCatalogue = () => {
-  //   catalogueRef.current.scrollIntoView({ behavior: "smooth" });
-  // };
-
+  const { darkMode } = useDarkMode();
   return (
     <div className={classes.welcomeContainer}>
       <div className={classes.welcomeContent}>

@@ -2,11 +2,15 @@
 
 import { Container, Row, Col, Button } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFacebook } from "@fortawesome/free-brands-svg-icons";
+import {
+  faFacebook,
+  faInstagram,
+  faYoutube,
+} from "@fortawesome/free-brands-svg-icons";
 import { useDarkMode } from "@/context/DarkModeContext";
 import Image from "next/legacy/image";
 import Link from "next/link";
-
+import classes from "./Library.module.css";
 const Footer = () => {
   const { darkMode } = useDarkMode();
 
@@ -14,39 +18,32 @@ const Footer = () => {
     <footer
       className="text-center py-3"
       style={{
-        backgroundColor: darkMode ? "black" : "white",
+        backgroundColor: darkMode ? "black" : "#ededed",
         width: "100%",
       }}
     >
       <Container>
         <Row className="align-items-center justify-content-around">
           <Col xs={3} md={3} className="text-left">
-            <div className="d-flex flex-column">
-              <Link href="Submissions">
-                <Button
-                  variant={darkMode ? "outline-light" : "outline-dark"}
-                  className="mb-1"
+            <div className="d-flex flex-column ">
+              <Link href="Submissions" className={classes.linkstyle}>
+                <p
                   style={{
                     fontSize: ".5rem",
-                    padding: "2px 3px",
-                    borderRadius: "4px",
+                    margin: "0",
                   }}
                 >
                   Submissions
-                </Button>
+                </p>
               </Link>
-              <Link href="Privacy">
-                <Button
-                  variant={darkMode ? "outline-light" : "outline-dark"}
+              <Link href="Privacy" className={classes.linkstyle}>
+                <p
                   style={{
-                    fontSize: ".45rem",
-                    padding: "2px 3px",
-                    borderRadius: "4px",
-                    minWidth: "65px",
+                    fontSize: ".5rem",
                   }}
                 >
                   Privacy & Data Policies
-                </Button>
+                </p>
               </Link>
             </div>
           </Col>
@@ -64,13 +61,37 @@ const Footer = () => {
                 color={darkMode ? "white" : "black"}
               />
             </a>
+            <a
+              href="https://www.facebook.com/perceptiapress/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-decoration-none ms-3"
+            >
+              <FontAwesomeIcon
+                icon={faInstagram}
+                size="lg"
+                color={darkMode ? "white" : "black"}
+              />
+            </a>
+            <a
+              href="https://www.youtube.com/channel/UCjGuvG6n2zBnKPdpelMXlXg"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-decoration-none ms-3"
+            >
+              <FontAwesomeIcon
+                icon={faYoutube}
+                size="lg"
+                color={darkMode ? "white" : "black"}
+              />
+            </a>
           </Col>
           <Col xs={3} md={3} className="text-center mb-0">
             <Image
               src={
                 darkMode
                   ? "/images/perceptia_logo_negative.jpg"
-                  : "/images/perceptia_logo.jpg"
+                  : "/images/perceptia_logo-gray.jpg"
               }
               alt="Perceptia Press"
               className="img-fluid"

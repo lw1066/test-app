@@ -5,17 +5,17 @@
 }
 
 .bookcard {
-  height: auto;
-  width: auto;
+  height: 126px;
+  width: 98px;
   transition: transform 0.6s ease-out;
-  /* overflow: hidden; */
+  overflow: hidden;
   box-shadow: 4px 6px 8px rgba(0, 0, 0, 0.8);
   border-radius: 0;
   padding: 0;
   background-color: #ededed;
-  display: flex;
+  /* display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: center; */
 }
 
 .bookcard button {

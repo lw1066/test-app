@@ -124,7 +124,6 @@ const BookCard = ({ book }) => {
             width={98}
             height={126}
             object-fit="cover"
-            unoptimized
           />
         )}
         <Image

@@ -4,10 +4,6 @@
   border-radius: 12px;
 }
 
-/* .card {
-  --bs-card-height: 150px;
-} */
-
 .bookcard {
   height: auto;
   width: auto;
@@ -65,11 +61,6 @@
   margin: 0;
 }
 
-/* .button {
-  margin: 0.15rem;
-  font-size: clamp(0.45rem, 1vw, 0.65rem);
-} */
-
 .buttonGroupContainer {
   display: flex;
   flex-wrap: wrap;
@@ -87,7 +78,8 @@
 }
 
 .frontPage {
-  display: grid;
+  display: flex;
+  flex-direction: column;
   gap: 5px;
   margin: 5px auto;
   flex: 1;
@@ -114,13 +106,13 @@
 }
 
 .headerContainer {
-  width: 70%;
+  width: 100%;
   border-radius: 4px;
   padding-inline: 20px;
   padding-top: 5px;
   display: flex;
   align-items: center;
-  margin-bottom: 30px;
+  margin: 0 auto 30px auto;
 }
 
 .headerText {
@@ -131,7 +123,8 @@
 
 .instructionText {
   font-size: 0.75rem;
-  width: 40%;
+  font-size: clamp(0.65rem, 1.1vw, 1rem);
+  width: 75%;
   text-align: center;
 }
 
@@ -205,9 +198,9 @@
     line-height: 0.75;
   }
 
-  .bookDetails {
+  /* .bookDetails {
     font-size: 0.5rem;
-  }
+  } */
 
   /* .button {
     margin: 0.2rem;
@@ -234,7 +227,7 @@
   .headerContainer {
     width: 90%;
     padding-inline: 10px;
-    padding-top: 5px;
+    /* padding-top: 5px; */
     margin-bottom: 20px;
   }
   /* 
@@ -243,11 +236,6 @@
     margin: 0;
     padding-bottom: 2px;
   } */
-
-  .instructionText {
-    font-size: 0.65rem;
-    width: 75%;
-  }
 
   .modalTitle {
     font-size: 0.8rem;

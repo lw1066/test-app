@@ -209,7 +209,7 @@ const BookCard = ({ book }) => {
                 variant="outline-success"
                 className={classes.linkButton}
                 style={{
-                  fontSize: "10px",
+                  fontSize: "12px",
                   padding: "3px 5px",
                   borderRadius: "4px",
                 }}
@@ -227,7 +227,7 @@ const BookCard = ({ book }) => {
                 variant="outline-success"
                 className={classes.linkButton}
                 style={{
-                  fontSize: "10px",
+                  fontSize: "12px",
                   padding: "3px 5px",
                   borderRadius: "4px",
                 }}
@@ -245,7 +245,7 @@ const BookCard = ({ book }) => {
                 variant="outline-success"
                 className={classes.linkButton}
                 style={{
-                  fontSize: "10px",
+                  fontSize: "12px",
                   padding: "3px 5px",
                   borderRadius: "4px",
                 }}
@@ -263,7 +263,7 @@ const BookCard = ({ book }) => {
                 variant="outline-success"
                 className={classes.linkButton}
                 style={{
-                  fontSize: "10px",
+                  fontSize: "12px",
                   padding: "3px 5px",
                   borderRadius: "4px",
                 }}
@@ -287,7 +287,7 @@ const BookCard = ({ book }) => {
                   variant="outline-primary"
                   className={classes.linkButton}
                   style={{
-                    fontSize: "10px",
+                    fontSize: "12px",
                     padding: "3px 5px",
                     borderRadius: "4px",
                   }}
@@ -301,7 +301,7 @@ const BookCard = ({ book }) => {
                     variant="outline-primary"
                     className={classes.linkButton}
                     style={{
-                      fontSize: "10px",
+                      fontSize: "12px",
                       padding: "3px 5px",
                       borderRadius: "4px",
                     }}
@@ -320,7 +320,7 @@ const BookCard = ({ book }) => {
                     variant="outline-warning"
                     className={classes.linkButton}
                     style={{
-                      fontSize: "10px",
+                      fontSize: "12px",
                       padding: "3px 5px",
                       borderRadius: "4px",
                     }}

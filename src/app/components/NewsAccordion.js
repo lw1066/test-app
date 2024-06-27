@@ -111,6 +111,7 @@ function NewsAccordion() {
       >
         <h2 className={classes.headerText}>News updates</h2>
       </div>
+
       <div className={classes.newsCarousel}>
         <Carousel data-bs-theme="dark" controls={false} interval={8000}>
           {newsDataArray.map((item, index) => (
@@ -129,7 +130,7 @@ function NewsAccordion() {
                     textAlign: "center",
                     color: darkMode ? "white" : "black",
                     fontSize: ".75rem",
-                    fontSize: "clamp(.6rem, 1.1vw, 1rem)",
+                    fontSize: "clamp(.65rem, 1.1vw, 1rem)",
                   }}
                 >
                   <h3 className={classes.captionTitle}>{item.title}</h3>

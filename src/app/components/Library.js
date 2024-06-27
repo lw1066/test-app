@@ -83,15 +83,15 @@ const Library = () => {
 
   return (
     <>
-      <div className={classes.genreContainer}>
-        <div
-          className={classes.headerContainer}
-          style={{ backgroundColor: darkMode ? "black" : "#ededed" }}
-        >
-          <h2 className={classes.headerText}>Catalogue</h2>
-        </div>
-        <GenreSelector onSelectGenre={handleGenreChange} />
+      <div
+        className={classes.headerContainer}
+        style={{ backgroundColor: darkMode ? "black" : "#ededed" }}
+      >
+        <h2 className={classes.headerText}>Catalogue</h2>
+      </div>
 
+      <div className={classes.genreContainer}>
+        <GenreSelector onSelectGenre={handleGenreChange} />
         <input
           type="text"
           id="search"

@@ -29,7 +29,7 @@ const Footer = () => {
               <Link href="Submissions" className={classes.linkstyle}>
                 <p
                   style={{
-                    fontSize: ".5rem",
+                    fontSize: ".60rem",
                     margin: "0",
                   }}
                 >
@@ -39,7 +39,7 @@ const Footer = () => {
               <Link href="Privacy" className={classes.linkstyle}>
                 <p
                   style={{
-                    fontSize: ".5rem",
+                    fontSize: ".60rem",
                   }}
                 >
                   Privacy & Data Policies
@@ -63,7 +63,7 @@ const Footer = () => {
                 />
               </a>
               <a
-                href="https://www.facebook.com/perceptiapress/"
+                href="https://www.instagram.com/perceptiapress/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-decoration-none mx-4"

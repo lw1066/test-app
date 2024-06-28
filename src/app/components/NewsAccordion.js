@@ -99,7 +99,7 @@ function NewsAccordion() {
                     textAlign: "center",
                     color: darkMode ? "white" : "black",
                     fontSize: ".75rem",
-                    fontSize: "clamp(.65rem, 1.1vw, 1rem)",
+                    fontSize: "clamp(.65rem, 1.1vw, .75rem)",
                   }}
                 >
                   <h3 className={classes.captionTitle}>{item.title}</h3>

@@ -32,6 +32,7 @@ const GenreSelector = ({ onSelectGenre }) => {
           className={classes.button}
           style={{
             fontSize: "12px",
+            fontWeight: "900",
             padding: "5px 10px",
             margin: "3px",
             borderRadius: "4px",

@@ -136,7 +136,7 @@ const BookCard = ({ book }) => {
             objectFit: "contain",
           }}
           onLoad={handleImageLoad}
-          // unoptimized={false}
+          unoptimized={true}
         />
       </div>
 

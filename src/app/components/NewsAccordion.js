@@ -4,14 +4,12 @@ import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import classes from "@/app/components/Library.module.css";
 import AddNews from "@/app/components/AddNews";
-import { deleteData } from "@/firebase/firestore/deleteDoc";
 import { useAuthContext } from "@/context/AuthContext";
-import { getAndModifyDoc } from "@/firebase/firestore/getAndModifyDoc";
-import { manualRefresh } from "@/firebase/firestore/addData";
 import { useDarkMode } from "@/context/DarkModeContext";
 import { useModal } from "@/context/ModalContext";
 import { checkIfDataIsStale } from "@/firebase/firestore/checkIfDataIsStale";
 import fetchNewsData from "@/firebase/firestore/fetchNewsData";
+import { updateNewsItem, deleteNewsItem } from "@/utils/newsUtils";
 
 function NewsAccordion() {
   const { user } = useAuthContext();
@@ -59,45 +57,16 @@ function NewsAccordion() {
   };
 
   const handleUpdate = async (updatedFormData) => {
-    try {
-      const { result, error } = await getAndModifyDoc(
-        "news",
-        selectedItem.id,
-        updatedFormData
-      );
-
-      if (error) {
-        console.error("Error updating document:", error);
-        showModal(`So sorry - there's an error!`, `${error}`);
-        return;
-      }
-
-      showModal(`News updated!`, `All done`);
-      closeModal();
-      manualRefresh();
-    } catch (error) {
-      console.error("Unexpected error:", error);
-      showModal(`So sorry - there's an error!`, `${error}`);
-    }
-  };
-
-  const handleDelete = async (itemId) => {
-    try {
-      const { success, error } = await deleteData("news", itemId);
-      if (error) {
-        console.error("Error deleting document:", error);
-        showModal(`So sorry - there's an error!`, `${error}`);
-      } else {
-        showModal(`News item deleted!`, `All done`);
-        manualRefresh();
-      }
-    } catch (error) {
-      console.error("Error:", error);
-    }
+    await updateNewsItem(
+      selectedItem.id,
+      updatedFormData,
+      showModal,
+      closeModal
+    );
   };
 
   const handleDeleteClick = (itemId) => {
-    handleDelete(itemId);
+    deleteNewsItem(itemId, showModal);
   };
 
   return (

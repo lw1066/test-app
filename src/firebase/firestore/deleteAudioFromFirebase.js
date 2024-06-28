@@ -1,10 +1,16 @@
 import { getStorage, ref, deleteObject } from "firebase/storage";
 
-const storage = getStorage();
+const initializeStorage = () => {
+  const storage = getStorage();
+  return storage;
+};
 
 export const deleteAudioFromFirebase = async (audioFileUrl) => {
   try {
-    console.log(audioFileUrl.downloadURL, "in deletefunction!");
+    console.log(audioFileUrl.downloadURL, "in delete function!");
+
+    const storage = initializeStorage();
+
     const fileRef = ref(storage, audioFileUrl.downloadURL);
 
     await deleteObject(fileRef);
@@ -14,7 +20,6 @@ export const deleteAudioFromFirebase = async (audioFileUrl) => {
       console.log("File not found, skipping deletion:", audioFileUrl);
     } else {
       console.error("Error deleting file:", error);
-      throw error;
     }
   }
 };

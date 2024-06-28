@@ -123,17 +123,20 @@ const BookCard = ({ book }) => {
             alt="Loading..."
             width={98}
             height={126}
-            object-fit="cover"
+            style={{ objectFit: "contain" }}
           />
         )}
         <Image
           src={book.imageUrl}
           alt={book.title}
-          width={98}
+          width={90}
           height={126}
-          object-fit="contain"
+          // fill={true}
+          style={{
+            objectFit: "contain",
+          }}
           onLoad={handleImageLoad}
-          unoptimized
+          // unoptimized={false}
         />
       </div>
 

@@ -11,6 +11,7 @@ import { deleteAudioFromFirebase } from "@/firebase/firestore/deleteAudioFromFir
 const AddResources = ({ book, handleUpdate }) => {
   const editorRef = useRef(null);
   const { showModal } = useModal();
+  const [isLoading, setIsLoading] = useState(false);
 
   const isUpdate = !!book;
 
@@ -99,6 +100,7 @@ const AddResources = ({ book, handleUpdate }) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    setIsLoading(true);
 
     try {
       if (formData.imageFile) {
@@ -125,6 +127,7 @@ const AddResources = ({ book, handleUpdate }) => {
       if (error) {
         console.error("Error adding document:", error);
         showModal("So sorry - there's an error!", `${error}`);
+        setIsLoading(false);
       } else {
         console.log("Document added with ID:", result);
         showModal("Book added!", "All done");
@@ -140,10 +143,12 @@ const AddResources = ({ book, handleUpdate }) => {
           audioFileUrls: [],
           links: [{ type: "", link: "", locked: false }],
         });
+        setIsLoading(false);
       }
     } catch (error) {
       console.error("Error:", error);
       showModal("So sorry - there's an error!", `${error}`);
+      setIsLoading(false);
     }
   };
 
@@ -162,6 +167,7 @@ const AddResources = ({ book, handleUpdate }) => {
   };
 
   const handleInputUpdateChange = async () => {
+    setIsLoading(true);
     try {
       let imageUrl = formData.imageUrl;
       let audioFileUrls = formData.audioFileUrls;
@@ -199,9 +205,11 @@ const AddResources = ({ book, handleUpdate }) => {
 
       await handleUpdate(updatedData);
       showModal("Book updated!", "All done");
+      setIsLoading(false);
     } catch (error) {
       console.error("Error updating document:", error);
       showModal("So sorry - there's an error!", `${error}`);
+      setIsLoading(false);
     }
   };
 
@@ -251,49 +259,20 @@ const AddResources = ({ book, handleUpdate }) => {
             value={formData.description}
             init={{
               height: 500,
-
-              menubar: {
-                edit: {
-                  title: "Edit",
-                  items:
-                    "undo redo | cut copy paste pastetext | selectall | searchreplace",
-                },
-                view: {
-                  title: "View",
-                  items:
-                    "code revisionhistory | visualaid visualchars visualblocks | spellchecker | preview fullscreen | showcomments",
-                },
-                insert: {
-                  title: "Insert",
-                  items:
-                    "image link media addcomment pageembed codesample inserttable | math | charmap emoticons hr | pagebreak nonbreaking anchor tableofcontents | insertdatetime",
-                },
-                format: {
-                  title: "Format",
-                  items:
-                    "bold italic underline strikethrough superscript subscript codeformat | styles blocks fontfamily fontsize align lineheight | forecolor backcolor | language | removeformat",
-                },
-                tools: {
-                  title: "Tools",
-                  items:
-                    "spellchecker spellcheckerlanguage | a11ycheck code wordcount",
-                },
-                table: {
-                  title: "Table",
-                  items:
-                    "inserttable | cell row column | advtablesort | tableprops deletetable",
-                },
-                help: { title: "Help", items: "help" },
-              },
               plugins: ["link", "lists", "table", "code"],
               toolbar:
-                "undo redo | fontfamily fontsizeinput forecolor backcolor | " +
+                "undo redo | fontfamily fontselect fontsizeinput forecolor backcolor | " +
                 "lineheight bold italic underline | alignleft aligncenter " +
                 "alignright alignjustify | bullist numlist outdent indent | " +
                 "removeformat | link | paste image code |" +
                 "table tabledelete | tableprops tablerowprops tablecellprops | tableinsertrowbefore tableinsertrowafter tabledeleterow | tableinsertcolbefore tableinsertcolafter tabledeletecol",
-              content_style:
-                "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }",
+              font_family_formats:
+                "Noto Sans=noto sans,sans-serif; Andale Mono=andale mono,times; Arial=arial,helvetica,sans-serif; Arial Black=arial black,avant garde; Book Antiqua=book antiqua,palatino; Comic Sans MS=comic sans ms,sans-serif; Courier New=courier new,courier; Georgia=georgia,palatino; Helvetica=helvetica; Impact=impact,chicago; Oswald=oswald; Symbol=symbol; Tahoma=tahoma,arial,helvetica,sans-serif; Terminal=terminal,monaco; Times New Roman=times new roman,times; Trebuchet MS=trebuchet ms,geneva; Verdana=verdana,geneva; Webdings=webdings; Wingdings=wingdings,zapf dingbats",
+
+              content_style: `
+              @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=swap');
+              body { font-family: 'Noto Sans', sans-serif; font-size: 12px; }`,
+
               default_link_target: "_blank",
             }}
             onEditorChange={handleEditorChange}
@@ -381,13 +360,22 @@ const AddResources = ({ book, handleUpdate }) => {
           </Form.Group>
 
           {!isUpdate && (
-            <Button variant="primary" type="submit" className="me-3">
-              Save
+            <Button
+              variant="primary"
+              type="submit"
+              className="me-3"
+              disabled={isLoading}
+            >
+              {isLoading ? "Loading" : "Save"}
             </Button>
           )}
           {isUpdate && (
-            <Button variant="primary" onClick={handleInputUpdateChange}>
-              Update
+            <Button
+              variant="primary"
+              onClick={handleInputUpdateChange}
+              disabled={isLoading}
+            >
+              {isLoading ? "Loading" : "Update"}
             </Button>
           )}
         </Form>

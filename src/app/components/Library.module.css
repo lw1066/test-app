@@ -120,7 +120,7 @@
 
 .instructionText {
   font-size: 0.75rem;
-  font-size: clamp(0.65rem, 1.1vw, 0.75rem);
+  font-size: 0.75rem;
   width: 75%;
   text-align: center;
 }

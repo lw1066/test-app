@@ -26,7 +26,7 @@ const Footer = () => {
         <Row className="align-items-center justify-content-around">
           <Col xs={3} md={3} className="text-left">
             <div className="d-flex flex-column ">
-              <Link href="Submissions" className={classes.linkstyle}>
+              <Link href="Submissions" className={classes.linkStyle}>
                 <p
                   style={{
                     margin: "0",
@@ -35,7 +35,7 @@ const Footer = () => {
                   Submissions
                 </p>
               </Link>
-              <Link href="Privacy" className={classes.linkstyle}>
+              <Link href="Privacy" className={classes.linkStyle}>
                 <p>Privacy & Data Policies</p>
               </Link>
             </div>

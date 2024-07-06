@@ -110,7 +110,7 @@ const Library = () => {
           value={searchQuery}
           onChange={handleSearchChange}
           style={{
-            width: "30%",
+            width: "40%",
             minWidth: "150px",
             padding: "3px",
             margin: "20px 0",
@@ -119,6 +119,7 @@ const Library = () => {
             borderColor: darkMode ? "white" : "black",
             backgroundColor: darkMode ? "black" : "white",
             color: darkMode ? "white" : "black",
+            fontSize: ".75rem",
           }}
         />
 
@@ -131,7 +132,7 @@ const Library = () => {
             <p className={classes.instructionText}>
               Browse our catalogue by choosing a category or entering an author
               or title above. Take a look at our news below or go to{" "}
-              <Link href="/Faq" className={classes.linkstyle}>
+              <Link href="/Faq" className={classes.linkStyle}>
                 FAQs
               </Link>{" "}
               to learn more about us.

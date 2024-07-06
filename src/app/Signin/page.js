@@ -40,7 +40,7 @@ function Page() {
               Please sign in to access teaching materials
             </p>
             <p style={{ fontSize: "1.25rem" }}>
-              <Link className={classes.linkstyle} href="Contact">
+              <Link className={classes.linkStyle} href="Contact">
                 Contact us
               </Link>{" "}
               to register for an account

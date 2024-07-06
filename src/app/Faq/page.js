@@ -18,7 +18,7 @@ const Page = () => {
       <div className="d-flex flex-column  align-items-center justify-content-center mt-2 mb-5">
         <p className={classes.pageDescription}>
           Any more questions -&nbsp;
-          <Link className={classes.linkstyle} href="Contact">
+          <Link className={classes.linkStyle} href="Contact">
             Contact us!
           </Link>
         </p>

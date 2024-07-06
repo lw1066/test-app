@@ -98,7 +98,7 @@ function Navigation() {
             <span className="navbar-toggler-icon"></span>
           </button>
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul className="navbar-nav ms-auto align-items-center mb-0">
+            <ul className="navbar-nav ms-auto align-items-center mb-1">
               <li className="nav-item mx-auto ">
                 <Link className={`nav-link ${classes.navText}`} href="Faq">
                   FAQs

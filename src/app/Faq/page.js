@@ -1,33 +1,29 @@
 "use client";
 
-import { useDarkMode } from "@/context/DarkModeContext";
-import Image from "next/legacy/image";
 import FAQAccordion from "../components/FAQAccordion";
 import classes from "../components/Library.module.css";
 import Link from "next/link";
 
 const Page = () => {
-  const { darkMode } = useDarkMode();
-
   return (
     <>
-      <div className="d-flex flex-column  align-items-center justify-content-center mt-5">
-        <Image
-          src={darkMode ? "/images/faqWhite.png" : "/images/faqBlack.png"}
-          alt="people talking animation"
-          width={80}
-          height={80}
-          unoptimized
+      <div className={classes.bannerImage}>
+        <img
+          src="/images/faq_image.jpg"
+          alt="student asking a question"
+          className={classes.bannerImage}
         />
-
-        <h1 style={{ fontSize: "18px", display: "flex", flexDirection: "row" }}>
-          Still got questions -&nbsp;
+        <h1 className={classes.pageImageText}>Frequently Asked Questions</h1>
+      </div>
+      <div className="d-flex flex-column  align-items-center justify-content-center mt-2 mb-5">
+        <p className={classes.pageDescription}>
+          Any more questions -&nbsp;
           <Link className={classes.linkstyle} href="Contact">
             Contact us!
           </Link>
-        </h1>
+        </p>
+        <FAQAccordion />
       </div>
-      <FAQAccordion />
     </>
   );
 };

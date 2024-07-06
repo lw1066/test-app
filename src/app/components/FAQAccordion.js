@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import Accordion from "react-bootstrap/Accordion";
 import classes from "@/app/components/Library.module.css";
+import "bootstrap/dist/css/bootstrap.min.css";
 import { useDarkMode } from "@/context/DarkModeContext";
 
 function FAQAccordion() {
@@ -14,12 +15,14 @@ function FAQAccordion() {
         <Accordion activeKey={activeKey} onSelect={(k) => setActiveKey(k)}>
           <Accordion.Item eventKey="0">
             <Accordion.Header>
-              Do you accept submissions or book ideas?
+              <p style={{ fontSize: "1rem", padding: 0, margin: 0 }}>
+                How do I browse titles?
+              </p>
             </Accordion.Header>
             <Accordion.Body
               style={{
                 backgroundColor: darkMode ? "black" : "white",
-                fontSize: "12px",
+                fontSize: ".75rem",
               }}
             >
               <p>
@@ -32,11 +35,15 @@ function FAQAccordion() {
             </Accordion.Body>
           </Accordion.Item>
           <Accordion.Item eventKey="1">
-            <Accordion.Header>How do I browse titles?</Accordion.Header>
+            <Accordion.Header>
+              <p style={{ fontSize: "1rem", padding: 0, margin: 0 }}>
+                How do I browse titles?
+              </p>
+            </Accordion.Header>
             <Accordion.Body
               style={{
                 backgroundColor: darkMode ? "black" : "white",
-                fontSize: "12px",
+                fontSize: ".75rem",
               }}
             >
               <p>
@@ -47,11 +54,15 @@ function FAQAccordion() {
             </Accordion.Body>
           </Accordion.Item>
           <Accordion.Item eventKey="2">
-            <Accordion.Header>Where can I buy your books?</Accordion.Header>
+            <Accordion.Header>
+              <p style={{ fontSize: "1rem", padding: 0, margin: 0 }}>
+                Where can I buy your books?
+              </p>
+            </Accordion.Header>
             <Accordion.Body
               style={{
                 backgroundColor: darkMode ? "black" : "white",
-                fontSize: "12px",
+                fontSize: ".75rem",
               }}
             >
               <p>Information on buying books online etc...</p>
@@ -59,12 +70,14 @@ function FAQAccordion() {
           </Accordion.Item>
           <Accordion.Item eventKey="3">
             <Accordion.Header>
-              I am a teacher can I access teacher materials?
+              <p style={{ fontSize: "1rem", padding: 0, margin: 0 }}>
+                I am a teacher can I access teacher materials?
+              </p>
             </Accordion.Header>
             <Accordion.Body
               style={{
                 backgroundColor: darkMode ? "black" : "white",
-                fontSize: "12px",
+                fontSize: ".75rem",
               }}
             >
               <p>Information on signing up to get teacher access?</p>

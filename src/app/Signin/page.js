@@ -35,9 +35,11 @@ function Page() {
       <Row>
         <Col md={{ span: 6, offset: 3 }}>
           <div className="d-flex flex-column align-items-center justify-content-center mb-2 mt-5 fs-6">
-            <h1 className="fs-5">Teacher sign-in</h1>
-            <p>Please sign in to access teaching materials</p>
-            <p>
+            <h1>Teacher sign-in</h1>
+            <p style={{ fontSize: "1.25rem" }}>
+              Please sign in to access teaching materials
+            </p>
+            <p style={{ fontSize: "1.25rem" }}>
               <Link className={classes.linkstyle} href="Contact">
                 Contact us
               </Link>{" "}
@@ -56,9 +58,7 @@ function Page() {
                 required
               />
             </Form.Group>
-            <p id="emailHelp" className={classes.emailText}>
-              We&apos;ll <strong>never</strong> share your email with anyone.
-            </p>
+
             <Form.Group controlId="formPassword" className="mt-3">
               <Form.Label>Password</Form.Label>
               <Form.Control

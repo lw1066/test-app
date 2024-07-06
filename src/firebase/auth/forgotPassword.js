@@ -8,8 +8,7 @@ export async function forgotPassword(email) {
     error = null;
   try {
     result = await sendPasswordResetEmail(auth, email);
-    result =
-      "Password reset email sent successfully. Please check your inbox (inc spam) for further instructions.";
+    result = `Email sent to ${email}. Please check your inbox (inc spam) for further instructions.`;
   } catch (e) {
     error = e;
   }

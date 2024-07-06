@@ -6,6 +6,7 @@ import LoadingSpinner from "@/app/components/LoadingSpinner";
 import fetchBooks from "@/firebase/firestore/fetchBooks";
 import { checkIfDataIsStale } from "@/firebase/firestore/checkIfDataIsStale";
 import { useDarkMode } from "@/context/DarkModeContext";
+import Link from "next/link";
 
 const Library = () => {
   const [books, setBooks] = useState([]);
@@ -83,6 +84,16 @@ const Library = () => {
 
   return (
     <>
+      <div className={classes.welcomeText}>
+        <p style={{ width: "85%", margin: "2% auto" }}>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque
+          consequat mi nulla, a venenatis sem vehicula non. Nam eu bibendum
+          arcu, id finibus lectus. Quisque aliquam tellus turpis, eget dictum
+          mauris venenatis quis. Integer neque massa, iaculis ut nunc ac,
+          commodo sollicitudin dolor. Pellentesque habitant morbi tristique
+          senectus et netus et malesuada fames ac turpis egestas.
+        </p>
+      </div>
       <div
         className={classes.headerContainer}
         style={{ backgroundColor: darkMode ? "black" : "#ededed" }}
@@ -107,7 +118,6 @@ const Library = () => {
             border: "1px solid black",
             borderColor: darkMode ? "white" : "black",
             backgroundColor: darkMode ? "black" : "white",
-            fontSize: ".6rem",
             color: darkMode ? "white" : "black",
           }}
         />
@@ -119,8 +129,12 @@ const Library = () => {
         ) : filteredBooks.length === 0 ? (
           searchQuery === "" ? (
             <p className={classes.instructionText}>
-              Choose a category or search by title or author, click on a cover
-              for details and to access materials/audio
+              Browse our catalogue by choosing a category or entering an author
+              or title above. Take a look at our news below or go to{" "}
+              <Link href="/Faq" className={classes.linkstyle}>
+                FAQs
+              </Link>{" "}
+              to learn more about us.
             </p>
           ) : (
             <p
@@ -151,7 +165,5 @@ const Library = () => {
     </>
   );
 };
-
-// Library.displayName = "Library";
 
 export default Library;

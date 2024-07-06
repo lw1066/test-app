@@ -1,16 +1,27 @@
-.body,
 html {
-  height: 100%;
-
+  background-color: gray;
   padding: 0;
-  max-width: 1024px;
+  display: flex;
+  justify-content: center;
+  min-height: 100%;
   margin: 0 auto;
+  flex: 1;
+  font-size: 14px;
+  max-width: 1024px;
+  width: 100%;
+}
+
+::-webkit-scrollbar {
+  display: none;
 }
 
 body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  height: 100%;
+  width: 100%;
+  flex: 1;
 }
 
 #__next {
@@ -22,11 +33,16 @@ body {
 .app {
   display: flex;
   flex-direction: column;
+
+  width: 100%;
   flex: 1;
 }
 
 .content {
-  flex: 1; /* Allow the content area to expand */
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  flex: 1;
 }
 
 .footer {

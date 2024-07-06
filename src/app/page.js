@@ -1,17 +1,19 @@
 "use client";
 
 import Library from "./components/Library";
-import NewsAccordion from "./components/NewsAccordion";
 import classes from "./components/Library.module.css";
 import WelcomeMessage from "./components/WelcomeMessage";
+import NewsCarousel from "./components/NewsCarousel";
 
 const Home = () => {
   return (
-    <div className={classes.frontPage}>
+    <>
       <WelcomeMessage />
-      <Library />
-      <NewsAccordion />
-    </div>
+      <div className={classes.frontPageContainer}>
+        <Library />
+        <NewsCarousel />
+      </div>
+    </>
   );
 };
 

@@ -29,7 +29,6 @@ const Footer = () => {
               <Link href="Submissions" className={classes.linkstyle}>
                 <p
                   style={{
-                    fontSize: ".60rem",
                     margin: "0",
                   }}
                 >
@@ -37,13 +36,7 @@ const Footer = () => {
                 </p>
               </Link>
               <Link href="Privacy" className={classes.linkstyle}>
-                <p
-                  style={{
-                    fontSize: ".60rem",
-                  }}
-                >
-                  Privacy & Data Policies
-                </p>
+                <p>Privacy & Data Policies</p>
               </Link>
             </div>
           </Col>

@@ -140,7 +140,12 @@ const BookCard = ({ book }) => {
         />
       </div>
 
-      <Modal show={showBookModal} onHide={handleCloseModal} size="lg">
+      <Modal
+        show={showBookModal}
+        onHide={handleCloseModal}
+        size="lg"
+        animation="slide-up"
+      >
         <Modal.Header closeButton>
           <div className="d-flex justify-content-between w-100 align-items-center">
             <div className="text-start">
@@ -187,10 +192,12 @@ const BookCard = ({ book }) => {
                     <p className={classes.modalTitle}>{book.title}</p>
                   </Modal.Title>
                   {book.author && (
-                    <p className={classes.bookDetails}>{book.author}</p>
+                    <p className={classes.modalBookDetails}>{book.author}</p>
                   )}
                   {book.bookDetails && (
-                    <p className={classes.bookDetails}>{book.bookDetails}</p>
+                    <p className={classes.modalBookDetails}>
+                      {book.bookDetails}
+                    </p>
                   )}
                 </div>
               </div>
@@ -210,11 +217,6 @@ const BookCard = ({ book }) => {
               <Button
                 variant="outline-success"
                 className={classes.linkButton}
-                style={{
-                  fontSize: "12px",
-                  padding: "3px 5px",
-                  borderRadius: "4px",
-                }}
                 onClick={() =>
                   handleLinkClick(
                     buyLinks.find((link) => link.type.includes("amazon")).link
@@ -228,11 +230,6 @@ const BookCard = ({ book }) => {
               <Button
                 variant="outline-success"
                 className={classes.linkButton}
-                style={{
-                  fontSize: "12px",
-                  padding: "3px 5px",
-                  borderRadius: "4px",
-                }}
                 onClick={() =>
                   handleLinkClick(
                     buyLinks.find((link) => link.type.includes("asian")).link
@@ -246,11 +243,6 @@ const BookCard = ({ book }) => {
               <Button
                 variant="outline-success"
                 className={classes.linkButton}
-                style={{
-                  fontSize: "12px",
-                  padding: "3px 5px",
-                  borderRadius: "4px",
-                }}
                 onClick={() =>
                   handleLinkClick(
                     buyLinks.find((link) => link.type.includes("euro")).link
@@ -264,11 +256,6 @@ const BookCard = ({ book }) => {
               <Button
                 variant="outline-success"
                 className={classes.linkButton}
-                style={{
-                  fontSize: "12px",
-                  padding: "3px 5px",
-                  borderRadius: "4px",
-                }}
                 onClick={() =>
                   handleLinkClick(
                     buyLinks.find((link) => link.type.includes("other")).link
@@ -288,11 +275,6 @@ const BookCard = ({ book }) => {
                 <Button
                   variant="outline-primary"
                   className={classes.linkButton}
-                  style={{
-                    fontSize: "12px",
-                    padding: "3px 5px",
-                    borderRadius: "4px",
-                  }}
                   onClick={handleAudioClick}
                 >
                   Audio
@@ -302,11 +284,6 @@ const BookCard = ({ book }) => {
                     key={index}
                     variant="outline-primary"
                     className={classes.linkButton}
-                    style={{
-                      fontSize: "12px",
-                      padding: "3px 5px",
-                      borderRadius: "4px",
-                    }}
                     onClick={() => window.open(link.link, "_blank")}
                   >
                     {link.type}
@@ -321,11 +298,6 @@ const BookCard = ({ book }) => {
                     key={index}
                     variant="outline-warning"
                     className={classes.linkButton}
-                    style={{
-                      fontSize: "12px",
-                      padding: "3px 5px",
-                      borderRadius: "4px",
-                    }}
                     onClick={() => window.open(link.link, "_blank")}
                   >
                     {link.type}

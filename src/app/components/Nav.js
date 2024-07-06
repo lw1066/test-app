@@ -21,7 +21,7 @@ function Navigation() {
   const { showModal } = useModal();
 
   const handleToggleDarkMode = () => {
-    const updatedMode = !darkMode;
+    // const updatedMode = !darkMode;
     toggleDarkMode();
   };
 
@@ -55,30 +55,23 @@ function Navigation() {
         style={{ zIndex: 1000, backgroundColor: darkMode ? "black" : "white" }}
       >
         <div className="container-fluid">
-          <Link className="navbar-brand" href="/">
+          <Link className="navbar-brand py-0" href="/">
             <div className="d-flex align-items-center justify-content-start">
-              <div
-                className="ms-3"
-                style={{ width: "20%", maxHeight: "100px" }}
-              >
+              <div className={classes.navTitles}>
                 <Image
                   src={
                     darkMode
                       ? "/images/perceptia_logo_negative.jpg"
                       : "/images/perceptia_logo.jpg"
                   }
-                  alt="The doors of perception"
+                  alt="The door of perception"
                   object-fit="contain"
-                  width={70}
-                  height={100}
+                  width={55}
+                  height={90}
                   className="img-fluid"
                   priority
                 />
-              </div>
-              <div
-                className="ms-1"
-                style={{ width: "70%", maxHeight: "100px" }}
-              >
+
                 <Image
                   src={
                     darkMode ? "/images/pplogoneg.jpg" : "/images/pplogo.jpg"
@@ -86,7 +79,7 @@ function Navigation() {
                   alt="perceptia press"
                   object-fit="contain"
                   width={400}
-                  height={100}
+                  height={90}
                   className="img-fluid"
                   priority
                 />
@@ -105,8 +98,8 @@ function Navigation() {
             <span className="navbar-toggler-icon"></span>
           </button>
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul className="navbar-nav ms-auto align-items-center">
-              <li className="nav-item">
+            <ul className="navbar-nav ms-auto align-items-center mb-0">
+              <li className="nav-item mx-auto ">
                 <Link className={`nav-link ${classes.navText}`} href="Faq">
                   FAQs
                 </Link>
@@ -120,7 +113,7 @@ function Navigation() {
                 <>
                   <li className="nav-item">
                     <Link
-                      className={`nav-link ${classes.navText}`}
+                      className={`nav-link  ${classes.navText}`}
                       href="Admin"
                     >
                       Admin
@@ -148,23 +141,27 @@ function Navigation() {
                 <li className="nav-item">
                   <Button
                     variant="outline-danger"
-                    className=" ms-2 mb-2 fs-0"
+                    className={`${classes.navBtn} rounded-circle `}
+                    style={{
+                      fontSize: "10px",
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      lineHeight: "1",
+                    }}
                     onClick={handleSignout}
-                    style={{ fontSize: "10px", padding: "5px 10px" }}
                   >
-                    signout
+                    sign out
                   </Button>
                 </li>
               )}
               <li className="nav-item">
-                {/* Dark mode toggle button */}
                 <Button
                   variant="light"
-                  className="rounded-circle ms-2 mb-2"
+                  className={`rounded-circle ${classes.navBtn}`}
                   onClick={handleToggleDarkMode}
                   style={{
-                    width: "30px",
-                    height: "30px",
+                    fontSize: "24px",
                     display: "flex",
                     justifyContent: "center",
                     alignItems: "center",

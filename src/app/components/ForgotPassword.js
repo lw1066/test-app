@@ -32,7 +32,7 @@ const ForgotPassword = () => {
       setTimeout(() => {
         setIsDisabled(false);
         localStorage.removeItem("lastPasswordReset");
-      }, 5 * 60 * 1000);
+      }, 1 * 60 * 1000);
     }
   };
 
@@ -53,7 +53,7 @@ const ForgotPassword = () => {
         Reset Password
       </button>
       {message && <p>{message}</p>}
-      {isDisabled && <p>Please wait 5 minutes to resend the email.</p>}
+      {isDisabled && <p>Please wait a minute to resend the email.</p>}
     </div>
   );
 };

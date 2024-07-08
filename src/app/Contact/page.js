@@ -75,13 +75,12 @@ const Contact = () => {
     <>
       <div className={classes.bannerImage}>
         <img
-          src="/images/contact_image.jpg"
+          src="/images/contactF.jpg"
           alt="student asking a question"
           className={classes.bannerImage}
         />
-        <h1 className={classes.pageImageText}>Contact Us</h1>
       </div>
-      <div className="d-flex flex-column align-items-center justify-content-center mt-2">
+      <div className="d-flex flex-column align-items-center justify-content-center mt-5">
         <p className={classes.pageDescription}>
           Give us some feedback, ask a question or just say hi!
         </p>

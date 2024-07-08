@@ -131,11 +131,7 @@ const Library = () => {
           searchQuery === "" ? (
             <p className={classes.instructionText}>
               Browse our catalogue by choosing a category or entering an author
-              or title above. Take a look at our news below or go to{" "}
-              <Link href="/Faq" className={classes.linkStyle}>
-                FAQs
-              </Link>{" "}
-              to learn more about us.
+              or title
             </p>
           ) : (
             <p

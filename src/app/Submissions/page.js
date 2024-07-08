@@ -6,21 +6,20 @@ function Page() {
   const googleFormsLink =
     "https://docs.google.com/forms/d/e/1FAIpQLSc7ncjkKopry6gRQjjcRgjSIfpZZhXmDvsfTjKR5YTbAEoxFQ/viewform?usp=sf_link";
   const emailLink =
-    "mailto:submissions@perceptiapress.com?subject=Submission &body=Thank%20you%20for%20submitting%20to%20us%20we%20will%20be%20in%20touch.";
+    "mailto:submissions@perceptiapress.com?subject=Submission &body=Thank%20you%20for%20submitting%20to%20us.%20We%20will%20be%20in%20touch.";
 
   return (
     <>
       <div className={classes.bannerImage}>
         <img
-          src="/images/submissions_image.jpg"
+          src="/images/subsF.jpg"
           alt="student asking a question"
           className={classes.bannerImage}
         />
-        <h1 className={classes.pageImageText}>Submissions</h1>
       </div>
       <div
-        className="d-flex flex-column align-items-center justify-content-center mt-2"
-        style={{ width: "60%", margin: "0 auto" }}
+        className="d-flex flex-column align-items-center justify-content-center mt-5"
+        style={{ width: "60%", margin: "10% auto" }}
       >
         <p className={classes.pageDescription}>
           Becoming an Author with Perceptia Press

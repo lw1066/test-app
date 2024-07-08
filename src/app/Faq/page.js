@@ -9,13 +9,12 @@ const Page = () => {
     <>
       <div className={classes.bannerImage}>
         <img
-          src="/images/faq_image.jpg"
+          src="/images/faqF.jpg"
           alt="student asking a question"
           className={classes.bannerImage}
         />
-        <h1 className={classes.pageImageText}>Frequently Asked Questions</h1>
       </div>
-      <div className="d-flex flex-column  align-items-center justify-content-center mt-2 mb-5">
+      <div className="d-flex flex-column  align-items-center justify-content-center mt-5 mb-5">
         <p className={classes.pageDescription}>
           Any more questions -&nbsp;
           <Link className={classes.linkStyle} href="Contact">

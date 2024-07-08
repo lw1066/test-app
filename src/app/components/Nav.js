@@ -13,12 +13,14 @@ import fetchBooks from "../../firebase/firestore/fetchBooks";
 import fetchNewsData from "@/firebase/firestore/fetchNewsData";
 import { useModal } from "@/context/ModalContext";
 import classes from "./Library.module.css";
+import { usePathname } from "next/navigation";
 
 function Navigation() {
   const { user } = useAuthContext();
   const isAdmin = user ? user.isAdmin : false;
   const { darkMode, toggleDarkMode } = useDarkMode();
   const { showModal } = useModal();
+  const pathname = usePathname();
 
   const handleToggleDarkMode = () => {
     // const updatedMode = !darkMode;
@@ -47,6 +49,8 @@ function Navigation() {
   const redirectToHome = () => {
     window.location.href = "/";
   };
+
+  console.log(pathname);
 
   return (
     <div className="sticky-top">
@@ -86,26 +90,49 @@ function Navigation() {
               </div>
             </div>
           </Link>
-          <button
-            className="navbar-toggler ms-auto"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span className="navbar-toggler-icon"></span>
-          </button>
-          <div className="collapse navbar-collapse" id="navbarSupportedContent">
+
+          <div className="collapse navbar-collapse" id="navbar">
             <ul className="navbar-nav ms-auto align-items-center mb-1">
-              <li className="nav-item mx-auto ">
-                <Link className={`nav-link ${classes.navText}`} href="Faq">
+              <li className="nav-item">
+                <Link
+                  className="nav-link"
+                  style={{
+                    transform: pathname === "/" ? "scale(1.1)" : "scale(1)",
+                    fontWeight: pathname === "/" ? "900" : "normal",
+                    transition:
+                      "transform 0.3s ease-in-out, font-weight 0.3s ease-in-out",
+                  }}
+                  href="/"
+                >
+                  Home
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link
+                  className="nav-link"
+                  style={{
+                    transform: pathname === "/Faq" ? "scale(1.1)" : "scale(1)",
+                    fontWeight: pathname === "/Faq" ? "900" : "normal",
+                    transition:
+                      "transform 0.3s ease-in-out, font-weight 0.3s ease-in-out",
+                  }}
+                  href="Faq"
+                >
                   FAQs
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className={`nav-link ${classes.navText}`} href="Contact">
+                <Link
+                  className="nav-link"
+                  style={{
+                    transform:
+                      pathname === "/Contact" ? "scale(1.1)" : "scale(1)",
+                    fontWeight: pathname === "/Contact" ? "900" : "normal",
+                    transition:
+                      "transform 0.3s ease-in-out, font-weight 0.3s ease-in-out",
+                  }}
+                  href="Contact"
+                >
                   Contact
                 </Link>
               </li>
@@ -113,7 +140,14 @@ function Navigation() {
                 <>
                   <li className="nav-item">
                     <Link
-                      className={`nav-link  ${classes.navText}`}
+                      className="nav-link"
+                      style={{
+                        transform:
+                          pathname === "/Admin" ? "scale(1.1)" : "scale(1)",
+                        fontWeight: pathname === "/Admin" ? "900" : "normal",
+                        transition:
+                          "transform 0.3s ease-in-out, font-weight 0.3s ease-in-out",
+                      }}
                       href="Admin"
                     >
                       Admin
@@ -131,7 +165,17 @@ function Navigation() {
               )}
               {!user && (
                 <li className="nav-item">
-                  <Link className={`nav-link ${classes.navText}`} href="Signin">
+                  <Link
+                    className="nav-link"
+                    style={{
+                      transform:
+                        pathname === "/Signin" ? "scale(1.1)" : "scale(1)",
+                      fontWeight: pathname === "/Signin" ? "900" : "normal",
+                      transition:
+                        "transform 0.3s ease-in-out, font-weight 0.3s ease-in-out",
+                    }}
+                    href="Signin"
+                  >
                     Sign-in
                   </Link>
                 </li>

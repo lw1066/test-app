@@ -304,8 +304,11 @@ const AddResources = ({ book, handleUpdate }) => {
               "Listening",
               "Speaking",
               "Writing",
+              "Vocabulary",
               "Culture",
               "Medical",
+              "CLIL",
+              "ESP",
             ].map((genre) => (
               <Form.Check
                 key={genre}

@@ -5,13 +5,16 @@ import { useDarkMode } from "@/context/DarkModeContext";
 
 const GenreSelector = ({ onSelectGenre }) => {
   const genres = [
+    "All",
     "Reading",
     "Speaking",
     "Writing",
     "Listening",
+    "Vocabulary",
     "Culture",
     "Medical",
-    "All",
+    "CLIL",
+    "ESP",
   ];
   const [selectedGenre, setSelectedGenre] = useState("");
   const { darkMode } = useDarkMode();

@@ -1,18 +1,10 @@
-import { getStorage, ref, deleteObject } from "firebase/storage";
-
-const initializeStorage = () => {
-  const storage = getStorage();
-  return storage;
-};
+import { storage } from "../config";
+import { ref, deleteObject } from "firebase/storage";
 
 export const deleteAudioFromFirebase = async (audioFileUrl) => {
   try {
     console.log(audioFileUrl.downloadURL, "in delete function!");
-
-    const storage = initializeStorage();
-
     const fileRef = ref(storage, audioFileUrl.downloadURL);
-
     await deleteObject(fileRef);
     console.log("File deleted successfully:", audioFileUrl);
   } catch (error) {

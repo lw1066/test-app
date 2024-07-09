@@ -6,7 +6,7 @@ function Page() {
   const googleFormsLink =
     "https://docs.google.com/forms/d/e/1FAIpQLSc7ncjkKopry6gRQjjcRgjSIfpZZhXmDvsfTjKR5YTbAEoxFQ/viewform?usp=sf_link";
   const emailLink =
-    "mailto:submissions@perceptiapress.com?subject=Submission &body=Thank%20you%20for%20submitting%20to%20us.%20We%20will%20be%20in%20touch.";
+    "mailto:submissions@perceptiapress.com?subject=Perceptia Press: Author Submission";
 
   return (
     <>

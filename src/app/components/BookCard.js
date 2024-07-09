@@ -10,6 +10,7 @@ import { useModal } from "@/context/ModalContext";
 import AudioModal from "@/app/components/AudioModal";
 import Image from "next/image";
 import "@/app/globals.css";
+import { deleteImageFromFirebase } from "@/firebase/firestore/deleteImageFromFirebase";
 
 const BookCard = ({ book }) => {
   const { user } = useAuthContext();
@@ -58,13 +59,16 @@ const BookCard = ({ book }) => {
     setImageLoading(false);
   };
 
-  const handleUpdateClick = () => {
-    setShowUpdateModal(true);
-    console.log("update time");
+  const handleDeleteClick = () => {
+    const imageUrl = book.imageUrl;
+    console.log("Delete clicked. Image URL:", imageUrl);
+    handleDelete(book.id, imageUrl);
   };
 
-  const handleDelete = async (bookId) => {
+  const handleDelete = async (bookId, imageUrl) => {
+    console.log("in handle delete click>>>", imageUrl);
     try {
+      await deleteImageFromFirebase(imageUrl);
       const { success, error } = await deleteData("books", bookId);
       if (error) {
         console.error("Error deleting document:", error);
@@ -78,8 +82,9 @@ const BookCard = ({ book }) => {
     }
   };
 
-  const handleDeleteClick = () => {
-    handleDelete(book.id);
+  const handleUpdateClick = () => {
+    setShowUpdateModal(true);
+    console.log("update time");
   };
 
   const handleUpdate = async (updatedFormData) => {

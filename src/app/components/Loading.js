@@ -8,7 +8,7 @@ export default function Loading() {
         justifyContent: "center",
         alignItems: "center",
         minHeight: "100vh",
-        backgroundColor: "gray", // Change to your desired background color
+        backgroundColor: "#adadad",
       }}
     >
       <div
@@ -16,14 +16,14 @@ export default function Loading() {
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
-          width: "250px", // Adjust width of the circle
-          height: "250px", // Adjust height of the circle
-          borderRadius: "50%", // Make it circular
-          backgroundColor: "white", // White background
-          justifyContent: "center", // Center content vertically
-          textAlign: "center", // Center text horizontally
-          padding: "20px", // Padding inside the circle
-          boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.4)", // Optional: Add box shadow
+          width: "250px",
+          height: "250px",
+          borderRadius: "50%",
+          backgroundColor: "white",
+          justifyContent: "center",
+          textAlign: "center",
+          padding: "20px",
+          boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.4)",
         }}
       >
         <Image

@@ -50,7 +50,7 @@ const Contact = () => {
         resetForm();
         showModal(
           `Hi ${name}`,
-          `Thanks for your email, we'll reply to ${email} as soon as possible.`
+          `Thanks for getting in touch. We'll reply to ${email} as soon as possible.`
         );
       } else {
         const errorData = await response.json();
@@ -82,7 +82,7 @@ const Contact = () => {
       </div>
       <div className="d-flex flex-column align-items-center justify-content-center mt-5">
         <p className={classes.pageDescription}>
-          Give us some feedback, ask a question or just say hi!
+          Please use this form to contact us
         </p>
 
         <Form onSubmit={handleFormSubmit} className={classes.contactForm}>

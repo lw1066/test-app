@@ -15,6 +15,7 @@ const GenreSelector = ({ onSelectGenre }) => {
     "Medical",
     "CLIL",
     "ESP",
+    "Resources",
   ];
   const [selectedGenre, setSelectedGenre] = useState("");
   const { darkMode } = useDarkMode();

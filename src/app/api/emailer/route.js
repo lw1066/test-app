@@ -24,16 +24,27 @@ export async function POST(req) {
   const mailOptions = {
     from: process.env.NODEMAILER_EMAIL,
     to: "lewis_webster@hotmail.com", // Change this to the recipient's email
-    subject: `Contact: ${name},  ${bookSamples ? "SAMPLES" : ""} ${
-      orderQuery ? "ORDER" : ""
-    } ${submission ? "SUB" : ""}`,
+    subject: `${[
+      bookSamples && "SAMPLES",
+      orderQuery && "ORDER",
+      submission && "SUB",
+    ]
+      .filter(Boolean)
+      .join(" + ")} | ${name} | ${email}`,
+
     html: `
       <p>Name: ${name}</p>
       <p>Email: ${email}</p>
+     <p>
+  Contact about: ${[
+    bookSamples && "Samples",
+    orderQuery && "Order Query",
+    submission && "Submissions",
+  ]
+    .filter(Boolean)
+    .join(" + ")}
+</p>
       <p>Message: ${message}</p>
-      <p>Book Samples: ${bookSamples ? "Yes" : "No"}</p>
-      <p>Order Query: ${orderQuery ? "Yes" : "No"}</p>
-      <p>Submission: ${submission ? "Yes" : "No"}</p>
     `,
   };
 

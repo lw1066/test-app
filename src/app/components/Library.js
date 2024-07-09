@@ -86,12 +86,10 @@ const Library = () => {
     <>
       <div className={classes.welcomeText}>
         <p style={{ width: "85%", margin: "2% auto" }}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque
-          consequat mi nulla, a venenatis sem vehicula non. Nam eu bibendum
-          arcu, id finibus lectus. Quisque aliquam tellus turpis, eget dictum
-          mauris venenatis quis. Integer neque massa, iaculis ut nunc ac,
-          commodo sollicitudin dolor. Pellentesque habitant morbi tristique
-          senectus et netus et malesuada fames ac turpis egestas.
+          Since 2004, Perceptia Press has been publishing innovative and
+          award-winning materials, written by teachers, that aim to inspire
+          learners. To find out more, browse our catalogue by choosing a
+          category or entering an author / title below.
         </p>
       </div>
       <div
@@ -130,8 +128,7 @@ const Library = () => {
         ) : filteredBooks.length === 0 ? (
           searchQuery === "" ? (
             <p className={classes.instructionText}>
-              Browse our catalogue by choosing a category or entering an author
-              or title
+              Choose a category or search for an author / title
             </p>
           ) : (
             <p

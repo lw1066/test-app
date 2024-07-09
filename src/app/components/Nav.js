@@ -50,8 +50,6 @@ function Navigation() {
     window.location.href = "/";
   };
 
-  console.log(pathname);
-
   return (
     <div className="sticky-top">
       <nav

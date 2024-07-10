@@ -89,7 +89,7 @@ const Library = () => {
           Since 2004, Perceptia Press has been publishing innovative and
           award-winning materials, written by teachers, that aim to inspire
           learners. Find out more about us in{" "}
-          <Link className={classes.linkStyle} href="/Faqs">
+          <Link className={classes.linkStyle} href="/Faq">
             FAQs
           </Link>{" "}
           or browse our catalogue below. Teachers can access extra resources by

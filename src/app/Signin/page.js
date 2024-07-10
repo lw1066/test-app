@@ -37,13 +37,11 @@ function Page() {
           <div className="d-flex flex-column align-items-center justify-content-center mb-2 mt-5 fs-6">
             <h1>Teacher sign-in</h1>
             <p style={{ fontSize: "1.25rem" }}>
-              Please sign in to access teaching materials
-            </p>
-            <p style={{ fontSize: "1.25rem" }}>
+              Sign in to access teaching materials or{" "}
               <Link className={classes.linkStyle} href="Contact">
-                Contact us
+                contact us
               </Link>{" "}
-              to register for an account
+              to register for an account.
             </p>
           </div>
 

@@ -36,7 +36,7 @@ const Footer = () => {
                 </p>
               </Link>
               <Link href="Privacy" className={classes.linkStyle}>
-                <p>Privacy & Data Policies</p>
+                <p>Privacy & Data</p>
               </Link>
             </div>
           </Col>
@@ -98,7 +98,7 @@ const Footer = () => {
               className="mb-0 text-center"
               style={{ fontSize: "0.5rem", minWidth: "50px" }}
             >
-              © {new Date().getFullYear()} Perceptia Press
+              © {new Date().getFullYear()} Perceptia Press LLC
             </p>
           </Col>
         </Row>

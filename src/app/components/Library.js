@@ -88,8 +88,12 @@ const Library = () => {
         <p style={{ width: "85%", margin: "2% auto" }}>
           Since 2004, Perceptia Press has been publishing innovative and
           award-winning materials, written by teachers, that aim to inspire
-          learners. To find out more, browse our catalogue by choosing a
-          category or entering an author / title below.
+          learners. Find out more about us in{" "}
+          <Link className={classes.linkStyle} href="/Faqs">
+            FAQs
+          </Link>{" "}
+          or browse our catalogue below. Teachers can access extra resources by
+          creating a free account!
         </p>
       </div>
       <div

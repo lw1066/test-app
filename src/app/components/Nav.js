@@ -14,6 +14,7 @@ import fetchNewsData from "@/firebase/firestore/fetchNewsData";
 import { useModal } from "@/context/ModalContext";
 import classes from "./Library.module.css";
 import { usePathname } from "next/navigation";
+import { SocialLinks } from "./SocialLinks";
 
 function Navigation() {
   const { user } = useAuthContext();
@@ -56,7 +57,7 @@ function Navigation() {
         className="navbar navbar-expand flex-wrap py-0"
         style={{ zIndex: 1000, backgroundColor: darkMode ? "black" : "white" }}
       >
-        <div className="container-fluid">
+        <div className="container-fluid navBar">
           <Link className="navbar-brand py-0" href="/">
             <div className="d-flex align-items-center justify-content-start">
               <div className={classes.navTitles}>
@@ -88,131 +89,139 @@ function Navigation() {
               </div>
             </div>
           </Link>
-
-          <div className="collapse navbar-collapse" id="navbar">
-            <ul className="navbar-nav ms-auto align-items-center mb-1">
-              <li className="nav-item">
-                <Link
-                  className="nav-link"
-                  style={{
-                    transform: pathname === "/" ? "scale(1.1)" : "scale(1)",
-                    fontWeight: pathname === "/" ? "900" : "normal",
-                    transition:
-                      "transform 0.3s ease-in-out, font-weight 0.3s ease-in-out",
-                  }}
-                  href="/"
-                >
-                  Home
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link
-                  className="nav-link"
-                  style={{
-                    transform: pathname === "/Faq" ? "scale(1.1)" : "scale(1)",
-                    fontWeight: pathname === "/Faq" ? "900" : "normal",
-                    transition:
-                      "transform 0.3s ease-in-out, font-weight 0.3s ease-in-out",
-                  }}
-                  href="Faq"
-                >
-                  FAQs
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link
-                  className="nav-link"
-                  style={{
-                    transform:
-                      pathname === "/Contact" ? "scale(1.1)" : "scale(1)",
-                    fontWeight: pathname === "/Contact" ? "900" : "normal",
-                    transition:
-                      "transform 0.3s ease-in-out, font-weight 0.3s ease-in-out",
-                  }}
-                  href="Contact"
-                >
-                  Contact
-                </Link>
-              </li>
-              {user && isAdmin && (
-                <>
-                  <li className="nav-item">
-                    <Link
-                      className="nav-link"
-                      style={{
-                        transform:
-                          pathname === "/Admin" ? "scale(1.1)" : "scale(1)",
-                        fontWeight: pathname === "/Admin" ? "900" : "normal",
-                        transition:
-                          "transform 0.3s ease-in-out, font-weight 0.3s ease-in-out",
-                      }}
-                      href="Admin"
-                    >
-                      Admin
-                    </Link>
-                  </li>
-                  <Button
-                    variant="outline-danger"
-                    className=" ms-2 mb-2 fs-0"
-                    onClick={handleRefresh}
-                    style={{ fontSize: "10px", padding: "5px 10px" }}
+          <div className="ms-auto">
+            <div className={`${classes.socialLinks}`}>
+              <SocialLinks />
+            </div>
+            <div
+              className="collapse navbar-collapse justify-content-end "
+              id="navbar"
+            >
+              <ul className="navbar-nav ms-auto align-items-center mb-1">
+                <li className="nav-item">
+                  <Link
+                    className="nav-link"
+                    style={{
+                      transform: pathname === "/" ? "scale(1.1)" : "scale(1)",
+                      fontWeight: pathname === "/" ? "900" : "normal",
+                      transition:
+                        "transform 0.3s ease-in-out, font-weight 0.3s ease-in-out",
+                    }}
+                    href="/"
                   >
-                    Refresh
-                  </Button>
-                </>
-              )}
-              {!user && (
+                    Home
+                  </Link>
+                </li>
                 <li className="nav-item">
                   <Link
                     className="nav-link"
                     style={{
                       transform:
-                        pathname === "/Signin" ? "scale(1.1)" : "scale(1)",
-                      fontWeight: pathname === "/Signin" ? "900" : "normal",
+                        pathname === "/Faq" ? "scale(1.1)" : "scale(1)",
+                      fontWeight: pathname === "/Faq" ? "900" : "normal",
                       transition:
                         "transform 0.3s ease-in-out, font-weight 0.3s ease-in-out",
                     }}
-                    href="Signin"
+                    href="Faq"
                   >
-                    Sign-in
+                    FAQs
                   </Link>
                 </li>
-              )}
+                <li className="nav-item">
+                  <Link
+                    className="nav-link"
+                    style={{
+                      transform:
+                        pathname === "/Contact" ? "scale(1.1)" : "scale(1)",
+                      fontWeight: pathname === "/Contact" ? "900" : "normal",
+                      transition:
+                        "transform 0.3s ease-in-out, font-weight 0.3s ease-in-out",
+                    }}
+                    href="Contact"
+                  >
+                    Contact
+                  </Link>
+                </li>
+                {user && isAdmin && (
+                  <>
+                    <li className="nav-item">
+                      <Link
+                        className="nav-link"
+                        style={{
+                          transform:
+                            pathname === "/Admin" ? "scale(1.1)" : "scale(1)",
+                          fontWeight: pathname === "/Admin" ? "900" : "normal",
+                          transition:
+                            "transform 0.3s ease-in-out, font-weight 0.3s ease-in-out",
+                        }}
+                        href="Admin"
+                      >
+                        Admin
+                      </Link>
+                    </li>
+                    <Button
+                      variant="outline-danger"
+                      className=" ms-2 mb-2 fs-0"
+                      onClick={handleRefresh}
+                      style={{ fontSize: "10px", padding: "5px 10px" }}
+                    >
+                      Refresh
+                    </Button>
+                  </>
+                )}
+                {!user && (
+                  <li className="nav-item">
+                    <Link
+                      className="nav-link"
+                      style={{
+                        transform:
+                          pathname === "/Signin" ? "scale(1.1)" : "scale(1)",
+                        fontWeight: pathname === "/Signin" ? "900" : "normal",
+                        transition:
+                          "transform 0.3s ease-in-out, font-weight 0.3s ease-in-out",
+                      }}
+                      href="Signin"
+                    >
+                      Sign-in
+                    </Link>
+                  </li>
+                )}
 
-              {user && (
+                {user && (
+                  <li className="nav-item">
+                    <Button
+                      variant="outline-danger"
+                      className={`${classes.navBtn} rounded-circle `}
+                      style={{
+                        fontSize: "10px",
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        lineHeight: "1",
+                      }}
+                      onClick={handleSignout}
+                    >
+                      sign out
+                    </Button>
+                  </li>
+                )}
                 <li className="nav-item">
                   <Button
-                    variant="outline-danger"
-                    className={`${classes.navBtn} rounded-circle `}
+                    variant="light"
+                    className={`rounded-circle ${classes.navBtn}`}
+                    onClick={handleToggleDarkMode}
                     style={{
-                      fontSize: "10px",
+                      fontSize: "24px",
                       display: "flex",
                       justifyContent: "center",
                       alignItems: "center",
-                      lineHeight: "1",
                     }}
-                    onClick={handleSignout}
                   >
-                    sign out
+                    <FontAwesomeIcon icon={darkMode ? faSun : faMoon} />
                   </Button>
                 </li>
-              )}
-              <li className="nav-item">
-                <Button
-                  variant="light"
-                  className={`rounded-circle ${classes.navBtn}`}
-                  onClick={handleToggleDarkMode}
-                  style={{
-                    fontSize: "24px",
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                  }}
-                >
-                  <FontAwesomeIcon icon={darkMode ? faSun : faMoon} />
-                </Button>
-              </li>
-            </ul>
+              </ul>
+            </div>
           </div>
         </div>
       </nav>

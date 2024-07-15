@@ -78,11 +78,11 @@ function NewsCarousel() {
           margin: "0 auto",
         }}
       >
-        <h2 className={classes.headerText}>News updates</h2>
+        <h2 className={classes.headerText}>News</h2>
       </div>
 
       <div className={classes.newsCarousel}>
-        <Carousel data-bs-theme="dark" controls={false} interval={8000}>
+        <Carousel data-bs-theme="dark" interval={30000}>
           {newsDataArray.map((item, index) => (
             <Carousel.Item
               key={index}

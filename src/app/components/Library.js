@@ -7,6 +7,7 @@ import fetchBooks from "@/firebase/firestore/fetchBooks";
 import { checkIfDataIsStale } from "@/firebase/firestore/checkIfDataIsStale";
 import { useDarkMode } from "@/context/DarkModeContext";
 import Link from "next/link";
+import RecommendationsCarousel from "./RecommendationsCarousel";
 
 const Library = () => {
   const [books, setBooks] = useState([]);
@@ -88,14 +89,14 @@ const Library = () => {
         <p style={{ width: "85%", margin: "2% auto" }}>
           Since 2004, Perceptia Press has been publishing innovative and
           award-winning materials, written by teachers, that aim to inspire
-          learners. Find out more about us in{" "}
-          <Link className={classes.linkStyle} href="/Faq">
-            FAQs
-          </Link>{" "}
-          or browse our catalogue below. Teachers can access extra resources by
-          creating a free account!
+          learners. Our catalogue includes books targeted at health
+          professionals, engineers and university students. Many titles include
+          audio resources. Additional teacher materials are available through a
+          free account. Take a look at our catalogue below.
         </p>
       </div>
+      {!isLoading && <RecommendationsCarousel books={books} />}
+
       <div
         className={classes.headerContainer}
         style={{ backgroundColor: darkMode ? "black" : "#ededed" }}

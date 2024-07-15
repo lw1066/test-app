@@ -1,16 +1,11 @@
 "use client";
 
-import { Container, Row, Col, Button } from "react-bootstrap";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faFacebook,
-  faInstagram,
-  faYoutube,
-} from "@fortawesome/free-brands-svg-icons";
+import { Container, Row, Col } from "react-bootstrap";
 import { useDarkMode } from "@/context/DarkModeContext";
 import Image from "next/legacy/image";
 import Link from "next/link";
 import classes from "./Library.module.css";
+import { SocialLinks } from "./SocialLinks";
 const Footer = () => {
   const { darkMode } = useDarkMode();
 
@@ -36,51 +31,13 @@ const Footer = () => {
                 </p>
               </Link>
               <Link href="Privacy" className={classes.linkStyle}>
-                <p>Privacy & Data</p>
+                <p>Privacy & Data policy</p>
               </Link>
             </div>
           </Col>
 
           <Col xs={4} md={6} className="mb-3 ">
-            <div className="d-flex justify-content-center mx-auto">
-              <a
-                href="https://www.facebook.com/perceptiapress/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-decoration-none"
-              >
-                <FontAwesomeIcon
-                  icon={faFacebook}
-                  size="lg"
-                  color={darkMode ? "white" : "black"}
-                />
-              </a>
-              <a
-                href="https://www.instagram.com/perceptiapress/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-decoration-none mx-4"
-              >
-                <FontAwesomeIcon
-                  icon={faInstagram}
-                  size="lg"
-                  color={darkMode ? "white" : "black"}
-                  margin="0"
-                />
-              </a>
-              <a
-                href="https://www.youtube.com/channel/UCjGuvG6n2zBnKPdpelMXlXg"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-decoration-none"
-              >
-                <FontAwesomeIcon
-                  icon={faYoutube}
-                  size="lg"
-                  color={darkMode ? "white" : "black"}
-                />
-              </a>
-            </div>
+            <SocialLinks />
           </Col>
           <Col xs={3} md={3} className="text-center mb-0">
             <Image

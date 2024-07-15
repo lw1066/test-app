@@ -12,16 +12,16 @@ import Image from "next/image";
 import "@/app/globals.css";
 import { deleteImageFromFirebase } from "@/firebase/firestore/deleteImageFromFirebase";
 
-const BookCard = ({ book }) => {
+const BookCard = ({ book, onModalOpen, onModalClose, onMouseLeave }) => {
   const { user } = useAuthContext();
   const { showModal } = useModal();
   const isAdmin = user ? user.isAdmin : false;
-  const filteredLinks = book.links
+  const filteredLinks = book?.links
     ? book.links.filter(
         (link) => !["amazon", "euro", "asian", "other"].includes(link.type)
       )
     : [];
-  const buyLinks = book.links
+  const buyLinks = book?.links
     ? book.links.filter((link) =>
         ["amazon", "euro", "asian", "other"].includes(link.type)
       )
@@ -37,8 +37,15 @@ const BookCard = ({ book }) => {
   const [showAudioModal, setShowAudioModal] = useState(false);
   const [currentAudioUrl, setCurrentAudioUrl] = useState("");
 
-  const handleCloseModal = () => setShowBookModal(false);
-  const handleShowModal = () => setShowBookModal(true);
+  const handleCloseModal = () => {
+    setShowBookModal(false);
+    onModalClose();
+    onMouseLeave();
+  };
+  const handleShowModal = () => {
+    setShowBookModal(true);
+    onModalOpen();
+  };
   const handleCloseUpdate = () => setShowUpdateModal(false);
 
   const hasAmazonLink = buyLinks.some((link) => link.type.includes("amazon"));
@@ -46,7 +53,7 @@ const BookCard = ({ book }) => {
   const hasEuroLink = buyLinks.some((link) => link.type.includes("euro"));
   const hasOtherLink = buyLinks.some((link) => link.type.includes("other"));
 
-  const audioFileUrls = book.audioFileUrls || [];
+  const audioFileUrls = book?.audioFileUrls || [];
   const sortedAudioFileUrls = audioFileUrls.sort((a, b) =>
     a.downloadURL.localeCompare(b.downloadURL)
   );
@@ -55,9 +62,10 @@ const BookCard = ({ book }) => {
     ? "/images/perceptia_logo_negative.jpg"
     : "/images/perceptia_logo.jpg";
 
-  const handleImageLoad = () => {
-    setImageLoading(false);
-  };
+  // const handleImageLoad = () => {
+  //   console.log("image loaded");
+  //   setImageLoading(false);
+  // };
 
   const handleDeleteClick = () => {
     const imageUrl = book.imageUrl;
@@ -132,15 +140,14 @@ const BookCard = ({ book }) => {
           />
         )}
         <Image
-          src={book.imageUrl}
-          alt={book.title}
+          src={book?.imageUrl}
+          alt={book?.title}
           width={90}
           height={126}
-          // fill={true}
           style={{
             objectFit: "contain",
           }}
-          onLoad={handleImageLoad}
+          onLoad={() => setImageLoading(false)}
           unoptimized={true}
         />
       </div>
@@ -179,8 +186,8 @@ const BookCard = ({ book }) => {
               <div style={{ display: "flex", flexDirection: "row" }}>
                 <div style={{ minWidth: 70, height: 95, position: "relative" }}>
                   <Image
-                    src={book.imageUrl}
-                    alt={book.title}
+                    src={book?.imageUrl}
+                    alt={book?.title}
                     fill={true}
                     object-fit="contain"
                     className="img-fluid"
@@ -194,14 +201,14 @@ const BookCard = ({ book }) => {
                   }}
                 >
                   <Modal.Title>
-                    <p className={classes.modalTitle}>{book.title}</p>
+                    <p className={classes.modalTitle}>{book?.title}</p>
                   </Modal.Title>
-                  {book.author && (
-                    <p className={classes.modalBookDetails}>{book.author}</p>
+                  {book?.author && (
+                    <p className={classes.modalBookDetails}>{book?.author}</p>
                   )}
-                  {book.bookDetails && (
+                  {book?.bookDetails && (
                     <p className={classes.modalBookDetails}>
-                      {book.bookDetails}
+                      {book?.bookDetails}
                     </p>
                   )}
                 </div>
@@ -318,7 +325,7 @@ const BookCard = ({ book }) => {
 
           <div
             className={classes.bookContent}
-            dangerouslySetInnerHTML={{ __html: book.description }}
+            dangerouslySetInnerHTML={{ __html: book?.description }}
           />
         </Modal.Body>
       </Modal>
@@ -342,7 +349,7 @@ const BookCard = ({ book }) => {
         onHide={() => setShowAudioListModal(false)}
       >
         <Modal.Header closeButton>
-          <Modal.Title>{book.title} Audio</Modal.Title>
+          <Modal.Title>{book?.title} Audio</Modal.Title>
         </Modal.Header>
         <Modal.Body
           style={{
@@ -353,8 +360,8 @@ const BookCard = ({ book }) => {
         >
           <div style={{ textAlign: "center", marginBottom: "1rem" }}>
             <Image
-              src={book.imageUrl}
-              alt={book.title}
+              src={book?.imageUrl}
+              alt={book?.title}
               width={100}
               height={125}
               object-fit="contain"
@@ -383,8 +390,8 @@ const BookCard = ({ book }) => {
           setShowAudioModal(false);
         }}
         audio={currentAudioUrl}
-        bookTitle={book.title}
-        bookImage={book.imageUrl}
+        bookTitle={book?.title}
+        bookImage={book?.imageUrl}
       />
     </>
   );

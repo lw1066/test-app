@@ -11,7 +11,7 @@ const ForgotPasswordModal = () => {
 
   return (
     <>
-      <Button variant="none" className={classes.linkStyle} onClick={handleShow}>
+      <Button variant="none" className={classes.register} onClick={handleShow}>
         Forgot Password?
       </Button>
 

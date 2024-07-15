@@ -167,8 +167,8 @@ export const faqs = [
             In our general communication range, <em>Scraps</em> has been one of
             the top sellers among all publishers for many years, and continues
             to be popular, even more so since it went to full colour. Our
-            English for nurses titles, especially the Bedside Manner series have
-            also captured the market of nursing textbooks.
+            English for nurses titles, especially the <em>Bedside Manner</em>{" "}
+            series have also captured the market of nursing textbooks.
           </span>
         ),
       },
@@ -188,7 +188,7 @@ export const faqs = [
             Yes! We have a growing catalogue of this popular genre, including
             our classics series about Ancient Greece and Ancient Rome, and the
             academic series for linguists and language specialists, including
-            <em>Linguistic Soup</em> and <em>What is Language?</em>
+            <em> Linguistic Soup</em> and <em>What is Language?</em>
           </span>
         ),
       },
@@ -260,7 +260,7 @@ export const faqs = [
             support provides a vast quantity of additional practice for learners
             including speaking, listening, reading, writing, vocabulary, and
             grammar, all carefully designed to dovetail with the book in
-            question. The OLS is accessed via a one-time password scratch card,
+            question. The OLS is accessed via a one-time password scratchcard,
             available separately, which lets the user select one title. The
             service is free for teachers.
           </span>
@@ -393,7 +393,7 @@ export const faqs = [
             reacquired the copyright, we may be interested in republishing,
             normally with an update.{" "}
             <Link className={classes.linkStyle} href="/Contact">
-              get in touch
+              Get in touch
             </Link>{" "}
             and we can discuss it.
           </span>

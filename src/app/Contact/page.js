@@ -81,9 +81,7 @@ const Contact = () => {
         />
       </div>
       <div className="d-flex flex-column align-items-center justify-content-center mt-5">
-        <p className={classes.pageDescription}>
-          Please use this form to contact us.
-        </p>
+        <p className={classes.pageDescription}>Use this form to contact us.</p>
 
         <Form onSubmit={handleFormSubmit} className={classes.contactForm}>
           <Form.Group controlId="formName">

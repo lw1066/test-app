@@ -26,16 +26,16 @@ function Page() {
         </p>
         <p className={classes.pageDescriptionSubmissions}>
           Thank you for your interest in submitting a manuscript to Perceptia
-          Press. We are always interested in looking at new projects.
+          Press. We are always keen to look at new projects.
         </p>
         <p className={classes.pageDescriptionSubmissions}>
-          Please download our{" "}
+          First download our{" "}
           <a
             href={submissionGuideUrl}
             className={classes.linkStyle}
             target="blank"
           >
-            Submissions Guidelines
+            Guidelines
           </a>{" "}
           and consider your submission. Then complete this{" "}
           <a
@@ -43,9 +43,9 @@ function Page() {
             className={classes.linkStyle}
             target="blank"
           >
-            proposal form
+            Proposal
           </a>{" "}
-          in as much detail as possible.
+          (opens in googleforms) in as much detail as possible.
         </p>
         <p className={classes.pageDescriptionSubmissions}>
           Finally, send a sample unit (if available) and recent CV including any

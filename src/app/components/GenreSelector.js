@@ -12,7 +12,7 @@ const GenreSelector = ({ onSelectGenre }) => {
     "Listening",
     "Vocabulary",
     "Culture",
-    "Medical",
+    "Health",
     "CLIL",
     "ESP",
     "Resources",

@@ -13,14 +13,15 @@
 }
 
 .bookcard {
-  height: 126px;
+  height: 130px;
   width: 90px;
-  transition: transform 0.6s ease-out;
+  transition: transform 0.6s ease-out, box-shadow 0.6s ease-out;
   overflow: hidden;
-  box-shadow: 4px 6px 8px rgba(0, 0, 0, 0);
   border-radius: 0;
   padding: 0;
-  background-color: #ededed00;
+  margin: 0;
+  display: flex;
+  align-items: center;
 }
 
 .bookcard button {
@@ -109,6 +110,14 @@
   align-items: center;
 }
 
+.bookCarouselContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: start;
+  width: 100%;
+}
+
 .headerContainer {
   width: 100%;
   border-radius: 4px;
@@ -123,6 +132,7 @@
   font-size: clamp(1rem, 1.5vw, 1.5rem);
   margin: 0;
   padding-bottom: 3px;
+  font-weight: 600;
 }
 
 .instructionText {
@@ -155,6 +165,10 @@
   width: 100%;
   margin: 0;
   padding: 10px;
+}
+
+.navBar {
+  background-color: red;
 }
 .navBtn {
   width: 30px;
@@ -194,6 +208,15 @@
   position: relative;
 }
 
+.register {
+  color: #6ea8fe;
+}
+
+.register:hover {
+  color: #97bffc;
+  cursor: pointer;
+}
+
 .welcomeText {
   width: 100%;
   margin: 1% auto;
@@ -210,6 +233,80 @@
   position: relative;
   width: 100%;
   max-width: 100%;
+}
+
+.socialLinks {
+  display: block;
+  margin-bottom: 15px;
+}
+
+.recommendationsHeaderContainer {
+  text-align: center;
+}
+
+.recommendationsHeaderText {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.recommendationsBooksContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.bookBox {
+  padding: 0px20px;
+  text-align: center;
+  width: 150px;
+  min-height: 225px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  opacity: 1;
+  transition: opacity 3s ease-in-out;
+  box-shadow: 4px 6px 8px rgba(0, 0, 0, 1);
+}
+
+/* .bookCard {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%; Ensures the image container takes up the full height of the parent
+} */
+
+.bookImage {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain; /* Ensures the image scales down to fit within the box */
+}
+
+.bookTitle {
+  font-weight: 600;
+  max-width: 140px;
+  margin: 0 0 5px 0; /* Added margin to separate title from image */
+  text-align: center;
+}
+
+.bookGenre {
+  padding: 0;
+  margin: 0;
+  font-size: 0.65rem;
+  max-width: 140px;
+}
+
+.bookBox.fade-out {
+  opacity: 0;
+}
+
+.bookBox.fade-in {
+  opacity: 1;
 }
 
 @media screen and (max-width: 609px) {
@@ -295,6 +392,12 @@
   /* .welcomeImageText {
     font-size: 5vw;
   } */
+}
+
+@media (max-width: 787px) {
+  .socialLinks {
+    display: none;
+  }
 }
 
 @media screen and (min-width: 1024px) {

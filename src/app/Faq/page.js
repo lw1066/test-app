@@ -18,7 +18,7 @@ const Page = () => {
         <p className={classes.pageDescription}>
           Any other questions?&nbsp;
           <Link className={classes.linkStyle} href="Contact">
-            Contact us!
+            Contact us.
           </Link>
         </p>
         <FAQAccordion />

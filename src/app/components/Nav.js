@@ -41,10 +41,13 @@ function Navigation() {
     signOutUser();
   };
 
-  const handleRefresh = () => {
-    fetchBooks();
-    fetchNewsData();
-    showModal("News and books refreshed", "go have a look");
+  const handleRefresh = async () => {
+    await fetchBooks();
+    await fetchNewsData();
+    localStorage.setItem("showModalAfterReload", "true");
+    localStorage.setItem("modalMessage", `Should all be up to date`);
+
+    window.location.replace("/");
   };
 
   const redirectToHome = () => {

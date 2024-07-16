@@ -1,12 +1,26 @@
 "use client";
 
+import { useEffect } from "react";
 import Library from "./components/Library";
 import classes from "./components/Library.module.css";
 import WelcomeMessage from "./components/WelcomeMessage";
 import NewsCarousel from "./components/NewsCarousel";
-import RecommendationsCarousel from "./components/RecommendationsCarousel";
+import { useModal } from "@/context/ModalContext";
 
 const Home = () => {
+  const { showModal } = useModal();
+
+  useEffect(() => {
+    const showModalAfterReload = localStorage.getItem("showModalAfterReload");
+    const modalMessage = localStorage.getItem("modalMessage");
+
+    if (showModalAfterReload === "true" && modalMessage) {
+      showModal("book added", modalMessage);
+      localStorage.removeItem("showModalAfterReload");
+      localStorage.removeItem("modalMessage");
+    }
+  }, []);
+
   return (
     <>
       <WelcomeMessage />

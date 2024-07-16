@@ -39,12 +39,12 @@ const BookCard = ({ book, onModalOpen, onModalClose, onMouseLeave }) => {
 
   const handleCloseModal = () => {
     setShowBookModal(false);
-    onModalClose();
-    onMouseLeave();
+    if (onModalClose) onModalClose();
+    if (onMouseLeave) onMouseLeave();
   };
   const handleShowModal = () => {
     setShowBookModal(true);
-    onModalOpen();
+    if (onModalOpen) onModalOpen();
   };
   const handleCloseUpdate = () => setShowUpdateModal(false);
 

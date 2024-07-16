@@ -34,7 +34,7 @@
 }
 
 .bookcard:hover {
-  transform: scale(1.5);
+  transform: scale(1.2);
   transition-delay: 0s;
   z-index: 1;
   cursor: pointer;
@@ -219,7 +219,7 @@
 
 .welcomeText {
   width: 100%;
-  margin: 1% auto;
+  margin: 0 auto 0 auto;
   text-align: left;
 }
 
@@ -242,6 +242,8 @@
 
 .recommendationsHeaderContainer {
   text-align: center;
+  margin: 0;
+  padding: 0;
 }
 
 .recommendationsHeaderText {
@@ -263,7 +265,7 @@
   padding: 0px20px;
   text-align: center;
   width: 150px;
-  min-height: 225px;
+  min-height: 175px;
   border-radius: 8px;
   display: flex;
   flex-direction: column;
@@ -271,7 +273,7 @@
   align-items: center;
   opacity: 1;
   transition: opacity 3s ease-in-out;
-  box-shadow: 4px 6px 8px rgba(0, 0, 0, 1);
+  /* box-shadow: 4px 6px 8px rgba(0, 0, 0, 1); */
 }
 
 /* .bookCard {
@@ -290,7 +292,7 @@
 .bookTitle {
   font-weight: 600;
   max-width: 140px;
-  margin: 0 0 5px 0; /* Added margin to separate title from image */
+  margin: 0 0 10px 0; /* Added margin to separate title from image */
   text-align: center;
 }
 

@@ -107,7 +107,7 @@ function RecommendationsBoxes({ books }) {
         changeBook(bookIndex);
         bookIndex = (bookIndex + 1) % currentIndices.length;
       }
-    }, 6000); // Change one book every 5 seconds
+    }, 8000); // Change one book every 5 seconds
 
     return () => clearInterval(staggeredInterval);
   }, [books.length, itemsToShow, isHovered, isModalOpen]);
@@ -132,9 +132,9 @@ function RecommendationsBoxes({ books }) {
     <>
       <div className={classes.recommendationsHeaderContainer}>
         <h2 className={classes.recommendationsHeaderText}>
-          Some of our most popular titles
+          Some suggestions...
         </h2>
-        <p>(Click for details)</p>
+        <p style={{ fontSize: ".5rem" }}>(Click for details)</p>
       </div>
 
       <div className={classes.recommendationsBooksContainer}>
@@ -146,7 +146,7 @@ function RecommendationsBoxes({ books }) {
               backgroundColor: darkMode ? "black" : "#ededed",
             }}
           >
-            <p className={classes.bookTitle}>{books[currentIndex]?.title}</p>
+            {/* <p className={classes.bookTitle}>{books[currentIndex]?.title}</p> */}
             <span
               onMouseEnter={handleMouseEnter}
               onMouseLeave={handleMouseLeave}

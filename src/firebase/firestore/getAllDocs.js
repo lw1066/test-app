@@ -16,6 +16,7 @@ export default async function getAllDocs(collectionName) {
     });
   } catch (e) {
     error = e;
+    console.error("Error fetching documents:", e);
   }
 
   return { results, error };

@@ -86,7 +86,7 @@ const Library = () => {
   return (
     <>
       <div className={classes.welcomeText}>
-        <p style={{ width: "85%", margin: "2% auto" }}>
+        <p style={{ width: "85%", margin: "1% auto" }}>
           Since 2004, Perceptia Press has been publishing innovative and
           award-winning materials, written by teachers, that aim to inspire
           learners. Our catalogue includes books targeted at health

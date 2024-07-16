@@ -2,11 +2,13 @@ import React, { useRef, useState } from "react";
 import { Container, Form, Button } from "react-bootstrap";
 import { addData } from "@/firebase/firestore/addData";
 import { uploadImageToFirebase } from "@/firebase/firestore/uploadImageToFirebase";
-import { Editor } from "@tinymce/tinymce-react";
 import { useModal } from "@/context/ModalContext";
 import { deleteImageFromFirebase } from "@/firebase/firestore/deleteImageFromFirebase";
 import { uploadAudioToFirebase } from "@/firebase/firestore/uploadAudioToFirebase";
 import { deleteAudioFromFirebase } from "@/firebase/firestore/deleteAudioFromFirebase";
+import fetchBooks from "@/firebase/firestore/fetchBooks";
+import EditorComponent from "./Editor";
+import CustomModal from "./CustomModal"; // Import CustomModal
 
 const AddResources = ({ book, handleUpdate }) => {
   const editorRef = useRef(null);
@@ -130,7 +132,7 @@ const AddResources = ({ book, handleUpdate }) => {
         setIsLoading(false);
       } else {
         console.log("Document added with ID:", result);
-        showModal("Book added!", "All done");
+
         setFormData({
           title: "",
           description: "",
@@ -143,7 +145,14 @@ const AddResources = ({ book, handleUpdate }) => {
           audioFileUrls: [],
           links: [{ type: "", link: "", locked: false }],
         });
+        await fetchBooks();
+        localStorage.setItem("showModalAfterReload", "true");
+        localStorage.setItem(
+          "modalMessage",
+          `Document added with ID: ${result}`
+        );
         setIsLoading(false);
+        window.location.replace("/");
       }
     } catch (error) {
       console.error("Error:", error);
@@ -252,29 +261,8 @@ const AddResources = ({ book, handleUpdate }) => {
             />
           </Form.Group>
 
-          <Editor
-            apiKey={process.env.NEXT_PUBLIC_TINYMCE_API_KEY}
-            textareaName="textarea"
-            name="description"
+          <EditorComponent
             value={formData.description}
-            init={{
-              height: 500,
-              plugins: ["link", "lists", "table", "code"],
-              toolbar:
-                "undo redo | fontfamily fontselect fontsizeinput forecolor backcolor | " +
-                "lineheight bold italic underline | alignleft aligncenter " +
-                "alignright alignjustify | bullist numlist outdent indent | " +
-                "removeformat | link | paste image code |" +
-                "table tabledelete | tableprops tablerowprops tablecellprops | tableinsertrowbefore tableinsertrowafter tabledeleterow | tableinsertcolbefore tableinsertcolafter tabledeletecol",
-              font_family_formats:
-                "Noto Sans=noto sans,sans-serif; Andale Mono=andale mono,times; Arial=arial,helvetica,sans-serif; Arial Black=arial black,avant garde; Book Antiqua=book antiqua,palatino; Comic Sans MS=comic sans ms,sans-serif; Courier New=courier new,courier; Georgia=georgia,palatino; Helvetica=helvetica; Impact=impact,chicago; Oswald=oswald; Symbol=symbol; Tahoma=tahoma,arial,helvetica,sans-serif; Terminal=terminal,monaco; Times New Roman=times new roman,times; Trebuchet MS=trebuchet ms,geneva; Verdana=verdana,geneva; Webdings=webdings; Wingdings=wingdings,zapf dingbats",
-
-              content_style: `
-              @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=swap');
-              body { font-family: 'Noto Sans', sans-serif; font-size: 12px; }`,
-
-              default_link_target: "_blank",
-            }}
             onEditorChange={handleEditorChange}
           />
 

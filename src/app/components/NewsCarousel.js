@@ -78,7 +78,7 @@ function NewsCarousel() {
           margin: "0 auto",
         }}
       >
-        <h2 className={classes.headerText}>News</h2>
+        <h2 className={classes.headerText}>Perceptia News</h2>
       </div>
 
       <div className={classes.newsCarousel}>

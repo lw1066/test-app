@@ -31,7 +31,7 @@ const Footer = () => {
                 </p>
               </Link>
               <Link href="Privacy" className={classes.linkStyle}>
-                <p>Privacy & Data policy</p>
+                <p>Privacy & Data Policy</p>
               </Link>
             </div>
           </Col>

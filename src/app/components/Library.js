@@ -89,10 +89,9 @@ const Library = () => {
         <p style={{ width: "85%", margin: "1% auto" }}>
           Since 2004, Perceptia Press has been publishing innovative and
           award-winning materials, written by teachers, that aim to inspire
-          learners. Our catalogue includes books targeted at health
-          professionals, engineers and university students. Many titles include
-          audio resources. Additional teacher materials are available through a
-          free account. Take a look at our catalogue below.
+          learners. Check our catalogue below for full details and information
+          about ordering. Teachers can access extra resources by creating a free
+          account.
         </p>
       </div>
       {!isLoading && <RecommendationsCarousel books={books} />}

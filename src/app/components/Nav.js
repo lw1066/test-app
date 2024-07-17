@@ -97,101 +97,102 @@ function Navigation() {
               <SocialLinks />
             </div>
             <div
-              className="collapse navbar-collapse justify-content-end "
+              className="collapse navbar-collapse justify-content-end"
+              style={{ minWidth: "290px" }}
               id="navbar"
             >
               <ul className="navbar-nav ms-auto align-items-center mb-1">
-                <li className="nav-item">
+                <li className="nav-item" style={{ width: "64px" }}>
                   <Link
                     className="nav-link"
                     style={{
-                      transform: pathname === "/" ? "scale(1.1)" : "scale(1)",
+                      transform: pathname === "/" ? "scale(1.2)" : "scale(1)",
                       fontWeight: pathname === "/" ? "900" : "normal",
                       transition:
-                        "transform 0.3s ease-in-out, font-weight 0.3s ease-in-out",
+                        "transform 0.6s ease-in-out, font-weight 0.3s ease-in-out",
                     }}
                     href="/"
                   >
-                    Home
+                    <span className={classes.navLinkText}>Home</span>
                   </Link>
                 </li>
-                <li className="nav-item">
+                <li className="nav-item" style={{ width: "55px" }}>
                   <Link
-                    className="nav-link"
+                    className={`nav-link ${classes.navLink}`}
                     style={{
                       transform:
-                        pathname === "/Faq" ? "scale(1.1)" : "scale(1)",
+                        pathname === "/Faq" ? "scale(1.2)" : "scale(1)",
                       fontWeight: pathname === "/Faq" ? "900" : "normal",
                       transition:
-                        "transform 0.3s ease-in-out, font-weight 0.3s ease-in-out",
+                        "transform 0.6s ease-in-out, font-weight 0.3s ease-in-out",
                     }}
                     href="Faq"
                   >
-                    FAQs
+                    <span className={classes.navLinkText}>FAQs</span>
                   </Link>
                 </li>
-                <li className="nav-item">
+                <li className="nav-item" style={{ width: "72px" }}>
                   <Link
                     className="nav-link"
                     style={{
                       transform:
-                        pathname === "/Contact" ? "scale(1.1)" : "scale(1)",
+                        pathname === "/Contact" ? "scale(1.2)" : "scale(1)",
                       fontWeight: pathname === "/Contact" ? "900" : "normal",
                       transition:
-                        "transform 0.3s ease-in-out, font-weight 0.3s ease-in-out",
+                        "transform 0.6s ease-in-out, font-weight 0.3s ease-in-out",
                     }}
                     href="Contact"
                   >
-                    Contact
+                    <span className={classes.navLinkText}>Contact</span>
                   </Link>
                 </li>
                 {user && isAdmin && (
                   <>
-                    <li className="nav-item">
+                    <li className="nav-item" style={{ width: "55px" }}>
                       <Link
                         className="nav-link"
                         style={{
                           transform:
-                            pathname === "/Admin" ? "scale(1.1)" : "scale(1)",
+                            pathname === "/Admin" ? "scale(1.2)" : "scale(1)",
                           fontWeight: pathname === "/Admin" ? "900" : "normal",
                           transition:
-                            "transform 0.3s ease-in-out, font-weight 0.3s ease-in-out",
+                            "transform 0.6s ease-in-out, font-weight 0.3s ease-in-out",
                         }}
                         href="Admin"
                       >
-                        Admin
+                        <span className={classes.navLinkText}>Admin</span>
                       </Link>
                     </li>
-                    <Button
+                    {/* <Button
                       variant="outline-danger"
                       className=" ms-2 mb-2 fs-0"
                       onClick={handleRefresh}
                       style={{ fontSize: "10px", padding: "5px 10px" }}
                     >
                       Refresh
-                    </Button>
+                    </Button> */}
                   </>
                 )}
                 {!user && (
-                  <li className="nav-item">
+                  <li className="nav-item" style={{ width: "68px" }}>
                     <Link
                       className="nav-link"
                       style={{
                         transform:
-                          pathname === "/Signin" ? "scale(1.1)" : "scale(1)",
+                          pathname === "/Signin" ? "scale(1.2)" : "scale(1)",
                         fontWeight: pathname === "/Signin" ? "900" : "normal",
                         transition:
-                          "transform 0.3s ease-in-out, font-weight 0.3s ease-in-out",
+                          "transform 0.6s ease-in-out, font-weight 0.3s ease-in-out",
                       }}
                       href="Signin"
                     >
-                      Sign-in
+                      <span className={classes.navLinkText}>Sign-in</span>
                     </Link>
                   </li>
                 )}
 
                 {user && (
-                  <li className="nav-item">
+                  <li className="nav-item" style={{ width: "45px" }}>
                     <Button
                       variant="outline-danger"
                       className={`${classes.navBtn} rounded-circle `}

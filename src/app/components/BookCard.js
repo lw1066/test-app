@@ -11,9 +11,13 @@ import AudioModal from "@/app/components/AudioModal";
 import Image from "next/image";
 import "@/app/globals.css";
 import { deleteImageFromFirebase } from "@/firebase/firestore/deleteImageFromFirebase";
+import { useBook } from "@/context/updateContext";
+import { useRouter } from "next/navigation";
+import fetchBooks from "@/firebase/firestore/fetchBooks";
 
 const BookCard = ({ book, onModalOpen, onModalClose, onMouseLeave }) => {
   const { user } = useAuthContext();
+  const router = useRouter();
   const { showModal } = useModal();
   const isAdmin = user ? user.isAdmin : false;
   const filteredLinks = book?.links
@@ -31,11 +35,13 @@ const BookCard = ({ book, onModalOpen, onModalClose, onMouseLeave }) => {
   const { darkMode } = useDarkMode();
 
   const [showBookModal, setShowBookModal] = useState(false);
-  const [showUpdateModal, setShowUpdateModal] = useState(false);
   const [showAudioListModal, setShowAudioListModal] = useState(false);
-  const [imageLoading, setImageLoading] = useState(true);
   const [showAudioModal, setShowAudioModal] = useState(false);
+
+  const [imageLoading, setImageLoading] = useState(true);
   const [currentAudioUrl, setCurrentAudioUrl] = useState("");
+
+  const { setBookUpdateInfo } = useBook();
 
   const handleCloseModal = () => {
     setShowBookModal(false);
@@ -46,7 +52,6 @@ const BookCard = ({ book, onModalOpen, onModalClose, onMouseLeave }) => {
     setShowBookModal(true);
     if (onModalOpen) onModalOpen();
   };
-  const handleCloseUpdate = () => setShowUpdateModal(false);
 
   const hasAmazonLink = buyLinks.some((link) => link.type.includes("amazon"));
   const hasAsianLink = buyLinks.some((link) => link.type.includes("asian"));
@@ -62,15 +67,9 @@ const BookCard = ({ book, onModalOpen, onModalClose, onMouseLeave }) => {
     ? "/images/perceptia_logo_negative.jpg"
     : "/images/perceptia_logo.jpg";
 
-  // const handleImageLoad = () => {
-  //   console.log("image loaded");
-  //   setImageLoading(false);
-  // };
-
-  const handleDeleteClick = () => {
+  const handleDeleteClick = async () => {
     const imageUrl = book.imageUrl;
-    console.log("Delete clicked. Image URL:", imageUrl);
-    handleDelete(book.id, imageUrl);
+    await handleDelete(book.id, imageUrl);
   };
 
   const handleDelete = async (bookId, imageUrl) => {
@@ -82,6 +81,7 @@ const BookCard = ({ book, onModalOpen, onModalClose, onMouseLeave }) => {
         console.error("Error deleting document:", error);
         showModal("Sorry it's gone wrong", `this happened: ${error}`);
       } else {
+        await fetchBooks();
         showModal("Book deleted", "All done");
         handleCloseModal();
       }
@@ -91,27 +91,9 @@ const BookCard = ({ book, onModalOpen, onModalClose, onMouseLeave }) => {
   };
 
   const handleUpdateClick = () => {
-    setShowUpdateModal(true);
     console.log("update time");
-  };
-
-  const handleUpdate = async (updatedFormData) => {
-    try {
-      const { result, error } = await getAndModifyDoc(
-        "books",
-        book.id,
-        updatedFormData
-      );
-      if (error) {
-        console.error("Error updating document:", error);
-        showModal("Sorry it's gone wrong", `this happened: ${error}`);
-      } else {
-        showModal("Book updated", "All done");
-        handleCloseUpdate();
-      }
-    } catch (error) {
-      console.error("Error:", error);
-    }
+    setBookUpdateInfo(book);
+    router.push("/Admin");
   };
 
   const handleLinkClick = (link) => {
@@ -218,7 +200,7 @@ const BookCard = ({ book, onModalOpen, onModalClose, onMouseLeave }) => {
         </Modal.Header>
         <Modal.Body
           style={{
-            padding: ".5rem",
+            padding: "1rem 2rem",
             backgroundColor: darkMode ? "black" : "white",
             borderBottomLeftRadius: "12px",
             borderBottomRightRadius: "12px",
@@ -282,27 +264,28 @@ const BookCard = ({ book, onModalOpen, onModalClose, onMouseLeave }) => {
           <hr style={{ margin: "0.5rem" }} />
 
           <div className="d-flex justify-content-between w-100 align-items-center">
-            {(unlockedLinks.length > 0 || audioFileUrls.length > 0) && (
-              <div className={classes.linksContainer}>
-                <Button
-                  variant="outline-primary"
-                  className={classes.linkButton}
-                  onClick={handleAudioClick}
-                >
-                  Audio
-                </Button>
-                {unlockedLinks.map((link, index) => (
+            {(unlockedLinks.length > 0 || audioFileUrls.length > 0) &&
+              audioFileUrls.length > 0 && (
+                <div className={classes.linksContainer}>
                   <Button
-                    key={index}
                     variant="outline-primary"
                     className={classes.linkButton}
-                    onClick={() => window.open(link.link, "_blank")}
+                    onClick={handleAudioClick}
                   >
-                    {link.type}
+                    Audio
                   </Button>
-                ))}
-              </div>
-            )}
+                  {unlockedLinks.map((link, index) => (
+                    <Button
+                      key={index}
+                      variant="outline-primary"
+                      className={classes.linkButton}
+                      onClick={() => window.open(link.link, "_blank")}
+                    >
+                      {link.type}
+                    </Button>
+                  ))}
+                </div>
+              )}
             {user && user.user !== null && lockedLinks.length > 0 && (
               <div className={classes.linksContainer}>
                 {lockedLinks.map((link, index) => (
@@ -328,20 +311,6 @@ const BookCard = ({ book, onModalOpen, onModalClose, onMouseLeave }) => {
             dangerouslySetInnerHTML={{ __html: book?.description }}
           />
         </Modal.Body>
-      </Modal>
-
-      <Modal show={showUpdateModal} onHide={handleCloseUpdate} size="lg">
-        <Modal.Header closeButton>
-          <Modal.Title>Update Book</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <AddResources book={book} handleUpdate={handleUpdate} />
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleCloseUpdate}>
-            Close
-          </Button>
-        </Modal.Footer>
       </Modal>
 
       <Modal

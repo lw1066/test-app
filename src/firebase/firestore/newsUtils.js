@@ -1,6 +1,6 @@
 import { deleteData } from "@/firebase/firestore/deleteDoc";
 import { getAndModifyDoc } from "@/firebase/firestore/getAndModifyDoc";
-import { manualRefresh } from "@/firebase/firestore/addData";
+import { manualRefreshNews } from "@/firebase/firestore/addData";
 
 export const updateNewsItem = async (
   itemId,
@@ -22,8 +22,8 @@ export const updateNewsItem = async (
     }
 
     showModal(`News updated!`, `All done`);
-    closeModal();
-    manualRefresh();
+
+    manualRefreshNews();
   } catch (error) {
     console.error("Unexpected error:", error);
     showModal(`So sorry - there's an error!`, `${error}`);
@@ -38,7 +38,7 @@ export const deleteNewsItem = async (itemId, showModal) => {
       showModal(`So sorry - there's an error!`, `${error}`);
     } else {
       showModal(`News item deleted!`, `All done`);
-      manualRefresh();
+      manualRefreshNews();
     }
   } catch (error) {
     console.error("Error:", error);

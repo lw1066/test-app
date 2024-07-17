@@ -7,7 +7,8 @@ export async function POST(req) {
   console.log("hi from the route");
   const body = await req.json();
   console.log("body-------------------", body);
-  const { name, email, message, bookSamples, orderQuery, submission } = body;
+  const { name, email, message, bookSamples, orderQuery, submission, other } =
+    body;
 
   // Create a transporter
   const transporter = nodemailer.createTransport({
@@ -28,6 +29,7 @@ export async function POST(req) {
       bookSamples && "SAMPLES",
       orderQuery && "ORDER",
       submission && "SUB",
+      other && "OTHER",
     ]
       .filter(Boolean)
       .join(" + ")} | ${name} | ${email}`,
@@ -40,6 +42,7 @@ export async function POST(req) {
     bookSamples && "Samples",
     orderQuery && "Order Query",
     submission && "Submissions",
+    other && "Other",
   ]
     .filter(Boolean)
     .join(" + ")}

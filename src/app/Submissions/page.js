@@ -18,17 +18,17 @@ function Page() {
         />
       </div>
       <div
-        className="d-flex flex-column align-items-center justify-content-center mt-5"
+        className="d-flex flex-column align-items-start justify-content-center mt-5"
         style={{ width: "60%", margin: "10% auto" }}
       >
         <p className={classes.pageDescription}>
           Becoming an Author with Perceptia Press
         </p>
-        <p className={classes.pageDescriptionSubmissions}>
+        <p>
           Thank you for your interest in submitting a manuscript to Perceptia
           Press. We are always keen to look at new projects.
         </p>
-        <p className={classes.pageDescriptionSubmissions}>
+        <p>
           First download our{" "}
           <a
             href={submissionGuideUrl}
@@ -45,16 +45,15 @@ function Page() {
           >
             Proposal
           </a>{" "}
-          (opens in googleforms) in as much detail as possible.
-        </p>
-        <p className={classes.pageDescriptionSubmissions}>
-          Finally, send a sample unit (if available) and recent CV including any
-          publishing experience to{" "}
+          (opens in googleforms) in as much detail as possible. Finally, send a
+          sample unit (if available) and recent CV including any publishing
+          experience to submissions (at){" "}
           <a className={classes.linkStyle} href={emailLink}>
-            submissions@perceptiapress.com
+            perceptiapress.com
           </a>
-          . We look forward to seeing your work.
+          .
         </p>
+        <p>We look forward to seeing your work.</p>
       </div>
     </>
   );

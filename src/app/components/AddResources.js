@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Container, Form, Button } from "react-bootstrap";
 import { addData } from "@/firebase/firestore/addData";
 import { uploadImageToFirebase } from "@/firebase/firestore/uploadImageToFirebase";
@@ -8,27 +8,48 @@ import { uploadAudioToFirebase } from "@/firebase/firestore/uploadAudioToFirebas
 import { deleteAudioFromFirebase } from "@/firebase/firestore/deleteAudioFromFirebase";
 import fetchBooks from "@/firebase/firestore/fetchBooks";
 import EditorComponent from "./Editor";
-import CustomModal from "./CustomModal"; // Import CustomModal
+import { useBook } from "@/context/updateContext";
+import { getAndModifyDoc } from "@/firebase/firestore/getAndModifyDoc";
 
-const AddResources = ({ book, handleUpdate }) => {
-  const editorRef = useRef(null);
+const AddResources = () => {
   const { showModal } = useModal();
+  const { bookUpdateInfo, setBookUpdateInfo } = useBook();
   const [isLoading, setIsLoading] = useState(false);
+  const genreList = [
+    "Reading",
+    "Listening",
+    "Speaking",
+    "Writing",
+    "Vocabulary",
+    "Culture",
+    "Health",
+    "CLIL",
+    "ESP",
+    "Resources",
+  ];
 
-  const isUpdate = !!book;
+  useEffect(() => {
+    return () => {
+      console.log("cleaning up");
+      setBookUpdateInfo(null);
+    };
+  }, []);
 
-  const initialFormData = book
+  const isUpdate = !!bookUpdateInfo;
+  console.log("update book info in addresources @22", bookUpdateInfo);
+
+  const initialFormData = bookUpdateInfo
     ? {
-        title: book.title || "title",
-        description: book.description || "description",
-        author: book.author || "author",
-        bookDetails: book.bookDetails || "details",
-        genres: book.genres || [],
+        title: bookUpdateInfo.title || "title",
+        description: bookUpdateInfo.description || "description",
+        author: bookUpdateInfo.author || "author",
+        bookDetails: bookUpdateInfo.bookDetails || "details",
+        genres: bookUpdateInfo.genres || [],
         imageFile: null,
-        imageUrl: book.imageUrl || "",
+        imageUrl: bookUpdateInfo.imageUrl || "",
         audioFiles: null,
-        audioFileUrls: book.audioFileUrls || [],
-        links: book.links || [{ type: "", link: "", locked: false }],
+        audioFileUrls: bookUpdateInfo.audioFileUrls || [],
+        links: bookUpdateInfo.links || [{ type: "", link: "", locked: false }],
       }
     : {
         title: "",
@@ -161,6 +182,14 @@ const AddResources = ({ book, handleUpdate }) => {
     }
   };
 
+  const handleRemoveAllAudioFiles = () => {
+    setFormData({
+      ...formData,
+      audioFiles: ["deleteAll"],
+      audioFileUrls: [],
+    });
+  };
+
   const handleGenreChange = (event) => {
     const { value } = event.target;
     const selectedGenres = [...formData.genres];
@@ -175,33 +204,59 @@ const AddResources = ({ book, handleUpdate }) => {
     setFormData({ ...formData, genres: selectedGenres });
   };
 
+  const handleUpdate = async (updatedFormData) => {
+    try {
+      const { result, error } = await getAndModifyDoc(
+        "books",
+        bookUpdateInfo.id,
+        updatedFormData
+      );
+      if (error) {
+        console.error("Error updating document:", error);
+        showModal("Sorry it's gone wrong", `this happened: ${error}`);
+      } else {
+        await fetchBooks();
+        showModal("Book updated", "All done");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
+
   const handleInputUpdateChange = async () => {
     setIsLoading(true);
+    console.log("formData:", formData);
     try {
       let imageUrl = formData.imageUrl;
       let audioFileUrls = formData.audioFileUrls;
 
       if (formData.imageFile) {
-        if (book.imageUrl) {
-          await deleteImageFromFirebase(book.imageUrl);
+        if (bookUpdateInfo.imageUrl) {
+          await deleteImageFromFirebase(bookUpdateInfo.imageUrl);
         }
         imageUrl = await uploadImageToFirebase(formData.imageFile);
       }
 
       if (formData.audioFiles) {
-        if (book.audioFileUrls) {
-          for (const audioFileUrl of book.audioFileUrls) {
+        if (bookUpdateInfo.audioFileUrls) {
+          for (const audioFileUrl of bookUpdateInfo.audioFileUrls) {
+            console.log("deleting audio:", audioFileUrl);
             await deleteAudioFromFirebase(audioFileUrl);
           }
         }
-        const uploadPromises = formData.audioFiles.map(async (file) => {
-          const downloadURL = await uploadAudioToFirebase(file);
-          let name = file.name.substring(0, file.name.lastIndexOf("."));
-          name = name.replace(/_/g, " ");
-          return { name, downloadURL };
-        });
 
-        audioFileUrls = await Promise.all(uploadPromises);
+        audioFileUrls = null;
+
+        if (formData.audioFiles[0] !== "deleteAll") {
+          const uploadPromises = formData.audioFiles.map(async (file) => {
+            const downloadURL = await uploadAudioToFirebase(file);
+            let name = file.name.substring(0, file.name.lastIndexOf("."));
+            name = name.replace(/_/g, " ");
+            return { name, downloadURL };
+          });
+
+          audioFileUrls = await Promise.all(uploadPromises);
+        }
       }
 
       const updatedData = {
@@ -285,20 +340,19 @@ const AddResources = ({ book, handleUpdate }) => {
             />
           </Form.Group>
 
+          {formData.audioFileUrls.length > 0 && isUpdate && (
+            <Button
+              variant="danger"
+              onClick={handleRemoveAllAudioFiles}
+              className="mb-3"
+            >
+              Remove All Audio Files
+            </Button>
+          )}
+
           <Form.Group controlId="genres" className="mb-3">
             <Form.Label>Choose the genres</Form.Label>
-            {[
-              "Reading",
-              "Listening",
-              "Speaking",
-              "Writing",
-              "Vocabulary",
-              "Culture",
-              "Health",
-              "CLIL",
-              "ESP",
-              "Resources",
-            ].map((genre) => (
+            {genreList.map((genre) => (
               <Form.Check
                 key={genre}
                 id={`genre-${genre}`}

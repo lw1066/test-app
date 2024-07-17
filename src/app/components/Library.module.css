@@ -40,10 +40,6 @@
   cursor: pointer;
 }
 
-.bookContent {
-  line-height: 1;
-}
-
 .modalBookDetails {
   font-size: 1rem;
   margin: 0;
@@ -80,7 +76,7 @@
 }
 
 .contactForm {
-  margin-bottom: 50px;
+  margin-bottom: 0px;
   font-size: 14px;
   width: 60%;
 }
@@ -158,6 +154,14 @@
   margin: 0;
 }
 
+.navLinkText {
+  transition: font-weight 0.3s ease-in-out;
+}
+
+.navLinkText:hover {
+  font-weight: 900;
+}
+
 .navTitles {
   display: flex;
   justify-content: center;
@@ -184,13 +188,8 @@
 }
 
 .pageDescription {
-  text-align: center;
+  margin: 0 auto 20px auto;
   font-size: 1.25rem;
-}
-
-.pageDescriptionSubmissions {
-  text-align: left;
-  font-size: 1rem;
 }
 
 .pageTitle {
@@ -215,6 +214,13 @@
 .register:hover {
   color: #97bffc;
   cursor: pointer;
+}
+.socialLink {
+  transition: transform 0.3s ease-in-out;
+}
+
+.socialLink:hover {
+  transform: scale(1.2);
 }
 
 .welcomeText {
@@ -264,8 +270,8 @@
 .bookBox {
   padding: 0px20px;
   text-align: center;
-  width: 150px;
-  min-height: 175px;
+  width: 100px;
+  min-height: 150px;
   border-radius: 8px;
   display: flex;
   flex-direction: column;

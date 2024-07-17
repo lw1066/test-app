@@ -1,22 +1,22 @@
 import React, { useState, useEffect } from "react";
 import Carousel from "react-bootstrap/Carousel";
-import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import classes from "@/app/components/Library.module.css";
-import AddNews from "@/app/components/AddNews";
 import { useAuthContext } from "@/context/AuthContext";
 import { useDarkMode } from "@/context/DarkModeContext";
 import { useModal } from "@/context/ModalContext";
 import { checkIfDataIsStale } from "@/firebase/firestore/checkIfDataIsStale";
 import fetchNewsData from "@/firebase/firestore/fetchNewsData";
-import { updateNewsItem, deleteNewsItem } from "@/utils/newsUtils";
+import { useBook } from "@/context/updateContext";
+import { useRouter } from "next/navigation";
+import { deleteNewsItem } from "@/firebase/firestore/newsUtils";
 
 function NewsCarousel() {
   const { user } = useAuthContext();
+  const { setNewsUpdateInfo } = useBook();
+  const router = useRouter();
   const isAdmin = user ? user.isAdmin : false;
   const [newsDataArray, setNewsDataArray] = useState([]);
-  const [showUpdateModal, setShowUpdateModal] = useState(false);
-  const [selectedItem, setSelectedItem] = useState(null);
 
   const { showModal } = useModal();
   const { darkMode } = useDarkMode();
@@ -47,22 +47,9 @@ function NewsCarousel() {
     }
   }, []);
 
-  const openModal = (item) => {
-    setSelectedItem(item);
-    setShowUpdateModal(true);
-  };
-
-  const closeModal = () => {
-    setShowUpdateModal(false);
-  };
-
-  const handleUpdate = async (updatedFormData) => {
-    await updateNewsItem(
-      selectedItem.id,
-      updatedFormData,
-      showModal,
-      closeModal
-    );
+  const handleUpdateClick = (item) => {
+    setNewsUpdateInfo(item);
+    router.push("/Admin");
   };
 
   const handleDeleteClick = (itemId) => {
@@ -115,7 +102,7 @@ function NewsCarousel() {
                     >
                       <Button
                         variant="primary"
-                        onClick={() => openModal(item)}
+                        onClick={() => handleUpdateClick(item)}
                         className="me-3"
                       >
                         Update
@@ -134,16 +121,6 @@ function NewsCarousel() {
           ))}
         </Carousel>
       </div>
-
-      {/* Modal for editing news */}
-      <Modal show={showUpdateModal} onHide={closeModal}>
-        <Modal.Header closeButton>
-          <Modal.Title>Edit News</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <AddNews news={selectedItem} handleUpdate={handleUpdate} />
-        </Modal.Body>
-      </Modal>
     </>
   );
 }

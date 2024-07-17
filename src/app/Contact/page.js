@@ -12,7 +12,11 @@ const Contact = () => {
   const [bookSamples, setBookSamples] = useState(false);
   const [orderQuery, setOrderQuery] = useState(false);
   const [submission, setSubmission] = useState(false);
+  const [other, setOther] = useState(false);
   const { showModal } = useModal();
+
+  const emailLink =
+    "mailto:info@perceptiapress.com?subject=Information request for Perceptia";
 
   const resetForm = () => {
     setName("");
@@ -21,6 +25,7 @@ const Contact = () => {
     setBookSamples(false);
     setOrderQuery(false);
     setSubmission(false);
+    setOther(false);
   };
 
   const handleFormSubmit = async (e) => {
@@ -33,6 +38,7 @@ const Contact = () => {
       bookSamples,
       orderQuery,
       submission,
+      other,
     };
 
     console.log(formData);
@@ -81,7 +87,7 @@ const Contact = () => {
         />
       </div>
       <div className="d-flex flex-column align-items-center justify-content-center mt-5">
-        <p className={classes.pageDescription}>Use this form to contact us.</p>
+        <p className={classes.pageDescription}>Contact form</p>
 
         <Form onSubmit={handleFormSubmit} className={classes.contactForm}>
           <Form.Group controlId="formName">
@@ -102,18 +108,6 @@ const Contact = () => {
               placeholder="Enter email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              required
-            />
-          </Form.Group>
-
-          <Form.Group controlId="formMessage" className="mt-3">
-            <Form.Label>Please enter your message here</Form.Label>
-            <Form.Control
-              as="textarea"
-              rows={3}
-              placeholder="Enter your message"
-              value={message}
-              onChange={(e) => setMessage(e.target.value)}
               required
             />
           </Form.Group>
@@ -140,13 +134,37 @@ const Contact = () => {
                 checked={submission}
                 onChange={(e) => setSubmission(e.target.checked)}
               />
+              <Form.Check
+                type="checkbox"
+                label="Other"
+                checked={other}
+                onChange={(e) => setOther(e.target.checked)}
+              />
             </fieldset>
           </Form.Group>
 
+          <Form.Group controlId="formMessage" className="mt-3">
+            <Form.Label>Message</Form.Label>
+            <Form.Control
+              as="textarea"
+              rows={3}
+              placeholder="Enter your message"
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
+              required
+            />
+          </Form.Group>
+
           <Button variant="outline-success" type="submit" className="mt-3">
-            Submit
+            Send
           </Button>
         </Form>
+        <p style={{ margin: "20px 0 50px 0", padding: 0 }}>
+          Alternatively, email us at info (at){" "}
+          <a className={classes.linkStyle} href={emailLink}>
+            perceptiapress.com
+          </a>
+        </p>
       </div>
     </>
   );

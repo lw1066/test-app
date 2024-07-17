@@ -33,7 +33,7 @@ async function addData(collectionName, data) {
   return { result, error };
 }
 
-const manualRefresh = async () => {
+const manualRefreshNews = async () => {
   try {
     const { results, error } = await getAllDocs("news");
     if (!error) {
@@ -48,4 +48,4 @@ const manualRefresh = async () => {
   }
 };
 
-export { addData, manualRefresh };
+export { addData, manualRefreshNews };

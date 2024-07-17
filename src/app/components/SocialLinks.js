@@ -22,6 +22,7 @@ export const SocialLinks = () => {
           icon={faFacebook}
           size="lg"
           color={darkMode ? "white" : "black"}
+          className={classes.socialLink}
         />
       </a>
       <a
@@ -35,6 +36,7 @@ export const SocialLinks = () => {
           size="lg"
           color={darkMode ? "white" : "black"}
           margin="0"
+          className={classes.socialLink}
         />
       </a>
       <a
@@ -47,6 +49,7 @@ export const SocialLinks = () => {
           icon={faYoutube}
           size="lg"
           color={darkMode ? "white" : "black"}
+          className={classes.socialLink}
         />
       </a>
     </div>

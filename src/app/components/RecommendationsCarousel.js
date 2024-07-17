@@ -131,10 +131,10 @@ function RecommendationsBoxes({ books }) {
   return (
     <>
       <div className={classes.recommendationsHeaderContainer}>
-        <h2 className={classes.recommendationsHeaderText}>
-          Some suggestions...
-        </h2>
-        <p style={{ fontSize: ".5rem" }}>(Click for details)</p>
+        <h2 className={classes.recommendationsHeaderText}>Suggested titles</h2>
+        <p style={{ fontSize: ".5rem", padding: "0", margin: "0" }}>
+          (Click for details)
+        </p>
       </div>
 
       <div className={classes.recommendationsBooksContainer}>
@@ -142,11 +142,7 @@ function RecommendationsBoxes({ books }) {
           <div
             key={index}
             className={`${classes.bookBox} ${classes[fadeStates[index]]}`}
-            style={{
-              backgroundColor: darkMode ? "black" : "#ededed",
-            }}
           >
-            {/* <p className={classes.bookTitle}>{books[currentIndex]?.title}</p> */}
             <span
               onMouseEnter={handleMouseEnter}
               onMouseLeave={handleMouseLeave}
@@ -158,11 +154,6 @@ function RecommendationsBoxes({ books }) {
                 onMouseLeave={handleMouseLeave}
               />
             </span>
-            <div>
-              <p className={classes.bookGenre}>
-                {books[currentIndex]?.genres.join(" ")}
-              </p>
-            </div>
           </div>
         ))}
       </div>

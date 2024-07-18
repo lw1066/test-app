@@ -24,18 +24,41 @@ const Library = () => {
       const storedTimestamp = localStorage.getItem("bookTimestamp");
       const isDataStale = checkIfDataIsStale(storedTimestamp);
 
-      if (storedBookData && !isDataStale) {
+      if (storedBookData && storedBookData !== "[]" && !isDataStale) {
         console.log("Using cached book data");
-        setBooks(JSON.parse(storedBookData));
-        setFilteredBooks(JSON.parse(storedBookData));
+        const parsedData = JSON.parse(storedBookData);
+        setBooks(parsedData);
+        setFilteredBooks(parsedData);
       } else {
         console.log("Fetching book data...");
-        const { results, error } = await fetchBooks();
-        if (error) {
-          setError(error);
-        } else {
+        let attempts = 0;
+        let success = false;
+        let results = [];
+        let error = null;
+
+        while (attempts < 3 && !success) {
+          attempts++;
+          try {
+            const fetchResult = await fetchBooks();
+            if (fetchResult.error) {
+              error = fetchResult.error;
+            } else {
+              results = fetchResult.results;
+              success = true;
+            }
+          } catch (err) {
+            error = err;
+            console.error(`Attempt ${attempts} failed:`, err);
+          }
+        }
+
+        if (success) {
           setBooks(results);
           setFilteredBooks(results);
+          localStorage.setItem("bookArray", JSON.stringify(results));
+          localStorage.setItem("bookTimestamp", new Date().toISOString());
+        } else {
+          setError("Sorry cannot access the server - try again later");
         }
       }
       setIsLoading(false);

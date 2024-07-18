@@ -23,15 +23,33 @@ function NewsCarousel() {
 
   useEffect(() => {
     const loadNewsData = async () => {
-      try {
-        const { results, error } = await fetchNewsData();
-        if (!error) {
-          setNewsDataArray(results);
-        } else {
-          console.error("Error fetching news data:", error);
+      let attempts = 0;
+      let success = false;
+      let results = [];
+      let error = null;
+
+      while (attempts < 3 && !success) {
+        attempts++;
+        try {
+          const fetchResult = await fetchNewsData();
+          if (fetchResult.error) {
+            error = fetchResult.error;
+          } else {
+            results = fetchResult.results;
+            success = true;
+          }
+        } catch (err) {
+          error = err;
+          console.error(`Attempt ${attempts} failed:`, err);
         }
-      } catch (error) {
-        console.error("Error fetching news data:", error);
+      }
+
+      if (success) {
+        setNewsDataArray(results);
+        localStorage.setItem("newsDataArray", JSON.stringify(results));
+        localStorage.setItem("newsDataTimestamp", new Date().toISOString());
+      } else {
+        setError("Sorry, there is a server access problem - try again later");
       }
     };
 
@@ -73,7 +91,7 @@ function NewsCarousel() {
           {newsDataArray.map((item, index) => (
             <Carousel.Item
               key={index}
-              style={{ minHeight: "400px", minWidth: "250px" }}
+              style={{ minHeight: "360px", minWidth: "250px" }}
             >
               <div>
                 <Carousel.Caption

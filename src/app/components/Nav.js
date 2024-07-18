@@ -92,7 +92,7 @@ function Navigation() {
               </div>
             </div>
           </Link>
-          <div className="ms-auto">
+          <div className={`ms-auto ${classes.navBarLinksContainer}`}>
             <div className={`${classes.socialLinks}`}>
               <SocialLinks />
             </div>

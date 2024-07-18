@@ -110,7 +110,7 @@
   display: flex;
   flex-direction: row;
   justify-content: center;
-  align-items: start;
+  align-items: flex-start;
   width: 100%;
 }
 
@@ -397,14 +397,20 @@
     font-size: 1rem;
   }
 
-  /* .welcomeImageText {
-    font-size: 5vw;
-  } */
-}
-
-@media (max-width: 787px) {
   .socialLinks {
     display: none;
+  }
+}
+
+@media (max-width: 818px) {
+  .socialLinks {
+    margin: 0 25px;
+  }
+  .navBarLinksContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
   }
 }
 

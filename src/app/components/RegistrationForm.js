@@ -1,6 +1,5 @@
-// RegistrationForm.js
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Modal, Button, Form } from "react-bootstrap";
 import classes from "@/app/components/Library.module.css";
 
@@ -10,7 +9,6 @@ const RegistrationForm = ({ show, onHide, onSubmit }) => {
   const [email, setEmail] = useState("");
   const [confirmEmail, setConfirmEmail] = useState("");
   const [schoolOrInstitution, setSchoolOrInstitution] = useState("");
-  const [addressType, setAddressType] = useState("home");
   const [address1, setAddress1] = useState("");
   const [address2, setAddress2] = useState("");
   const [postcode, setPostcode] = useState("");
@@ -48,19 +46,17 @@ const RegistrationForm = ({ show, onHide, onSubmit }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // Validate email and confirm email
+
     if (email !== confirmEmail) {
       alert("Email and confirm email must match.");
       return;
     }
 
-    // Call parent component onSubmit with form data
     onSubmit({
       firstName,
       familyName,
       email,
       schoolOrInstitution,
-      addressType,
       address1,
       address2,
       postcode,
@@ -70,7 +66,43 @@ const RegistrationForm = ({ show, onHide, onSubmit }) => {
       teachingInterests,
       agreedToPolicy,
     });
+
+    resetForm();
   };
+
+  const resetForm = () => {
+    setFirstName("");
+    setFamilyName("");
+    setEmail("");
+    setConfirmEmail("");
+    setSchoolOrInstitution("");
+    setAddress1("");
+    setAddress2("");
+    setPostcode("");
+    setCountry("");
+    setSchoolType({
+      primary: false,
+      secondary: false,
+      university: false,
+      privateSchool: false,
+      other: false,
+    });
+    setLevelsTaught({
+      beginner: false,
+      elementary: false,
+      intermediate: false,
+      upperIntermediate: false,
+      advanced: false,
+    });
+    setTeachingInterests("");
+    setAgreedToPolicy(false);
+  };
+
+  useEffect(() => {
+    if (!show) {
+      resetForm();
+    }
+  }, [show]);
 
   return (
     <Modal show={show} onHide={onHide} backdrop="static" keyboard={false}>
@@ -79,10 +111,9 @@ const RegistrationForm = ({ show, onHide, onSubmit }) => {
       </Modal.Header>
       <Modal.Body>
         <p style={{ fontWeight: "600" }}>
-          Fill out the form below and we will send log in details to your email
-          after validating your teacher status.
+          Fill out the form below and we will email log in details after
+          validating your teacher status.
         </p>
-        <p style={{ fontWeight: "600", fontSize: "1.1em" }}>Personal Details</p>
         <Form onSubmit={handleSubmit}>
           <Form.Group controlId="formFirstName">
             <Form.Label>First name *</Form.Label>
@@ -117,7 +148,10 @@ const RegistrationForm = ({ show, onHide, onSubmit }) => {
             />
           </Form.Group>
 
-          <Form.Group controlId="formConfirmEmail">
+          <Form.Group
+            controlId="formConfirmEmail"
+            style={{ marginBottom: "3rem" }}
+          >
             <Form.Label>Confirm email address *</Form.Label>
             <Form.Control
               type="email"
@@ -126,64 +160,8 @@ const RegistrationForm = ({ show, onHide, onSubmit }) => {
               onChange={(e) => setConfirmEmail(e.target.value)}
               required
             />
-
-            <Form.Group controlId="formLevelsTaught">
-              <Form.Label>Level(s) taught *</Form.Label>
-              <div>
-                <Form.Check
-                  type="checkbox"
-                  label="Beginner"
-                  id="checkboxBeginner"
-                  checked={levelsTaught.beginner}
-                  onChange={() => handleLevelsTaughtChange("beginner")}
-                />
-                <Form.Check
-                  type="checkbox"
-                  label="Elementary"
-                  id="checkboxElementary"
-                  checked={levelsTaught.elementary}
-                  onChange={() => handleLevelsTaughtChange("elementary")}
-                />
-                <Form.Check
-                  type="checkbox"
-                  label="Intermediate"
-                  id="checkboxIntermediate"
-                  checked={levelsTaught.intermediate}
-                  onChange={() => handleLevelsTaughtChange("intermediate")}
-                />
-                <Form.Check
-                  type="checkbox"
-                  label="Upper intermediate"
-                  id="checkboxUpperIntermediate"
-                  checked={levelsTaught.upperIntermediate}
-                  onChange={() => handleLevelsTaughtChange("upperIntermediate")}
-                />
-                <Form.Check
-                  type="checkbox"
-                  label="Advanced"
-                  id="checkboxAdvanced"
-                  checked={levelsTaught.advanced}
-                  onChange={() => handleLevelsTaughtChange("advanced")}
-                />
-              </div>
-            </Form.Group>
-
-            <Form.Group controlId="formTeachingInterests">
-              <Form.Label>Teaching interests</Form.Label>
-              <Form.Control
-                as="textarea"
-                rows={3}
-                placeholder="Enter teaching interests"
-                value={teachingInterests}
-                onChange={(e) => setTeachingInterests(e.target.value)}
-              />
-            </Form.Group>
           </Form.Group>
 
-          <div style={{ marginBottom: "3rem" }} />
-          <p style={{ fontWeight: "600", fontSize: "1.1rem" }}>
-            School Details
-          </p>
           <Form.Group controlId="formSchoolOrInstitution">
             <Form.Label>School or Institution *</Form.Label>
             <Form.Control
@@ -228,7 +206,10 @@ const RegistrationForm = ({ show, onHide, onSubmit }) => {
               />
             </Form.Group>
 
-            <Form.Group controlId="formCountry">
+            <Form.Group
+              controlId="formCountry"
+              style={{ marginBottom: "3rem" }}
+            >
               <Form.Label>Country *</Form.Label>
               <Form.Control
                 type="text"
@@ -240,7 +221,10 @@ const RegistrationForm = ({ show, onHide, onSubmit }) => {
             </Form.Group>
           </Form.Group>
 
-          <Form.Group controlId="formSchoolType">
+          <Form.Group
+            controlId="formSchoolType"
+            style={{ marginBottom: "1rem" }}
+          >
             <Form.Label>School type *</Form.Label>
             <div>
               <Form.Check
@@ -280,7 +264,65 @@ const RegistrationForm = ({ show, onHide, onSubmit }) => {
               />
             </div>
           </Form.Group>
-          <div style={{ marginBottom: "3rem" }} />
+
+          <Form.Group
+            controlId="formLevelsTaught"
+            style={{ marginBottom: "1rem" }}
+          >
+            <Form.Label>Level(s) taught *</Form.Label>
+            <div>
+              <Form.Check
+                type="checkbox"
+                label="Beginner"
+                id="checkboxBeginner"
+                checked={levelsTaught.beginner}
+                onChange={() => handleLevelsTaughtChange("beginner")}
+              />
+              <Form.Check
+                type="checkbox"
+                label="Elementary"
+                id="checkboxElementary"
+                checked={levelsTaught.elementary}
+                onChange={() => handleLevelsTaughtChange("elementary")}
+              />
+              <Form.Check
+                type="checkbox"
+                label="Intermediate"
+                id="checkboxIntermediate"
+                checked={levelsTaught.intermediate}
+                onChange={() => handleLevelsTaughtChange("intermediate")}
+              />
+              <Form.Check
+                type="checkbox"
+                label="Upper intermediate"
+                id="checkboxUpperIntermediate"
+                checked={levelsTaught.upperIntermediate}
+                onChange={() => handleLevelsTaughtChange("upperIntermediate")}
+              />
+              <Form.Check
+                type="checkbox"
+                label="Advanced"
+                id="checkboxAdvanced"
+                checked={levelsTaught.advanced}
+                onChange={() => handleLevelsTaughtChange("advanced")}
+              />
+            </div>
+          </Form.Group>
+
+          <Form.Group
+            controlId="formTeachingInterests"
+            style={{ marginBottom: "3rem" }}
+          >
+            <Form.Label>Teaching interests</Form.Label>
+            <Form.Control
+              as="textarea"
+              rows={3}
+              placeholder="Enter teaching interests"
+              value={teachingInterests}
+              onChange={(e) => setTeachingInterests(e.target.value)}
+            />
+          </Form.Group>
+
           <Form.Group controlId="formAgreedToPolicy">
             <Form.Check
               type="checkbox"

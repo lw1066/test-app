@@ -41,10 +41,41 @@ function Page() {
     setShowRegisterModal(false);
   };
 
-  const handleRegistrationSubmit = (formData) => {
-    // Implement your registration logic here
+  const handleRegistrationSubmit = async (formData) => {
     console.log(formData);
-    setShowRegisterModal(false); // Close modal after submission (you may modify this behavior)
+    setShowRegisterModal(false);
+    const registrationData = { ...formData, registration: true };
+    try {
+      const response = await fetch("/api/emailer", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(registrationData),
+      });
+
+      if (response.ok) {
+        showModal(
+          `Hi ${formData.firstName}`,
+          `Thanks for registering. We'll send your log-in details to ${formData.email} as soon as possible.`
+        );
+      } else {
+        const errorData = await response.json();
+        console.error("Error response:", errorData);
+        showModal(
+          "Sorry - something went wrong",
+          `There was a problem with your submission. Status: ${
+            response.status
+          }. Error: ${JSON.stringify(errorData)}`
+        );
+      }
+    } catch (error) {
+      console.error("Fetch error:", error);
+      showModal(
+        "Sorry - something went wrong",
+        `An unexpected error occurred: ${error.message}`
+      );
+    }
   };
 
   return (

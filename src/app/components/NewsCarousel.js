@@ -57,7 +57,7 @@ function NewsCarousel() {
     const storedTimestamp = localStorage.getItem("newsDataTimestamp");
     const isDataStale = checkIfDataIsStale(storedTimestamp);
 
-    if (storedNewsData && !isDataStale) {
+    if (storedNewsData !== null && storedNewsData !== "" && !isDataStale) {
       console.log("Using cached news data");
       setNewsDataArray(JSON.parse(storedNewsData));
     } else {

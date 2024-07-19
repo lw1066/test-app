@@ -5,8 +5,8 @@ import { useDarkMode } from "@/context/DarkModeContext";
 import BookCard from "./BookCard";
 
 function RecommendationsBoxes({ books }) {
-  const { user } = useAuthContext();
-  const { darkMode } = useDarkMode();
+  // const { user } = useAuthContext();
+  // const { darkMode } = useDarkMode();
   const [currentIndices, setCurrentIndices] = useState([0, 1, 2]);
   const [itemsToShow, setItemsToShow] = useState(3); // Default to 3 items
   const [fadeStates, setFadeStates] = useState([
@@ -120,6 +120,14 @@ function RecommendationsBoxes({ books }) {
     setIsHovered(false);
   };
 
+  const handleTouchStart = () => {
+    setIsHovered(true);
+  };
+
+  const handleTouchEnd = () => {
+    setIsHovered(false);
+  };
+
   const handleModalOpen = () => {
     setIsModalOpen(true);
   };
@@ -146,6 +154,8 @@ function RecommendationsBoxes({ books }) {
             <span
               onMouseEnter={handleMouseEnter}
               onMouseLeave={handleMouseLeave}
+              onTouchStart={handleTouchStart}
+              onTouchEnd={handleTouchEnd}
             >
               <BookCard
                 book={books[currentIndex]}

@@ -6,7 +6,6 @@ import LoadingSpinner from "@/app/components/LoadingSpinner";
 import fetchBooks from "@/firebase/firestore/fetchBooks";
 import { checkIfDataIsStale } from "@/firebase/firestore/checkIfDataIsStale";
 import { useDarkMode } from "@/context/DarkModeContext";
-import Link from "next/link";
 import RecommendationsCarousel from "./RecommendationsCarousel";
 
 const Library = () => {
@@ -23,6 +22,7 @@ const Library = () => {
       const storedBookData = localStorage.getItem("bookArray");
       const storedTimestamp = localStorage.getItem("bookTimestamp");
       const isDataStale = checkIfDataIsStale(storedTimestamp);
+      console.log(typeof storedBookData);
 
       if (storedBookData && storedBookData !== "[]" && !isDataStale) {
         console.log("Using cached book data");

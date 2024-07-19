@@ -39,6 +39,7 @@ const BookCard = ({ book, onModalOpen, onModalClose, onMouseLeave }) => {
   const [showAudioModal, setShowAudioModal] = useState(false);
 
   const [imageLoading, setImageLoading] = useState(true);
+  const [imageLoaded, setImageLoaded] = useState(false);
   const [currentAudioUrl, setCurrentAudioUrl] = useState("");
 
   const { setBookUpdateInfo } = useBook();
@@ -112,24 +113,22 @@ const BookCard = ({ book, onModalOpen, onModalClose, onMouseLeave }) => {
   return (
     <>
       <div className={classes.bookcard} onClick={handleShowModal}>
-        {imageLoading && (
-          <Image
-            src={loadingImage}
-            alt="Loading..."
-            width={98}
-            height={126}
-            style={{ objectFit: "contain" }}
-          />
-        )}
         <Image
+          className={`classes.loadingImage ${
+            imageLoaded ? classes.hidden : ""
+          }`}
+          src={loadingImage}
+          alt="Loading..."
+          width={90}
+          height={126}
+        />
+        <Image
+          className={`${classes.image} ${imageLoaded ? classes.loaded : ""}`}
           src={book?.imageUrl}
           alt={book?.title}
           width={90}
           height={126}
-          style={{
-            objectFit: "contain",
-          }}
-          onLoad={() => setImageLoading(false)}
+          onLoad={() => setImageLoaded(true)}
           unoptimized={true}
         />
       </div>

@@ -41,6 +41,7 @@ const AddResources = () => {
   const initialFormData = bookUpdateInfo
     ? {
         title: bookUpdateInfo.title || "title",
+        subTitle: bookUpdateInfo.subTitle || "subtitle",
         description: bookUpdateInfo.description || "description",
         author: bookUpdateInfo.author || "author",
         bookDetails: bookUpdateInfo.bookDetails || "details",
@@ -53,6 +54,7 @@ const AddResources = () => {
       }
     : {
         title: "",
+        subTitle: "",
         description: "",
         author: "",
         bookDetails: "",
@@ -156,6 +158,7 @@ const AddResources = () => {
 
         setFormData({
           title: "",
+          subTitle: "",
           description: "",
           author: "",
           bookDetails: "",
@@ -293,6 +296,16 @@ const AddResources = () => {
               value={formData.title}
               onChange={handleInputChange}
               required
+            />
+          </Form.Group>
+
+          <Form.Group controlId="book title" className="mb-3">
+            <Form.Control
+              type="text"
+              name="subTitle"
+              placeholder="subtitle of book"
+              value={formData.subTitle}
+              onChange={handleInputChange}
             />
           </Form.Group>
 

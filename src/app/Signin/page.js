@@ -1,10 +1,9 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import signIn from "@/firebase/auth/signin";
 import { useRouter } from "next/navigation";
 import { useModal } from "@/context/ModalContext";
 import classes from "../components/Library.module.css";
-import Link from "next/link";
 
 import ForgotPasswordModal from "../components/ForgotPasswordModal";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
@@ -17,6 +16,12 @@ function Page() {
   const router = useRouter();
   const { showModal } = useModal();
 
+  useEffect(() => {
+    if (router.isReady && router.query.fromLink) {
+      setIsModalOpen(true);
+    }
+  }, [router.isReady, router.query]);
+
   const handleForm = async (event) => {
     event.preventDefault();
 
@@ -27,7 +32,7 @@ function Page() {
         "Sorry something isn't right",
         "Please check your details and try again."
       );
-      return console.log(error);
+      return;
     }
 
     return router.push("/");
@@ -104,6 +109,7 @@ function Page() {
                 type="email"
                 placeholder="Enter email"
                 value={email}
+                autoComplete="email"
                 onChange={(e) => setEmail(e.target.value)}
                 required
               />
@@ -115,6 +121,7 @@ function Page() {
                 type="password"
                 placeholder="Enter password"
                 value={password}
+                autoComplete="current-password"
                 onChange={(e) => setPassword(e.target.value)}
                 required
               />

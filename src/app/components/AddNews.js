@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Container, Form, Button } from "react-bootstrap";
-import { addData, manualRefresh } from "../../firebase/firestore/addData";
+import {
+  addData,
+  manualRefresh,
+  manualRefreshNews,
+} from "../../firebase/firestore/addData";
 import { useModal } from "@/context/ModalContext";
 import EditorComponent from "./Editor";
 import { updateNewsItem } from "@/firebase/firestore/newsUtils";
@@ -23,11 +27,9 @@ const AddNews = () => {
 
   const initialNewsData = newsUpdateInfo
     ? {
-        title: newsUpdateInfo.title || "title",
         description: newsUpdateInfo.description || "description",
       }
     : {
-        title: "",
         description: "",
       };
 
@@ -62,7 +64,6 @@ const AddNews = () => {
         console.log("Document added with ID:", result);
         showModal(`News item added!`, `All done`);
         setNewsData({
-          title: "",
           description: "Add description here",
         });
         setIsLoading(false);
@@ -72,7 +73,7 @@ const AddNews = () => {
       showModal(`So sorry - there's an error!`, `${error}`);
       setIsLoading(false);
     }
-    manualRefresh();
+    manualRefreshNews();
   };
 
   const handleInputUpdateChange = async () => {
@@ -89,16 +90,6 @@ const AddNews = () => {
             {isUpdate ? "Update" : "Enter"} news item
           </h1>
           <Form onSubmit={handleSubmit}>
-            <Form.Group controlId="title">
-              <Form.Control
-                type="text"
-                name="title"
-                placeholder="Title of item"
-                value={newsData.title}
-                onChange={handleInputChange}
-                required
-              />
-            </Form.Group>
             <EditorComponent
               value={newsData.description}
               onEditorChange={handleEditorChange}

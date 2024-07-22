@@ -1,7 +1,6 @@
 "use client";
 import React from "react";
 import { useAuthContext } from "@/context/AuthContext";
-import { useRouter } from "next/navigation";
 import Signup from "../components/Signup";
 import AddResources from "../components/AddResources";
 import { Container } from "react-bootstrap";
@@ -10,31 +9,29 @@ import SetCustomClaimByEmail from "../components/SetCustomClaimByEmail";
 
 function Page() {
   const { user } = useAuthContext();
-  const router = useRouter();
   const isAdmin = user ? user.isAdmin : false;
-  // const isAdmin = true;
 
   return (
     <div>
       {isAdmin ? (
         <>
-          <Container className="d-flex justify-content-center border border-3 border-primary mb-4 p-4">
-            <h1>Welcome to the admin page</h1>
+          <Container className="d-flex justify-content-center mb-1 p-1">
+            <h1>Admin page</h1>
           </Container>
 
-          <Container className="d-flex justify-content-center border border-3 border-primary mb-4 p-4">
+          <Container className="d-flex justify-content-center border border-2 border-primary mb-4 p-4">
             <AddResources />
           </Container>
 
-          <Container className="d-flex justify-content-center border border-3 border-primary mb-4 p-4">
+          <Container className="d-flex justify-content-center border border-2 border-primary mb-4 p-4">
             <AddNews />
           </Container>
 
-          <Container className="d-flex justify-content-center border border-3 border-primary mb-4 p-4">
+          <Container className="d-flex justify-content-center border border-2 border-primary mb-4 p-4">
             <Signup />
           </Container>
 
-          <Container className="d-flex justify-content-center border border-3 border-primary mb-4 p-4">
+          <Container className="d-flex justify-content-center border border-2 border-danger mb-4 p-4">
             <SetCustomClaimByEmail />
           </Container>
         </>

@@ -13,6 +13,7 @@ export async function POST(req) {
     bookSamples,
     orderQuery,
     submission,
+    technicalHelp,
     other,
     registration,
   } = body;
@@ -77,6 +78,7 @@ export async function POST(req) {
         bookSamples && "SAMPLES",
         orderQuery && "ORDER",
         submission && "SUB",
+        technicalHelp && "TECH",
         other && "OTHER",
       ]
         .filter(Boolean)
@@ -88,6 +90,7 @@ export async function POST(req) {
           bookSamples && "Samples",
           orderQuery && "Order Query",
           submission && "Submissions",
+          technicalHelp && "Technical",
           other && "Other",
         ]
           .filter(Boolean)

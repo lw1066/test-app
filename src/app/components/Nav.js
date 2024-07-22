@@ -71,7 +71,6 @@ function Navigation() {
                       : "/images/perceptia_logo.jpg"
                   }
                   alt="The door of perception"
-                  object-fit="contain"
                   width={55}
                   height={90}
                   className="img-fluid"

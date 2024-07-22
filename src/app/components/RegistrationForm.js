@@ -111,11 +111,11 @@ const RegistrationForm = ({ show, onHide, onSubmit }) => {
       </Modal.Header>
       <Modal.Body>
         <p style={{ fontWeight: "600" }}>
-          Fill out the form below and we will email log in details after
+          Complete the form below and we will email log in details after
           validating your teacher status.
         </p>
         <Form onSubmit={handleSubmit}>
-          <Form.Group controlId="formFirstName">
+          <Form.Group controlId="formFirstName" className="mb-3">
             <Form.Label>First name *</Form.Label>
             <Form.Control
               type="text"
@@ -126,7 +126,7 @@ const RegistrationForm = ({ show, onHide, onSubmit }) => {
             />
           </Form.Group>
 
-          <Form.Group controlId="formFamilyName">
+          <Form.Group controlId="formFamilyName" className="mb-3">
             <Form.Label>Last name *</Form.Label>
             <Form.Control
               type="text"
@@ -137,7 +137,7 @@ const RegistrationForm = ({ show, onHide, onSubmit }) => {
             />
           </Form.Group>
 
-          <Form.Group controlId="formEmail">
+          <Form.Group controlId="formEmail" className="mb-3">
             <Form.Label>Email address *</Form.Label>
             <Form.Control
               type="email"
@@ -162,7 +162,7 @@ const RegistrationForm = ({ show, onHide, onSubmit }) => {
             />
           </Form.Group>
 
-          <Form.Group controlId="formSchoolOrInstitution">
+          <Form.Group controlId="formSchoolOrInstitution" className="mb-3">
             <Form.Label>School or Institution *</Form.Label>
             <Form.Control
               type="text"
@@ -174,7 +174,7 @@ const RegistrationForm = ({ show, onHide, onSubmit }) => {
           </Form.Group>
 
           <Form.Group controlId="formSchoolAddress">
-            <Form.Group controlId="formAddress1">
+            <Form.Group controlId="formAddress1" className="mb-3">
               <Form.Label>Address 1 *</Form.Label>
               <Form.Control
                 type="text"
@@ -185,7 +185,7 @@ const RegistrationForm = ({ show, onHide, onSubmit }) => {
               />
             </Form.Group>
 
-            <Form.Group controlId="formAddress2">
+            <Form.Group controlId="formAddress2" className="mb-3">
               <Form.Label>Address 2</Form.Label>
               <Form.Control
                 type="text"
@@ -195,7 +195,7 @@ const RegistrationForm = ({ show, onHide, onSubmit }) => {
               />
             </Form.Group>
 
-            <Form.Group controlId="formPostcode">
+            <Form.Group controlId="formPostcode" className="mb-3">
               <Form.Label>Postcode *</Form.Label>
               <Form.Control
                 type="text"
@@ -224,6 +224,7 @@ const RegistrationForm = ({ show, onHide, onSubmit }) => {
           <Form.Group
             controlId="formSchoolType"
             style={{ marginBottom: "1rem" }}
+            className="mb-3"
           >
             <Form.Label>School type *</Form.Label>
             <div>
@@ -265,10 +266,7 @@ const RegistrationForm = ({ show, onHide, onSubmit }) => {
             </div>
           </Form.Group>
 
-          <Form.Group
-            controlId="formLevelsTaught"
-            style={{ marginBottom: "1rem" }}
-          >
+          <Form.Group controlId="formLevelsTaught" className="mb-3">
             <Form.Label>Level(s) taught *</Form.Label>
             <div>
               <Form.Check

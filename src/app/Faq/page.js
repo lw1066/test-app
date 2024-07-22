@@ -9,7 +9,7 @@ const Page = () => {
     <>
       <div className={classes.bannerImage}>
         <img
-          src="/images/faqF.jpg"
+          src="/images/faq.webp"
           alt="student asking a question"
           className={classes.bannerImage}
         />

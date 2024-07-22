@@ -2,8 +2,8 @@ import { useState } from "react";
 import { useDarkMode } from "@/context/DarkModeContext";
 import { Button, Modal, ListGroup, ListGroupItem } from "react-bootstrap";
 import classes from "@/app/components/Library.module.css";
-import AddResources from "@/app/components/AddResources";
-import { getAndModifyDoc } from "@/firebase/firestore/getAndModifyDoc";
+// import AddResources from "@/app/components/AddResources";
+// import { getAndModifyDoc } from "@/firebase/firestore/getAndModifyDoc";
 import { useAuthContext } from "@/context/AuthContext";
 import { deleteData } from "@/firebase/firestore/deleteDoc";
 import { useModal } from "@/context/ModalContext";
@@ -38,7 +38,7 @@ const BookCard = ({ book, onModalOpen, onModalClose, onMouseLeave }) => {
   const [showAudioListModal, setShowAudioListModal] = useState(false);
   const [showAudioModal, setShowAudioModal] = useState(false);
 
-  const [imageLoading, setImageLoading] = useState(true);
+  // const [imageLoading, setImageLoading] = useState(true);
   const [imageLoaded, setImageLoaded] = useState(false);
   const [currentAudioUrl, setCurrentAudioUrl] = useState("");
 
@@ -119,15 +119,16 @@ const BookCard = ({ book, onModalOpen, onModalClose, onMouseLeave }) => {
           }`}
           src={loadingImage}
           alt="Loading..."
-          width={90}
-          height={126}
+          fill
+          sizes="20vw"
         />
         <Image
-          className={`${classes.image} ${imageLoaded ? classes.loaded : ""}`}
+          className={`${classes.image}  ${imageLoaded ? classes.loaded : ""}`}
           src={book?.imageUrl}
           alt={book?.title}
-          width={90}
-          height={126}
+          width={0}
+          height={0}
+          style={{ width: "90px", height: "auto" }}
           onLoad={() => setImageLoaded(true)}
           unoptimized={true}
         />
@@ -184,6 +185,9 @@ const BookCard = ({ book, onModalOpen, onModalClose, onMouseLeave }) => {
                   <Modal.Title>
                     <p className={classes.modalTitle}>{book?.title}</p>
                   </Modal.Title>
+                  {book?.subTitle && (
+                    <p className={classes.modalSubTitle}>{book?.subTitle}</p>
+                  )}
                   {book?.author && (
                     <p className={classes.modalBookDetails}>{book?.author}</p>
                   )}
@@ -216,7 +220,7 @@ const BookCard = ({ book, onModalOpen, onModalClose, onMouseLeave }) => {
                   )
                 }
               >
-                Buy on Amazon
+                Buy at Amazon
               </Button>
             )}
             {hasAsianLink && (
@@ -229,7 +233,7 @@ const BookCard = ({ book, onModalOpen, onModalClose, onMouseLeave }) => {
                   )
                 }
               >
-                Buy in Asia
+                Buy at Englishbooks.jp
               </Button>
             )}
             {hasEuroLink && (
@@ -242,7 +246,7 @@ const BookCard = ({ book, onModalOpen, onModalClose, onMouseLeave }) => {
                   )
                 }
               >
-                Buy in Europe
+                Buy at BEBC.co.uk
               </Button>
             )}
             {hasOtherLink && (

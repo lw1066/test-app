@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
 import classes from "@/app/components/Library.module.css";
-import { useAuthContext } from "@/context/AuthContext";
+
 import { useDarkMode } from "@/context/DarkModeContext";
 import BookCard from "./BookCard";
 
 function RecommendationsBoxes({ books }) {
-  // const { user } = useAuthContext();
-  // const { darkMode } = useDarkMode();
+  const { darkMode } = useDarkMode();
   const [currentIndices, setCurrentIndices] = useState([0, 1, 2]);
   const [itemsToShow, setItemsToShow] = useState(3); // Default to 3 items
   const [fadeStates, setFadeStates] = useState([
@@ -139,10 +138,13 @@ function RecommendationsBoxes({ books }) {
   return (
     <>
       <div className={classes.recommendationsHeaderContainer}>
-        <h2 className={classes.recommendationsHeaderText}>Suggested titles</h2>
-        <p style={{ fontSize: ".5rem", padding: "0", margin: "0" }}>
-          (Click for details)
-        </p>
+        <div
+          className={classes.headerContainer}
+          style={{ backgroundColor: darkMode ? "black" : "#ededed" }}
+        >
+          <h2 className={classes.headerText}>Suggested titles </h2>
+        </div>
+        {/* <h2 className={classes.recommendationsHeaderText}></h2> */}
       </div>
 
       <div className={classes.recommendationsBooksContainer}>

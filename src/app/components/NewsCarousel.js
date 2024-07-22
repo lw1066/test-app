@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Carousel from "react-bootstrap/Carousel";
 import Button from "react-bootstrap/Button";
+import { Editor } from "@tinymce/tinymce-react";
 import classes from "@/app/components/Library.module.css";
 import { useAuthContext } from "@/context/AuthContext";
 import { useDarkMode } from "@/context/DarkModeContext";
@@ -8,8 +9,8 @@ import { useModal } from "@/context/ModalContext";
 import { checkIfDataIsStale } from "@/firebase/firestore/checkIfDataIsStale";
 import fetchNewsData from "@/firebase/firestore/fetchNewsData";
 import { useBook } from "@/context/updateContext";
+import { deleteNewsItem, updateNewsItem } from "@/firebase/firestore/newsUtils";
 import { useRouter } from "next/navigation";
-import { deleteNewsItem } from "@/firebase/firestore/newsUtils";
 
 function NewsCarousel() {
   const { user } = useAuthContext();
@@ -17,8 +18,10 @@ function NewsCarousel() {
   const router = useRouter();
   const isAdmin = user ? user.isAdmin : false;
   const [newsDataArray, setNewsDataArray] = useState([]);
+  const [editingItem, setEditingItem] = useState(null);
+  const [editedContent, setEditedContent] = useState("");
 
-  const { showModal } = useModal();
+  const { showModal, closeModal } = useModal();
   const { darkMode } = useDarkMode();
 
   useEffect(() => {
@@ -65,13 +68,28 @@ function NewsCarousel() {
     }
   }, []);
 
-  const handleUpdateClick = (item) => {
-    setNewsUpdateInfo(item);
-    router.push("/Admin");
+  const handleEditClick = (item) => {
+    setEditingItem(item.id);
+    setEditedContent(item.description);
+  };
+
+  const handleSaveClick = async (item) => {
+    await updateNewsItem(
+      item.id,
+      { description: editedContent },
+      showModal,
+      closeModal
+    );
+    setEditingItem(null);
   };
 
   const handleDeleteClick = (itemId) => {
     deleteNewsItem(itemId, showModal);
+  };
+
+  const handleUpdateClick = (item) => {
+    setNewsUpdateInfo(item);
+    router.push("/Admin");
   };
 
   return (
@@ -91,25 +109,40 @@ function NewsCarousel() {
           {newsDataArray.map((item, index) => (
             <Carousel.Item
               key={index}
-              style={{ minHeight: "360px", minWidth: "250px" }}
+              style={{ minHeight: "200px", minWidth: "250px" }}
             >
               <div>
                 <Carousel.Caption
                   style={{
                     height: "100%",
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    textAlign: "center",
                     color: darkMode ? "white" : "black",
                   }}
                 >
-                  <h3 className={classes.captionTitle}>{item.title}</h3>
-                  <div
-                    className={classes.captionDescription}
-                    dangerouslySetInnerHTML={{ __html: item.description }}
-                  />
+                  {editingItem === item.id ? (
+                    <Editor
+                      apiKey={process.env.NEXT_PUBLIC_TINYMCE_API_KEY}
+                      initialValue={item.description}
+                      init={{
+                        inline: true,
+                        menubar: false,
+                        plugins: [
+                          "link",
+                          "lists",
+                          "table",
+                          "autolink",
+                          "media",
+                        ],
+                        toolbar:
+                          "undo redo | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent",
+                      }}
+                      onEditorChange={(content) => setEditedContent(content)}
+                    />
+                  ) : (
+                    <div
+                      className={classes.captionDescription}
+                      dangerouslySetInnerHTML={{ __html: item.description }}
+                    />
+                  )}
                   {isAdmin && (
                     <div
                       style={{
@@ -118,13 +151,41 @@ function NewsCarousel() {
                         justifyContent: "center",
                       }}
                     >
-                      <Button
-                        variant="primary"
-                        onClick={() => handleUpdateClick(item)}
-                        className="me-3"
-                      >
-                        Update
-                      </Button>
+                      {editingItem === item.id ? (
+                        <>
+                          <Button
+                            variant="success"
+                            onClick={() => handleSaveClick(item)}
+                            className="me-3"
+                          >
+                            Save
+                          </Button>
+                          <Button
+                            variant="secondary"
+                            onClick={() => setEditingItem(null)}
+                            className="me-3"
+                          >
+                            Cancel
+                          </Button>
+                        </>
+                      ) : (
+                        <>
+                          <Button
+                            variant="primary"
+                            onClick={() => handleEditClick(item)}
+                            className="me-3"
+                          >
+                            Edit Here
+                          </Button>
+                          <Button
+                            variant="secondary"
+                            onClick={() => handleUpdateClick(item)}
+                            className="me-3"
+                          >
+                            Edit There
+                          </Button>
+                        </>
+                      )}
                       <Button
                         variant="danger"
                         onClick={() => handleDeleteClick(item.id)}

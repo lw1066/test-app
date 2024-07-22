@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import classes from "@/app/components/Library.module.css";
 import BookCard from "@/app/components/BookCard";
 import GenreSelector from "@/app/components/GenreSelector";
@@ -7,6 +7,7 @@ import fetchBooks from "@/firebase/firestore/fetchBooks";
 import { checkIfDataIsStale } from "@/firebase/firestore/checkIfDataIsStale";
 import { useDarkMode } from "@/context/DarkModeContext";
 import RecommendationsCarousel from "./RecommendationsCarousel";
+import Link from "next/link";
 
 const Library = () => {
   const [books, setBooks] = useState([]);
@@ -14,15 +15,16 @@ const Library = () => {
   const [selectedGenre, setSelectedGenre] = useState("");
   const [filteredBooks, setFilteredBooks] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+
   const [searchQuery, setSearchQuery] = useState("");
   const { darkMode } = useDarkMode();
+  const catalogueRef = useRef(null);
 
   useEffect(() => {
     async function loadBooks() {
       const storedBookData = localStorage.getItem("bookArray");
       const storedTimestamp = localStorage.getItem("bookTimestamp");
       const isDataStale = checkIfDataIsStale(storedTimestamp);
-      console.log(typeof storedBookData);
 
       if (storedBookData && storedBookData !== "[]" && !isDataStale) {
         console.log("Using cached book data");
@@ -106,20 +108,46 @@ const Library = () => {
     setSearchQuery(e.target.value);
   };
 
+  const scrollToCatalogue = () => {
+    if (catalogueRef.current) {
+      const element = catalogueRef.current;
+      element.scrollIntoView({ behavior: "smooth", block: "start" });
+      const offset = -160;
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.scrollY + offset;
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth",
+      });
+    }
+  };
+
   return (
     <>
       <div className={classes.welcomeText}>
-        <p style={{ width: "85%", margin: "1% auto" }}>
+        <p style={{ width: "70%", margin: "3% auto" }}>
           Since 2004, Perceptia Press has been publishing innovative and
           award-winning materials, written by teachers, that aim to inspire
-          learners. Check our catalogue below for full details and information
-          about ordering. Teachers can access extra resources by creating a free
-          account.
+          learners. Check our{" "}
+          <span
+            className={classes.register}
+            onClick={scrollToCatalogue}
+            style={{ cursor: "pointer" }}
+          >
+            catalogue
+          </span>{" "}
+          below for full details and information about ordering. Teachers can
+          access extra resources by{" "}
+          <Link className={classes.linkStyle} href={"/Signin"}>
+            registering
+          </Link>{" "}
+          for a free account.
         </p>
       </div>
       {!isLoading && <RecommendationsCarousel books={books} />}
 
       <div
+        ref={catalogueRef}
         className={classes.headerContainer}
         style={{ backgroundColor: darkMode ? "black" : "#ededed" }}
       >

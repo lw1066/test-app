@@ -37,7 +37,7 @@ const SetCustomClaimByEmail = () => {
 
   return (
     <div>
-      <h2>Set Custom Claim by Email</h2>
+      <h2>Set admin privleges here - BE CAREFUL!</h2>
       <input
         type="email"
         placeholder="Enter Email"

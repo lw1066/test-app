@@ -12,11 +12,12 @@ const Contact = () => {
   const [bookSamples, setBookSamples] = useState(false);
   const [orderQuery, setOrderQuery] = useState(false);
   const [submission, setSubmission] = useState(false);
+  const [technicalHelp, setTechnicalHelp] = useState(false);
   const [other, setOther] = useState(false);
   const { showModal } = useModal();
 
   const emailLink =
-    "mailto:info@perceptiapress.com?subject=Information request for Perceptia";
+    "mailto:info@perceptiapress.com?subject=Information request";
 
   const resetForm = () => {
     setName("");
@@ -25,6 +26,7 @@ const Contact = () => {
     setBookSamples(false);
     setOrderQuery(false);
     setSubmission(false);
+    setTechnicalHelp(false);
     setOther(false);
   };
 
@@ -38,6 +40,7 @@ const Contact = () => {
       bookSamples,
       orderQuery,
       submission,
+      technicalHelp,
       other,
     };
 
@@ -81,7 +84,7 @@ const Contact = () => {
     <>
       <div className={classes.bannerImage}>
         <img
-          src="/images/contactF.jpg"
+          src="/images/contact.webp"
           alt="student asking a question"
           className={classes.bannerImage}
         />
@@ -118,7 +121,7 @@ const Contact = () => {
 
               <Form.Check
                 type="checkbox"
-                label="Sample copies of books"
+                label="Inspection copies of books"
                 checked={bookSamples}
                 onChange={(e) => setBookSamples(e.target.checked)}
               />
@@ -133,6 +136,12 @@ const Contact = () => {
                 label="Discuss a submission"
                 checked={submission}
                 onChange={(e) => setSubmission(e.target.checked)}
+              />
+              <Form.Check
+                type="checkbox"
+                label="Technical Help (OLS)"
+                checked={technicalHelp}
+                onChange={(e) => setTechnicalHelp(e.target.checked)}
               />
               <Form.Check
                 type="checkbox"
@@ -160,9 +169,9 @@ const Contact = () => {
           </Button>
         </Form>
         <p style={{ margin: "20px 0 50px 0", padding: 0 }}>
-          Alternatively, email us at info (at){" "}
+          Alternatively, email us at{" "}
           <a className={classes.linkStyle} href={emailLink}>
-            perceptiapress.com
+            info@perceptiapress.com
           </a>
         </p>
       </div>

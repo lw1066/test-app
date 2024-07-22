@@ -12,7 +12,7 @@ function Page() {
     <>
       <div className={classes.bannerImage}>
         <img
-          src="/images/subsF.jpg"
+          src="/images/subs.webp"
           alt="student asking a question"
           className={classes.bannerImage}
         />
